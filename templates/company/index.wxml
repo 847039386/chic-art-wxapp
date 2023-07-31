@@ -1,0 +1,29 @@
+<!--templates/company/index.wxml-->
+<cu-custom bgColor="bg-white">
+  <view slot="content"></view>
+</cu-custom>
+
+<view class="cu-bar bg-white solid-bottom margin-top">
+    <view class="action">
+      <text class="cuIcon-titles text-blue "></text>我的加入
+    </view>
+    <view class="action">
+      <text class="cuIcon-shopfill text-blue text-xl" bindtap="toCreateCompanyPage" style="font-size: 38rpx;"></text>
+    </view>
+</view>
+
+<view class="bg-white">
+  <view class="flex padding-sm justify-start">
+    <view class="">
+      <view class="cu-avatar xl radius" style="background-image:url(https://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI0IbHM1RERicE7lVliaQibDDlHhdEbHfC00C9ZU2yj8NuneuyV8jxPM9nBJSFMiccfBzvns8HMia4r2sw/132);">
+      </view>
+    </view>
+    <view class="padding-xs text-xl text-black margin-left-sm">
+      <view class="text-xl text-bold">什么公司</view>
+      <view class="padding-top-sm">
+        <view class="cu-tag bg-grey light radius">123</view>
+        <view class="cu-tag bg-grey light radius">123</view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,9 @@
+<!--index.wxml-->
+<!-- <view class="container">
+ 
+</view> -->
+
+<home wx:if="{{PageCur=='home'}}"></home>
+<company wx:if="{{PageCur=='company'}}"></company>
+
+<UserTabBar bind:NavChange="onSwitchTab"></UserTabBar>

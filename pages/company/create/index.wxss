@@ -1,0 +1,23 @@
+/* pages/company/create/index.wxss */
+page {
+  background-color: #FFFFFF
+}
+
+.check_item {
+  background: #F4F5F9;
+  border-radius: 6rpx;
+  text-align: center;
+  line-height: 64rpx;
+  position: relative;
+}
+
+.checked {
+  background: #DBE9FC;
+  color: #1E79EC;
+}
+
+.checkicon { 
+  position: absolute;
+  top: -30rpx;
+  right: -10rpx;
+}

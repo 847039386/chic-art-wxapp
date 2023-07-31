@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "UserTabBar": "/components/user-tab-bar/index",
+    "home": "/templates/home/index",
+    "company": "/templates/company/index"
+  }
+}

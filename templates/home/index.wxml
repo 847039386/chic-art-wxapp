@@ -1,0 +1,41 @@
+<!--pages/template/home/index.wxml-->
+<cu-custom bgColor="bg-white">
+  <view slot="content"></view>
+</cu-custom>
+<!-- 个人信息 -->
+<view class="bg-white">
+  <view class="flex padding-xl justify-start">
+    <view class="">
+      <view class="cu-avatar xl radius" style="background-image:url({{avatar}});">
+      </view>
+    </view>
+    <view class="padding-xs text-xxl text-black margin-left-sm">
+      <view>{{username}}<text class="text-gray text-df"></text></view>
+      <view class="text-gray text-df padding-top-sm">用户模式</view>
+    </view>
+  </view>
+</view>
+<!-- 菜单列表 -->
+<view class="cu-list menu margin-top">
+  <view class="cu-item arrow" bindtap="scan">
+    <view class="content">
+      <text class="cuIcon-scan text-blue text-xl" style="font-size: 38rpx;"></text>
+      <text class="text-black text-xl">扫一扫</text>
+    </view>
+  </view>
+</view>
+
+<view class="cu-list menu">
+  <view class="cu-item">
+    <view class="content">
+      <text class="cuIcon-repeal text-green" style="font-size: 38rpx;"></text>
+      <text class="text-black text-xl">切换公司模式</text>
+    </view>
+  </view>
+  <view class="cu-item">
+    <view class="content">
+      <text class="cuIcon-service text-orange text-xl" style="font-size: 38rpx;"></text>
+      <text class="text-black text-xl">联系管理</text>
+    </view>
+  </view>
+</view>
