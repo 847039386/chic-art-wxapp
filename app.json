@@ -2,7 +2,14 @@
   "pages": [
     "pages/index/index",
     "pages/login/index",
-    "pages/company/create/index"
+    "pages/company/create/index",
+    "pages/company/info/index",
+    "pages/company/employees/index",
+    "pages/company/settings/index",
+    "pages/user/update_info/index",
+    "pages/user/update_name/index",
+    "pages/user/update_phone/index",
+    "pages/order/create/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

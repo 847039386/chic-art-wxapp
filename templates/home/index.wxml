@@ -39,3 +39,12 @@
     </view>
   </view>
 </view>
+
+<view class="cu-list menu margin-top">
+  <view class="cu-item arrow" bindtap="toUserSettings">
+    <view class="content">
+      <text class="cuIcon-settings text-blue text-xl" style="font-size: 38rpx;"></text>
+      <text class="text-black text-xl">设置</text>
+    </view>
+  </view>
+</view>

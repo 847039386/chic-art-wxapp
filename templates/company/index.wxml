@@ -3,9 +3,10 @@
   <view slot="content"></view>
 </cu-custom>
 
-<view class="cu-bar bg-white solid-bottom margin-top">
+<view class="cu-bar bg-white solid-bottom">
     <view class="action">
-      <text class="cuIcon-titles text-blue "></text>我的加入
+      <text class="cuIcon-titles text-blue "></text>
+      <text>我的加入</text>
     </view>
     <view class="action">
       <text class="cuIcon-shopfill text-blue text-xl" bindtap="toCreateCompanyPage" style="font-size: 38rpx;"></text>
@@ -13,17 +14,22 @@
 </view>
 
 <view class="bg-white">
-  <view class="flex padding-sm justify-start">
-    <view class="">
-      <view class="cu-avatar xl radius" style="background-image:url(https://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI0IbHM1RERicE7lVliaQibDDlHhdEbHfC00C9ZU2yj8NuneuyV8jxPM9nBJSFMiccfBzvns8HMia4r2sw/132);">
+  <view class="cf padding-sm" wx:if="{{userCompany}}" bindtap="toCompanyInfoPage" data-id="{{userCompany._id}}" >
+    <view class="cu-avatar xl radius fl" style="background-image:url({{userCompany.logo}});"></view>
+    <view class="padding-xs text-xl text-black margin-left-sm fl">
+      <view>
+        <text class="text-xl text-bold">{{ userCompany.name }}</text>
+        <text class="text-df margin-left-sm text-gray">创始人</text>
+      </view>
+      <view class="padding-top-sm">
+        <view class="cu-tag bg-grey light radius" wx:for="{{userCompany.tag_ids}}" wx:key="_id">{{ item.name }}</view>
       </view>
     </view>
-    <view class="padding-xs text-xl text-black margin-left-sm">
-      <view class="text-xl text-bold">什么公司</view>
-      <view class="padding-top-sm">
-        <view class="cu-tag bg-grey light radius">123</view>
-        <view class="cu-tag bg-grey light radius">123</view>
-      </view>
+    <view class="padding-xs text-xl text-black margin-left-sm fr">
+      <view wx:if="{{userCompany.censor == 1}}" class="text-df text-yellow">审核中</view>
+      <view wx:if="{{userCompany.censor == 2}}" class="text-df text-gray">待审核</view>
     </view>
   </view>
 </view>
+
+<view class="cu-load loading" wx:if="{{loading}}"></view>

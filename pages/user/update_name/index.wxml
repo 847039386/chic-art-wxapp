@@ -1,0 +1,23 @@
+<!--pages/user/update_name/index.wxml-->
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+  <!-- <view slot="content"></view> -->
+</cu-custom>
+
+<form class="">
+  <view class="padding-lg">
+    <view class="flex justify-center">
+        <view class="text-xxl text-bold text-black">修改姓名</view>
+    </view>
+    <!-- 标签选择 -->
+    <view class="cu-form-group margin-top-xl" style="border-top: 1rpx solid #EEE">
+      <view class="title text-bold text-black">姓名</view>
+      <input value="{{name}}" bindinput="handleUserNameInput" placeholder="{{name || '请输入姓名'}}"></input>
+    </view>
+    <view class="text-grey margin-top-sm">设置真实姓名不会暴露在公共信息上。</view>
+
+    <!-- 创建按钮 -->
+    <view class="flex justify-center margin-top-xl" bindtap="updateUserName">
+      <button loading="{{loading}}" disabled="{{loading}}" class="cu-btn xxl" bindtap=""  style="background-color:#1AAD19;color:#FFF;width: 50vw;">确定</button>
+    </view>
+  </view>
+</form>

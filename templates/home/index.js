@@ -28,6 +28,11 @@ Component({
           console.log('扫描成功：', JSON.stringify(res))
         }
       })
+    },
+    toUserSettings(){
+      wx.navigateTo({
+        url: '/pages/user/update_info/index',
+      })
     }
   }
   

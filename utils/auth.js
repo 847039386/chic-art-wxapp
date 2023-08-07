@@ -43,11 +43,11 @@ function verifyToken() {
 }
 
 function setUserInfo(user){
-  wx.setStorageSync("user_info", user);
+  wx.setStorageSync("userInfo", user);
 }
 
 function getUserInfo(){
-  let user_info = wx.getStorageSync("user_info")
+  let user_info = wx.getStorageSync("userInfo")
   return user_info
 }
 

@@ -1,14 +1,19 @@
 const { request }  = require('../utils/request');
 
-const wxLogin = (data) => {
-  return request({ url: '/auth/wx_login' ,method: 'POST' , data })
+// const wxLogin = (data) => {
+//   return request({ url: '/auth/wx_login' ,method: 'POST' , data })
+// }
+
+const updateUserName = (name) => {
+  console.log(name)
+  return request({ url: '/user/up_name' ,method: 'PATCH' , data :{ name } }) 
 }
 
-const getList = (data) => {
-  return request({ url: '/company/list' ,method: 'POST' , data })
+const updateUserPhone = (phone) => {
+  return request({ url: '/user/up_phone' ,method: 'PATCH' , data:{ phone } }) 
 }
 
 module.exports = {
-  wxLogin,
-  getList
+  updateUserName,
+  updateUserPhone
 }

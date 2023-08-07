@@ -1,0 +1,10 @@
+/* pages/company/info/index.wxss */
+
+.cu-item-my{
+  position: relative;
+  padding: 20rpx 0 20rpx;
+  display: flex;
+  transition-duration: 0s;
+  flex-direction: column;
+  color: #8799a3;
+}

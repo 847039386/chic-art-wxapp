@@ -29,7 +29,6 @@ function refreshToken() {
 }
 
 const wxLogin = () => {
-  console.log('第一次金我')
   return new Promise((resolve, reject) => {
       wx.getUserProfile({
       desc: '展示用户信息', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
@@ -47,9 +46,10 @@ const wxLogin = () => {
                 if(res.data.success){
                   console.log(res.data.data)
                   let username = res.data.data.username;
-                  let avatar = res.data.data.avatar
+                  let avatar = res.data.data.avatar;
+                  let _id = res.data.data.user_id
                   setToken(res.data.data)
-                  setUserInfo({username,avatar})
+                  setUserInfo({_id,username,avatar})
                   resolve(res.data)
                 }else{
                   reject({message : res.data.message})

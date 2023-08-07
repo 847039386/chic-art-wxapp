@@ -1,0 +1,4 @@
+<!--pages/order/create/index.wxml-->
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+  <view slot="content">创建订单</view>
+</cu-custom>
