@@ -9,7 +9,8 @@
     "pages/user/update_info/index",
     "pages/user/update_name/index",
     "pages/user/update_phone/index",
-    "pages/order/create/index"
+    "pages/order/create/index",
+    "pages/qrcode/company_employee/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -19,7 +20,7 @@
     "navigationBarTextStyle": "black"
   },
   "usingComponents": {
-    "cu-custom": "/colorui/components/cu-custom/cu-custom"
+    "cu-custom": "/common/colorui/components/cu-custom/cu-custom"
   },
   "sitemapLocation": "sitemap.json"
 }

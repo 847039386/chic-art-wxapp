@@ -30,8 +30,9 @@ Component({
         let data = result.data;
         if(data){
           data.logo = getImageUrl(data.logo)
-          this.setData({userCompany: data ,loading :false})
+          this.setData({userCompany: data })
         }
+        this.setData({loading :false})
        }).catch(() =>{
         this.setData({loading :false})
        })

@@ -1,0 +1,17 @@
+<!--pages/qrcode/company_employee/index.wxml-->
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+  <!-- <view slot="content"></view> -->
+</cu-custom>
+
+
+<view class="flex justify-center margin-top-xxl">
+  <view class="cu-avatar lg radius fl" style="background-image:url({{company_logo}});"></view>
+  <view class="margin-top text-bold margin-left-sm text-lg">{{ company_name }}</view>
+</view>
+<view class="flex justify-center margin-top-xxl">
+ <view class="padding-sm">
+    <canvas style="width: 130px;height: 130px;" canvas-id="myQrcode"></canvas>
+ </view>
+</view>
+<view class="flex justify-center text-grey margin-top-xxl">扫一扫加入该公司</view>
+

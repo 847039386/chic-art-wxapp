@@ -8,15 +8,12 @@
       <view class="cf padding-sm" wx:if="{{company}}" bindtap="toCompanyInfoPage" data-id="{{company._id}}" >
         <view class="cu-avatar xl radius fl" style="background-image:url({{company.logo}});"></view>
         <view class=" text-xl text-black margin-left-sm fl">
-          <view>
+          <view class="margin-top-xs">
             <text class="text-xl text-bold">{{ company.name }}</text>
             <text class="text-df margin-left-sm text-gray">创始人</text>
           </view>
           <view class="padding-top-sm">
             <view class="cu-tag bg-blue light radius" wx:for="{{company.tag_ids}}" wx:key="_id">{{ item.name }}</view>
-          </view>
-          <view class="padding-top-sm">
-            <view class="text-df text-gray">{{ company.description }}</view>
           </view>
         </view>
         <view class="padding-xs text-xl text-black margin-left-sm fr">
@@ -25,6 +22,9 @@
         </view>
       </view>
     </view>
+    <view class="padding-sm">
+      <view class="text-df text-grey" >{{ company.description }}</view>
+    </view>
 
     <!-- <view class="cu-bar margin-lr-xs margin-top grid col-4 no-border bg-white radius-lg-top">
       <view class="action">
@@ -32,7 +32,7 @@
       </view>
     </view> -->
 
-    <view class="cu-list grid col-5 no-border text-black margin-lr-sm radius margin-top-xl">
+    <view class="cu-list grid col-5 no-border text-black margin-lr-sm radius">
       <view class="cu-item-my" wx:for="{{iconOtherList}}" wx:key="idx" bindtap="{{item.bindtap}}">
         <view class="cuIcon-{{item.icon}} text-{{item.color}} text-shadow" style="font-size: 56rpx;">
           <view class="cu-tag badge" wx:if="{{item.badge!=0}}">
@@ -42,6 +42,7 @@
         <text class="margin-top-xs">{{item.name}}</text>
       </view>
     </view>
+    
   </cu-skeleton>
 </view>
 

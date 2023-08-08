@@ -15,9 +15,9 @@ Component({
   lifetimes : {
     attached:function(){
       let userinfo = getUserInfo()
-      let username = userinfo.username;
+      let nickname = userinfo.nickname;
       let avatar = userinfo.avatar
-      this.setData({username,avatar})
+      this.setData({nickname,avatar})
     }
   },
   

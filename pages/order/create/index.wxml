@@ -2,3 +2,26 @@
 <cu-custom bgColor="bg-white" isBack="{{true}}">
   <view slot="content">创建订单</view>
 </cu-custom>
+
+<view wx:if="{{errMsg}}" class="cu-load bg-red light">
+  <text>{{errMsg}}</text>
+  <text class="cuIcon-roundclose lg padding-right-xs"></text>
+</view>
+
+<form class="bg-white">
+  <view class="padding-lg">
+    <view class="flex justify-center">
+        <view class="text-xxl text-bold text-black">公司注册</view>
+    </view>
+    <!-- 标签选择 -->
+    <!-- <view class="cu-form-group margin-top-sm" style="border-top: 1rpx solid #EEE">
+      <view class="title text-bold text-black">公司名称</view>
+      <input value="{{formData.name}}"  bindinput="handleCompanyNameInput" placeholder="请输入公司名称"></input>
+    </view> -->
+    <!-- 公司简介 -->
+    <!-- 创建按钮 -->
+    <view class="flex justify-center margin-top-xl">
+      <button loading="{{bcc_loading}}" disabled="{{bcc_loading}}" class="cu-btn xxl" bindtap=""  style="background-color:#1AAD19;color:#FFF;width: 50vw;">注册公司</button>
+    </view>
+  </view>
+</form>

@@ -1,5 +1,5 @@
 {
   "usingComponents": {
-    "cu-skeleton":"/colorui/components/skeleton/skeleton"
+    "cu-skeleton":"/common/colorui/components/skeleton/skeleton"
   }
 }

@@ -1,9 +1,9 @@
 /**app.wxss**/
-@import "colorui/main.wxss";
-@import "colorui/icon.wxss";
-@import "colorui/icon-new.wxss";
-@import "colorui/animation.wxss";
-@import "colorui/dark.wxss";
+@import "common/colorui/main.wxss";
+@import "common/colorui/icon.wxss";
+@import "common/colorui/icon-new.wxss";
+@import "common/colorui/animation.wxss";
+@import "common/colorui/dark.wxss";
 
 .container {
   height: 100%;

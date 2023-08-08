@@ -33,23 +33,23 @@ const wxLogin = () => {
       wx.getUserProfile({
       desc: '展示用户信息', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
       success: (wx_ProfileRes) => {
-        let name = wx_ProfileRes.userInfo.nickName
+        let nickname = wx_ProfileRes.userInfo.nickName
         let avatar = wx_ProfileRes.userInfo.avatarUrl
         wx.login({
           success: async (wx_LoginRes) => {
             let code = wx_LoginRes.code
             wx.request({
               url: baseURL + '/auth/wx_login',
-              data:{code,avatar,name},
+              data:{code,avatar,nickname},
               method:"POST",
               success:(res) => {
                 if(res.data.success){
-                  console.log(res.data.data)
-                  let username = res.data.data.username;
+                  let nickname = res.data.data.nickname;
+                  let name = res.data.data.name || null;
                   let avatar = res.data.data.avatar;
                   let _id = res.data.data.user_id
                   setToken(res.data.data)
-                  setUserInfo({_id,username,avatar})
+                  setUserInfo({_id,nickname,avatar,name})
                   resolve(res.data)
                 }else{
                   reject({message : res.data.message})
