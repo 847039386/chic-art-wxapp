@@ -103,17 +103,27 @@ function request(params = { methods, url, data }) {
     wx.request({
       url: baseURL + params.url,
       method: params.method,
-      data: params.data ? JSON.stringify(params.data) : null,
+      data: params.data ? JSON.stringify(params.data) : {},
       header,
       timeout: 5000,
       success(res) { 
         if(res.data.success){
           resolve(res.data);
         }else{
+          wx.showModal({
+            title: '错误',
+            showCancel:false,
+            content: res.data.message || '未知错误',
+          })
           reject({message :res.data.message})
         }
       },
       fail (err) {
+        wx.showModal({
+          title: '错误',
+          showCancel:false,
+          content: err.message || '未知错误',
+        })
         reject(err)
       }
     })

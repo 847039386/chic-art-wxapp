@@ -25,7 +25,12 @@ const getImageUrl = (url) => {
   }
 }
 
+const uniqueArray = (arr) => {
+  return Array.from(new Set(arr))
+}
+
 module.exports = {
   formatTime,
-  getImageUrl
+  getImageUrl,
+  uniqueArray
 }

@@ -42,7 +42,7 @@ Page({
       let data = result.data;
       data.logo = getImageUrl(data.logo)
       this.setData({ company :data ,loading :false ,company_name :data.name ,company_logo:data.logo})
-    }).catch(()=>{
+    }).finally(()=>{
       this.setData({loading :false})
     })
   },

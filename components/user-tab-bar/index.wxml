@@ -1,6 +1,6 @@
 <!--components/user-tab-bar/index.wxml-->
+<view class="cu-tabbar-height"></view>
 <view class="cu-bar tabbar bg-white shadow foot">
-  
     <view class="action {{ PageCur == 'basics' || PageCur == 'templates' ? 'text-blue' : 'text-black' }}" bindtap="NavChange" data-cur="basics">
       <view class="{{ PageCur == 'basics' || PageCur == 'templates' ? 'cuIcon-formfill' : 'cuIcon-form' }}"></view> 订单
     </view>

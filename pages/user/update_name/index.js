@@ -30,12 +30,7 @@ Page({
       setUserInfo(userInfo)
       this.setData({loading:false})
       wx.navigateBack({ delta: 1 })
-    }).catch((error) =>{
-      wx.showModal({
-        showCancel:false,
-        title: '错误',
-        content: error.message,
-      })
+    }).finally(() => {
       this.setData({loading:false})
     })
   }

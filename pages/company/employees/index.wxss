@@ -1,4 +1,7 @@
 /* pages/company/employees/index.wxss */
+
+page{ background-color: #fff; }
+
 .indexes {
   position: relative;
 }
