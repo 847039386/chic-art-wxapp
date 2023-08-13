@@ -1,66 +1,222 @@
 // pages/order/create/index.js
+const { ProgressTemplate ,Company ,ProjectOrder } = require('../../../api/index')
+const { getImageUrl ,uniqueArray } = require('../../../utils/util')
+const { getUserInfo } = require('../../../utils/auth')
+const app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    bcc_loading:false
+    CustomBar: app.globalData.CustomBar,
+    loadingTemplates:false,
+    loadingEmployees:false,
+    createProjectOrderLoading:false,
+    company_id:null,
+    formData : {
+      name:null,
+      customer:null,
+      address:null,
+      phone:null,
+    },
+    employeeDatas:[], //员工列表
+    employeeModal:false,  // 员工列表模态框
+    currentSelectEmployees:[],  //当前
+    progressTemplates:[{name:'默认模板',template:['开始','结束']}],   //进度模板
+    currentProgressTemplatesName:'默认模板',
+    currentProgressTemplates:['开始','结束'] //当前选中的模板
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-
+    const company_id = options.id;
+    this.setData({company_id})
+    this.getCompanyEmployees()
+    this.getProgressTemplate()
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {
-
+  openMap (){
+    wx.chooseLocation({
+      success:(res) => {
+        this.setData({ 'formData.address' :res.address })
+      }
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {
-
+  handleNameInput(e){
+    this.setData({ 'formData.name' :e.detail.value })
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {
-
+  handleAddressInput(e){
+    this.setData({ 'formData.address' :e.detail.value })
   },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {
-
+  handlePhoneInput(e){
+    this.setData({ 'formData.phone' :e.detail.value })
   },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {
-
+  handleCustomerInput(e){
+    this.setData({ 'formData.customer' :e.detail.value })
   },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {
-
+  bindPTPickerChange(event){
+    let value = event.detail.value
+    let name = this.data.progressTemplates[value].name;
+    let template = this.data.progressTemplates[value].template;
+    this.setData({currentProgressTemplates:template ,currentProgressTemplatesName:name})
   },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {
-
+  getCompanyEmployees(){
+    let company_id = this.data.company_id
+    this.setData({loadingEmployees:true})
+    Company.getEmployees(company_id).then((result) =>{
+      let groups = []
+      let employeeDatas = [];
+      let employeeList = result.data.list;
+      // 验证登陆的userid是否是创始人
+      let userInfo = getUserInfo()
+      let uid = userInfo._id  // 自己的ID
+      if(employeeList.length > 0){
+        employeeList.map((element) => {
+          if(element.user_id && element.user_id.avatar){
+            element.user_id.avatar = getImageUrl(element.user_id.avatar)
+          }
+          // identity_type > 0 是通过申请的员工
+          if(element.identity_type > 0){
+            // Uid是登陆者的ID，当前功能为创建订单那么订单绑定的人就是登陆者id，所以不应添加自己，因为本身自己就是存在的
+            // 所以该代码过滤自己的ID
+            if(uid != element.user_id._id){
+              employeeDatas.push(element)
+              groups.push(element.group_name)
+            }
+          } 
+          return element
+        })
+        // 去重组
+        groups = uniqueArray(groups)
+        // 将默认分组放到第一位
+        groups.forEach((element,index) =>{
+          if(element == '默认分组'){
+            // 如果有默认分组删除他，然后排在第一位
+            groups.splice(index,1)
+          }
+        })
+        groups.unshift('默认分组')
+        // 初始化分组员工
+        let newEmployeeDatas = []
+        groups.forEach((element,index)=>{
+          newEmployeeDatas.push({
+            list:[],
+            checked:true,
+            group_name :element
+          })
+        })
+        // 赋值分组员工
+        for (let index = 0; index < employeeDatas.length; index++) {
+          const employee = employeeDatas[index];
+          for (let jndex = 0; jndex < newEmployeeDatas.length; jndex++) {
+            const group = newEmployeeDatas[jndex];
+            const group_name = group.group_name
+            if(employee.group_name == group_name){
+              let list = group.list;
+              list.push(Object.assign(employee,{ checked :false }))
+              newEmployeeDatas[jndex].list = list;
+              break
+            }
+          }
+        }
+        this.setData({employeeDatas:newEmployeeDatas})
+      }
+      
+    }).finally(() => {
+      this.setData({loadingEmployees:false})
+    })
+  },
+  getProgressTemplate(){
+    this.setData({ loadingTemplates :true })
+    ProgressTemplate.getList().then((res) => {
+      let progressTemplates = res.data
+      if(progressTemplates.length > 0){
+        this.setData({ 
+          progressTemplates,
+          currentProgressTemplatesName:progressTemplates[0].name,
+          currentProgressTemplates :progressTemplates[0].template,
+        })
+      }
+    }).finally(() => {
+      this.setData({ loadingTemplates :false })
+    })
+  },
+  bindEmployeeChange(event){
+    const group_index = event.currentTarget.dataset.group_index;
+    const list_index = event.currentTarget.dataset.list_index;
+    let employeeDatas = this.data.employeeDatas;
+    let currentEmployee = employeeDatas[group_index].list[list_index];
+    let currentSelectEmployees = []
+    currentEmployee.checked = !currentEmployee.checked;
+    for (let index = 0; index < employeeDatas.length; index++) {
+      const employee = employeeDatas[index];
+      for (let jndex = 0; jndex < employee.list.length; jndex++) {
+        const element = employee.list[jndex];
+        if(element.checked){
+          currentSelectEmployees.push(element)
+        }
+      }
+    }
+    this.setData({ employeeDatas ,currentSelectEmployees })
+    
+  },
+  openEmployeeModal(){
+    this.setData({employeeModal : true})
+  },
+  closeEmployeeModal(){
+    this.setData({employeeModal : false})
+  },
+  createOrder(){
+    let company_id = this.data.company_id;
+    let name = this.data.formData.name;
+    let customer = this.data.formData.customer;
+    let address = this.data.formData.address;
+    let phone = this.data.formData.phone;
+    let progress_template = this.data.currentProgressTemplates;
+    let employee_ids = this.data.currentSelectEmployees.map((item) => {
+      return {
+        _id :item._id,
+        user_id :item.user_id._id
+      };
+    })
+    let err_msg = null
+    let namePattern = /^[0-9A-Za-z\u4e00-\u9fa5\s]{1,16}$/;
+    let customerPattern = /^[0-9A-Za-z\u4e00-\u9fa5\s]{1,16}$/;
+    let phonePattern = /^\d{7,8}$|^1\d{10}$|^(0\d{2,3}-?|0\d2,3 )?[1-9]\d{4,7}(-\d{1,8})?$/;
+    let addressPattern = /^.{2,120}$/;
+    if(!name || !namePattern.test(name)){
+      err_msg = '项目名称只允许数字英文或汉文还有空格1-16位'
+    }
+    if(!customer || !customerPattern.test(customer)){
+      err_msg = '客户名称只允许数字英文或汉文还有空格1-16位'
+    }
+    if(!phonePattern.test(phone)){
+      err_msg = '请输入正确的手机号码，可以是固定电话'
+    }
+    if(!address || !addressPattern.test(address)){
+      err_msg = '地址的字符长度应在2-120个字符之间'
+    } 
+    if(err_msg){
+      wx.showModal({
+        title: '错误',
+        content: err_msg,
+        showCancel:false
+      })
+    }else{
+      employee_ids = employee_ids.concat(employee_ids)
+      let data = {customer,address,phone ,employee_ids ,progress_template ,company_id ,name}
+      console.log(data)
+      this.setData({createProjectOrderLoading :true})
+      ProjectOrder.add(data).then((result) => {
+        wx.redirectTo({
+          url: `/pages/qrcode/user_add_project_order/index?id=${result.data._id}`,
+        })
+      }).finally(() => {
+        this.setData({createProjectOrderLoading:false})
+      })
+    }
   }
 })

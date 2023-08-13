@@ -47,9 +47,10 @@ const wxLogin = () => {
                   let nickname = res.data.data.nickname;
                   let name = res.data.data.name || null;
                   let avatar = res.data.data.avatar;
+                  let phone = res.data.data.phone;
                   let _id = res.data.data.user_id
                   setToken(res.data.data)
-                  setUserInfo({_id,nickname,avatar,name})
+                  setUserInfo({_id,nickname,avatar,name ,phone})
                   resolve(res.data)
                 }else{
                   reject({message : res.data.message})

@@ -10,7 +10,7 @@
       </view>
     </view>
     <view class="padding-xs text-xxl text-black margin-left-sm">
-      <view>{{nickname}}<text class="text-gray text-df"></text></view>
+      <view>{{nickname || '无昵称'}}<text class="text-gray text-df"></text></view>
       <view class="text-gray text-df padding-top-sm">用户模式</view>
     </view>
   </view>

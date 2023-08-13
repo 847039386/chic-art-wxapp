@@ -22,7 +22,7 @@
         <text class="text-df margin-left-sm text-gray">创始人</text>
       </view>
       <view class="padding-top-sm">
-        <view class="cu-tag bg-grey light radius" wx:for="{{userCompany.tag_ids}}" wx:key="_id">{{ item.name }}</view>
+        <view class="cu-tag bg-blue light radius" wx:for="{{userCompany.tag_ids}}" wx:key="_id">{{ item.name }}</view>
       </view>
     </view>
     <view class="padding-xs text-xl text-black margin-left-sm fr">

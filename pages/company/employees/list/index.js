@@ -1,10 +1,14 @@
 // pages/company/employees/index.js
-const { Company } = require('../../../api/index')
-const { getImageUrl ,uniqueArray } = require('../../../utils/util')
-const { setLocalEmployeeGroup ,getLocalEmployeeGroup } = require('../../../utils/storage/company_employee')
+const { Company } = require('../../../../api/index')
+const { getImageUrl ,uniqueArray } = require('../../../../utils/util')
+const { getUserInfo } = require('../../../../utils/auth')
+const { setLocalEmployeeGroup ,getLocalEmployeeGroup } = require('../../../../utils/storage/company_employee')
 Page({
 
   data: {
+    isAllowOperation:false,
+    loading:false,
+    company:null,
     company_id:null,
     employeeDatas :[],    // 已经通过审核的员工
     formatEmployeeDatas : [], // 格式化通过审核员工数据
@@ -12,15 +16,16 @@ Page({
     localEmployeeGroup:[],   // 本地组
     remoteEmployeeGroup:[],  // 远程组
     allEmployeeGroup:[], // 本地和远程的员工组审核通过的
-
   },
 
   onLoad(options) {
+    
     this.setData({ company_id :options.id })
+  },
+  onShow(){
     this.getEmployees();
   },
-
-  getEmployees (){
+  getEmployees(callback){
     const company_id = this.data.company_id;
     // 正式员工
     let employeeDatas = [];
@@ -28,10 +33,18 @@ Page({
     let auditEmployeeDatas = [];
     // 组名称
     let remoteEmployeeGroup = []; // 远程组
-    wx.showLoading({title: '加载中'})
+    this.setData({ loading:true })
     Company.getEmployees(company_id).then((result) =>{
-      if(result.data.length > 0){
-        result.data.map((element) => {
+      let employeeList = result.data.list;
+      let company = result.data.company;
+      // 验证登陆的userid是否是创始人
+      let userInfo = getUserInfo()
+      let uid = userInfo._id
+      if(company.user_id._id == userInfo._id){
+        this.setData({isAllowOperation :true})
+      }
+      if(employeeList.length > 0){
+        employeeList.map((element) => {
           if(element.user_id && element.user_id.avatar){
             element.user_id.avatar = getImageUrl(element.user_id.avatar)
           }
@@ -47,17 +60,20 @@ Page({
         })
       }
       // 格式化数据
-      this.formatemployeeDatas(remoteEmployeeGroup,employeeDatas)
-      this.setData({auditEmployeeDatas ,remoteEmployeeGroup ,employeeDatas})
+      this.getFormatemployeeDatas(remoteEmployeeGroup,employeeDatas)
+      this.setData({auditEmployeeDatas ,remoteEmployeeGroup ,employeeDatas ,company})
     }).finally(() => {
-      wx.hideLoading()
+      this.setData({ loading :false})
+      if(callback){
+        callback()
+      }
     })
   },
-
+  
   auditEmployee(e){
     let id = e.currentTarget.dataset.id
     let remoteEmployeeGroup = this.data.remoteEmployeeGroup //远程组
-    wx.showLoading({title:'加载中',mask:true})
+    wx.showLoading({mask:true})
     Company.auditEmployeeOk(id).then(() =>{
       let index = e.currentTarget.dataset.index
       let currentEmployee = this.data.auditEmployeeDatas[index]
@@ -66,13 +82,26 @@ Page({
       auditEmployeeDatas.splice(index,1)
       let employeeDatas = this.data.employeeDatas;
       employeeDatas.push(currentEmployee)
-      this.formatemployeeDatas(remoteEmployeeGroup,employeeDatas)
+      this.getFormatemployeeDatas(remoteEmployeeGroup,employeeDatas)
       this.setData({ auditEmployeeDatas ,employeeDatas })
       // 已经通过的员工数组在添加一条信息
     }).finally(() => {
       wx.hideLoading()
     })
-    
+  },
+  auditNotEmployee(e){
+    let id = e.currentTarget.dataset.id
+    wx.showLoading({mask:true})
+    Company.removeEmployee(id).then(() =>{
+      let index = e.currentTarget.dataset.index
+      // 审核通过后在审核数组删除这条数据
+      let auditEmployeeDatas = this.data.auditEmployeeDatas
+      auditEmployeeDatas.splice(index,1)
+      this.setData({ auditEmployeeDatas })
+      // 已经通过的员工数组在添加一条信息
+    }).finally(() => {
+      wx.hideLoading()
+    })
   },
   createGroup () {
     wx.showModal({
@@ -83,13 +112,22 @@ Page({
         let content = res.content;
         if (res.confirm) {
           setLocalEmployeeGroup(content)
+          let allEmployeeGroup = getLocalEmployeeGroup()
           let formatEmployeeDatas = this.data.formatEmployeeDatas;
-          formatEmployeeDatas.push({
-            list:[],
-            checked:false,
-            group_name:content
-          })
-          this.setData({formatEmployeeDatas ,allEmployeeGroup:getLocalEmployeeGroup()})
+          if(formatEmployeeDatas.length == allEmployeeGroup.length){
+            wx.showModal({
+              title: '错误',
+              showCancel:false,
+              content: '分组名称不能重复',
+            })
+          }else{
+            formatEmployeeDatas.push({
+              list:[],
+              checked:false,
+              group_name:content
+            })
+          }
+          this.setData({formatEmployeeDatas ,allEmployeeGroup })
         }
       }
     })
@@ -105,7 +143,7 @@ Page({
     this.setData({ formatEmployeeDatas });
   },
   // 需要参数数据库中已经通过审核的员工
-  formatemployeeDatas (remoteEmployeeGroup ,employeeDatas){
+  getFormatemployeeDatas (remoteEmployeeGroup ,employeeDatas){
     let localEmployeeGroup = [];  // 本地组
     let allEmployeeGroup = []  //远程组和本地组
     // 去重分组
@@ -145,48 +183,6 @@ Page({
     }
     this.setData({formatEmployeeDatas :newEmployeeDatas ,allEmployeeGroup})
   },
-
-  // ListTouch触摸开始
-  ListTouchStart(e) {
-    this.setData({
-      ListTouchStart: e.touches[0].pageX
-    })
-  },
-
-  // ListTouch计算方向
-  ListTouchMove(e) {
-    this.setData({
-      ListTouchDirection: e.touches[0].pageX - this.data.ListTouchStart > 0 ? 'right' : 'left'
-    })
-  },
-
-  // ListTouch计算滚动
-  ListTouchEnd(e) {
-    if (this.data.ListTouchDirection == 'left') {
-      this.setData({
-        modalName: e.currentTarget.dataset.target
-      })
-    } else {
-      this.setData({
-        modalName: null
-      })
-    }
-    this.setData({
-      ListTouchDirection: null
-    })
-  },
-
-  // 转移到组
-  
-  onMoveGroupOk(event){
-    let that = this;
-    let id = event.currentTarget.dataset.id
-    let value = event.detail.value;
-    let group_name = this.data.allEmployeeGroup[value]
-    Company.updateEmployeeGroupName(id,group_name).then(() => {
-      that.getEmployees();
-    })
-  },
   removeGroup(event){
     let that = this;
     let company_id = this.data.company_id
@@ -206,7 +202,7 @@ Page({
           content: '删除分组后数据将保存到默认分组',
           complete: (res) => {
             if (res.confirm) {
-              wx.showLoading({title:'加载中',mask:true})
+              wx.showLoading({mask:true})
               Company.updateAllEmployeeGroupName(company_id,group_name).then(()=>{
                 localEmployeeGroup.splice(value,1)
                 // 下标0肯定是默认分组，为了防止多次调用API，所以将移除的分组数据放在默认分组里
@@ -228,9 +224,23 @@ Page({
         that.setData({ formatEmployeeDatas ,allEmployeeGroup:getLocalEmployeeGroup()})
       }
     }
-
-
-  }
-  
+  },
+  toEmployeeSettingsPage(event){
+    let isAllowOperation = this.data.isAllowOperation
+    if(isAllowOperation){
+      const id = event.currentTarget.dataset.id;
+      const group_name = event.currentTarget.dataset.group_name;
+      const identity_type = event.currentTarget.dataset.identity_type
+      const remark = event.currentTarget.dataset.remark
+      wx.navigateTo({
+        url: `/pages/company/employees/settings/info/index?id=${id}&group_name=${group_name}&identity_type=${identity_type}&remark=${remark}`,
+      })
+    }
+  },
+  onPullDownRefresh(){
+    this.getEmployees(() =>{
+      wx.stopPullDownRefresh();
+    });
+  },
 
 })

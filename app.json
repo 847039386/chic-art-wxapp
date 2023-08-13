@@ -4,13 +4,17 @@
     "pages/login/index",
     "pages/company/create/index",
     "pages/company/info/index",
-    "pages/company/employees/index",
+    "pages/company/employees/list/index",
     "pages/company/settings/index",
     "pages/user/update_info/index",
     "pages/user/update_name/index",
     "pages/user/update_phone/index",
     "pages/order/create/index",
-    "pages/qrcode/company_employee/index"
+    "pages/qrcode/company_employee/index",
+    "pages/company/employees/settings/info/index",
+    "pages/user/update_nickname/index",
+    "pages/company/employees/settings/update_remark/index",
+    "pages/qrcode/user_add_project_order/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

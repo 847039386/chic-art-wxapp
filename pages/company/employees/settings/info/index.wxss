@@ -1,0 +1,7 @@
+/* pages/company/employees/settings/index.wxss */
+.mov_group_pick{
+  height: 100rpx;
+  line-height: 100rpx;
+  position: relative;
+  text-align: center;
+}

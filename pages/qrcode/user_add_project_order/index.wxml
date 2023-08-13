@@ -1,0 +1,56 @@
+<!--pages/qrcode/user_add_project_order/index.wxml-->
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+  <!-- <view slot="content"></view> -->
+</cu-custom>
+
+<import src="index.skeleton.wxml"/>
+<template is="skeleton" wx:if="{{loading}}" />
+
+<block wx:if="{{!loading}}">
+  <view class="cf padding-lr-xxl margin-top" >
+    <view class="cu-avatar radius lg fl" style="background-image:url({{projectOrder.user_id.avatar}});"></view>
+    <view class="content fl margin-left-sm margin-top-xs">
+      <view class="text-sm">
+        <text class="text-Abc text-grey">负责人：</text>
+        <text class="text-Abc text-blue">{{ projectOrder.user_id.name || projectOrder.user_id.nickname }}</text>
+      </view>
+      <view class="text-sm margin-top-xs">
+        <view wx:if="{{projectOrder.user_id.phone}}">
+          <text class="text-Abc text-grey">联系方式：</text>
+          <text class="text-Abc text-blue">{{projectOrder.user_id.phone}}</text>
+        </view>
+        <view wx:else>无联系方式</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="padding">
+    <view class="margin-top-sm margin-left-sm text-lg">
+      <text class="text-bold">项目名称：</text>
+      <text class="text-grey">{{ projectOrder.name }}</text>
+    </view>
+    <view class="margin-top-sm margin-left-sm text-lg">
+      <text class="text-bold">承包公司：</text>
+      <text class="text-grey">{{ projectOrder.company_id.name }}</text>
+    </view>
+    <view class="margin-top-sm margin-left-sm text-lg">
+      <text class="text-bold">对接客户：</text>
+      <text class="text-grey">{{ projectOrder.customer }}</text>
+    </view>
+    <view class="margin-top-sm margin-left-sm text-lg">
+      <text class="text-bold">联系方式：</text>
+      <text class="text-grey">{{ projectOrder.phone }}</text>
+    </view>
+    <view class="margin-top-sm margin-left-sm text-lg">
+      <text class="text-bold">项目地址：</text>
+      <text class="text-grey">{{ projectOrder.address }}</text>
+    </view>
+  </view>
+
+  <view class="flex justify-center margin-top-xxl">
+  <view class="padding-sm">
+      <canvas style="width: 130px;height: 130px;" canvas-id="myQrcode"></canvas>
+  </view>
+  </view>
+  <view class="flex justify-center text-grey margin-top-xxl">扫一扫加入订单</view>
+</block>

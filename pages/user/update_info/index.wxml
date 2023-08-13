@@ -4,9 +4,17 @@
 </cu-custom>
 
 <view class="cu-list menu">
+  <view class="cu-item arrow" bindtap="toUserUpdateNickNamePage">
+    <view class="content">
+      <text class="">昵称</text>
+    </view>
+    <view class="action">
+      <text class="text-grey text-sm">{{ nickname || '未设置' }}</text>
+    </view>
+  </view>
   <view class="cu-item arrow" bindtap="toUserUpdateNamePage">
     <view class="content">
-      <text class="">真实姓名</text>
+      <text class="">姓名</text>
     </view>
     <view class="action">
       <text class="text-grey text-sm">{{ name || '未设置' }}</text>
@@ -18,6 +26,12 @@
     </view>
     <view class="action">
       <text class="text-grey text-sm">{{ phone || '未设置' }}</text>
+    </view>
+  </view>
+
+  <view class="cu-item margin-top-sm" bindtap="logout">
+    <view class="content text-center">
+      <text class="text-red ">退出登陆</text>
     </view>
   </view>
 </view>

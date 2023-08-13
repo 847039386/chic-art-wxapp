@@ -1,0 +1,38 @@
+// pages/qrcode/user_add_project_order/index.js
+const { ProjectOrder } = require('../../../api/index')
+const drawQrcode = require('../../../common/weapp_qrcode/weapp.qrcode.common')
+Page({
+
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    loading:true,
+    id : null,
+    projectOrder : { }
+  },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad(options) {
+    let id = options.id
+    this.getInfo(id)
+    this.setData({id})
+    drawQrcode({
+      width: 130,
+      height: 130,
+      canvasId: 'myQrcode',
+      text: 'hellow',
+    })
+  },
+  getInfo(id){
+    this.setData({loading:true})
+    ProjectOrder.getInfoById(id).then((result) => {
+      this.setData({ projectOrder : result.data })
+    }).finally(() => {
+      this.setData({loading:false})
+    })
+  },
+
+})

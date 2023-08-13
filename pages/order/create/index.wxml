@@ -3,25 +3,92 @@
   <view slot="content">创建订单</view>
 </cu-custom>
 
-<view wx:if="{{errMsg}}" class="cu-load bg-red light">
-  <text>{{errMsg}}</text>
-  <text class="cuIcon-roundclose lg padding-right-xs"></text>
-</view>
-
 <form class="bg-white">
-  <view class="padding-lg">
-    <view class="flex justify-center">
-        <view class="text-xxl text-bold text-black">公司注册</view>
-    </view>
-    <!-- 标签选择 -->
-    <!-- <view class="cu-form-group margin-top-sm" style="border-top: 1rpx solid #EEE">
-      <view class="title text-bold text-black">公司名称</view>
-      <input value="{{formData.name}}"  bindinput="handleCompanyNameInput" placeholder="请输入公司名称"></input>
-    </view> -->
-    <!-- 公司简介 -->
-    <!-- 创建按钮 -->
-    <view class="flex justify-center margin-top-xl">
-      <button loading="{{bcc_loading}}" disabled="{{bcc_loading}}" class="cu-btn xxl" bindtap=""  style="background-color:#1AAD19;color:#FFF;width: 50vw;">注册公司</button>
+  <!-- 项目名称 -->
+  <view class="cu-form-group margin-top-sm">
+    <view class="title text-black">项目名</view>
+    <input value="{{formData.name}}" bindinput="handleNameInput" placeholder="例如：XX计划、XX改造、室内装修"></input>
+  </view>
+  <!-- 客户 -->
+  <view class="cu-form-group margin-top-sm">
+    <view class="title text-black">客户</view>
+    <input value="{{formData.customer}}" bindinput="handleCustomerInput" placeholder="请输入客户名称"></input>
+  </view>
+  <!-- 地址 -->
+  <view class="cu-form-group arrow">
+    <view class="title text-black">地址</view>
+    <input value="{{formData.address}}" bindinput="handleAddressInput" placeholder="请输入地址"></input>
+    <text bindtap="openMap" class="cuIcon-locationfill text-orange"></text>
+  </view>
+  <!-- 手机号 -->
+  <view class="cu-form-group">
+    <view class="title text-black">电话号码</view>
+    <input value="{{formData.phone}}" bindinput="handlePhoneInput" placeholder="请输入固定电话或手机号码"></input>
+    <view class="cu-capsule radius">
+      <text bindtap="openMap" class="cuIcon-dianhua text-blue"></text>
     </view>
   </view>
+  <!-- 选择进度模板 -->
+  <view class="cu-form-group margin-top-sm">
+    <view class="title text-black">进度模板</view>
+    <picker bindchange="bindPTPickerChange" range-key="name" range="{{progressTemplates}}">
+      <view class="picker">{{currentProgressTemplatesName}}</view>
+    </picker>
+  </view>
+  <view class="cu-form-group">
+    <scroll-view scroll-x class="bg-white padding-tb response cu-steps steps-bottom margin-top-xs">
+      <view class="cu-item padding-lr-xl" wx:for="{{currentProgressTemplates}}" wx:key="item" >
+        <text class="cu-item">{{ item }}</text>
+        <text class="num bg-blue" data-index="{{index + 1}}"></text>
+      </view>
+    </scroll-view>
+  </view>
 </form>
+<!-- 添加员工 -->
+<view style="border-top: 1rpx solid #EEE;"></view>
+<view class="cu-list menu margin-top-sm">
+  <view class="cu-item arrow" bindtap="openEmployeeModal">
+    <view class="content text-black">添加员工 </view>
+    <view class="action">
+      <view class="cu-avatar-group">
+        <view >
+          <view wx:key="_id" wx:for="{{currentSelectEmployees}}" wx:if="{{index < 8}}" class="cu-avatar round sm" style="background-image:url({{item.user_id.avatar}});"></view>
+        </view>
+      </view>
+      <text class="text-grey text-sm">
+        <text wx:if="{{currentSelectEmployees.length > 8}}">等 </text>
+        <text>{{ currentSelectEmployees.length }} 人</text>
+      </text>
+    </view>
+  </view>
+</view>
+<!-- 创建订单按钮 -->
+<view class="padding margin-top-xl">
+  <button loading="{{createProjectOrderLoading}}" disabled="{{createProjectOrderLoading}}" bindtap="createOrder" class="cu-btn block bg-blue xxl">创建订单</button>
+</view>
+<!-- 员工列表侧边抽屉 -->
+<view class="cu-modal drawer-modal justify-start {{ employeeModal ? 'show' :'' }}" bindtap="closeEmployeeModal">
+  <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;height:calc(100vh - {{CustomBar}}px)">
+    <block wx:for="{{ employeeDatas }}" wx:for-item="group" wx:key="index" wx:for-index="group_index">
+      <view class="padding cf bg-white" >
+          <view class="fl">{{ group.group_name}}</view>
+          <view class="fr action padding-left-xs">
+            <text class="cuIcon-unfold"></text>
+          </view>
+          <view class="fr text-grey text-sm">{{ group.list.length}}</view>
+      </view>
+      <view class="cu-list menu-avatar no-padding bg-gray">
+        <view wx:for="{{ group.list }}" wx:key="_id"  wx:for-item="item" wx:for-index="list_index" >
+          <view class="padding-xs cf cu-item {{ item.checked ? 'bg-blue light':'' }}" data-group_index="{{group_index}}" data-list_index="{{list_index}}" bindtap="bindEmployeeChange">
+            <view class="cu-avatar radius fl" style="background-image:url({{item.user_id.avatar}});"></view>
+            <view style="height: 64rpx;line-height: 64rpx;" class="content margin-left-sm fl">{{ item.user_id.name || item.user_id.nickname }}</view>
+            <view style="height: 64rpx;line-height: 64rpx;" class="content margin-left-sm text-xs fr {{ item.checked ? 'text-grey' :'text-gray'}}">{{ item.remark || '普通员工' }}</view>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>
+
+
+

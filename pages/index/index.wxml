@@ -2,8 +2,8 @@
 <!-- <view class="container">
  
 </view> -->
-
-<home wx:if="{{PageCur=='home'}}"></home>
-<company wx:if="{{PageCur=='company'}}"></company>
+<ProjectOrder wx:if="{{PageCur=='ProjectOrder' || PageCur == 'templates'}}"></ProjectOrder>
+<Home wx:if="{{PageCur=='Home'}}"></Home>
+<Company wx:if="{{PageCur=='Company'}}"></Company>
 
 <UserTabBar bind:NavChange="onSwitchTab"></UserTabBar>

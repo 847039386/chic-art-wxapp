@@ -50,7 +50,7 @@ Page({
   toCompanyEmployeesPage(){
     let company_id = this.data.company_id
     wx.navigateTo({
-      url: `/pages/company/employees/index?id=${company_id}`,
+      url: `/pages/company/employees/list/index?id=${company_id}`,
     })
   },
   // 去往公司设置页面

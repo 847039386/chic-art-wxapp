@@ -1,4 +1,4 @@
-// pages/user/update_name/index.js
+// pages/user/update_nickname/index.js
 const { getUserInfo ,setUserInfo } = require('../../../utils/auth')
 const { User } = require('../../../api/index')
 Page({
@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    name:null,
+    nickname:null,
     loading :false
   },
 
@@ -16,17 +16,17 @@ Page({
    */
   onLoad(options) {
     const info = getUserInfo();
-    this.setData({ name : info.name })
+    this.setData({ nickname : info.nickname })
   },
   handleUserNameInput (e) {
-    this.setData({ name :e.detail.value})
+    this.setData({ nickname :e.detail.value})
   },
-  updateUserName(){
+  updateUserNickName(){
     this.setData({loading:true})
-    let name = this.data.name
-    User.updateUserName(name).then((result) => {
+    let nickname = this.data.nickname
+    User.updateUserNickName(nickname).then((result) => {
       let userInfo = getUserInfo()
-      userInfo = Object.assign(userInfo,{name :name})
+      userInfo = Object.assign(userInfo,{nickname :nickname})
       setUserInfo(userInfo)
       this.setData({loading:false})
       wx.navigateBack({ delta: 1 })
@@ -34,5 +34,4 @@ Page({
       this.setData({loading:false})
     })
   }
-
 })

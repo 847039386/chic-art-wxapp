@@ -39,6 +39,21 @@ const updateAllEmployeeGroupName = (company_id ,group_name) => {
   return request({ url: `/company-employee/up_call_group_name` ,method: 'PATCH' ,data :{ company_id ,group_name } })
 }
 
+// 删除公司员工
+const removeEmployee = (id) => {
+  return request({ url: `/company-employee/del?id=${id}` ,method: 'DELETE' })
+}
+
+// 修改公司员工身份
+const updateEmployeeIdentityType = (id ,identity_type) => {
+  return request({ url: `/company-employee/up_identity_type` ,method: 'PATCH' ,data :{ id ,identity_type } })
+}
+
+// 修改员工备注
+const updateEmployeeRemark = (id ,remark) => {
+  return request({ url: `/company-employee/up_remark` ,method: 'PATCH' ,data :{ id ,remark } })
+}
+
 module.exports = {
   create,
   getList,
@@ -46,6 +61,9 @@ module.exports = {
   getInfo,
   getEmployees,
   auditEmployeeOk,
+  removeEmployee,
   updateEmployeeGroupName,
-  updateAllEmployeeGroupName
+  updateAllEmployeeGroupName,
+  updateEmployeeIdentityType,
+  updateEmployeeRemark
 }

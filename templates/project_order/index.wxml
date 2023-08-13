@@ -1,0 +1,16 @@
+<!--templates/order/index.wxml-->
+<cu-custom bgColor="bg-white">
+  <view slot="content"></view>
+</cu-custom>
+<view></view>
+<scroll-view scroll-x class="bg-white nav fixed" style="top:{{CustomBar}}px;" id="#order_nav">
+  <view bindtap="onSwitchOrderTab" data-state="0" class="cu-item {{ state == 0 ? 'text-blue cur' :'' }}">进行中</view>
+  <view bindtap="onSwitchOrderTab" data-state="1" class="cu-item {{ state == 1 ? 'text-blue cur' :'' }}">已完成</view>
+  <view bindtap="onSwitchOrderTab" data-state="2" class="cu-item {{ state == 2 ? 'text-blue cur' :'' }}">已取消</view>
+  <view bindtap="onSwitchOrderTab" data-state="-1" class="cu-item {{ state == -1 ? 'text-blue cur' :'' }}">全部</view>
+</scroll-view>
+<view class="nav"><view class="cu-item"></view></view>
+
+<view wx:for="{{10}}" wx:key="index" class="bg-blue light padding padding-tb-xxl margin-sm text-center radius">
+  Tab
+</view>

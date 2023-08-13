@@ -1,0 +1,40 @@
+<!--pages/company/employees/settings/index.wxml-->
+<!--pages/user/update_info/index.wxml-->
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+  <view slot="content">个人信息</view>
+</cu-custom>
+
+<view class="cu-list menu">
+  <view class="cu-item arrow" bindtap="toUpdateremarkPage">
+    <view class="content">
+      <text class="">备注</text>
+    </view>
+    <view class="action">
+      <text class="text-grey text-sm">{{ remark || '普通员工' }}</text>
+    </view>
+  </view>
+  <!-- 设置管理 -->
+  <view class="cu-item">
+    <view class="content padding-tb-sm">
+      <view>设置管理</view>
+      <view class="text-gray text-sm">管理员可以创建订单</view>
+    </view>
+    <view class="action">
+      <switch disabled="{{ upAdmLoading }}" checked="{{ switchAdminChecked }}" class="blue" bindchange="switchAdmin"></switch>
+    </view>
+  </view>
+
+<!-- 移动分组 -->
+  <picker disabled="{{ localEmployeeGroup.length < 1}}" class="mov_group_pick bg-white" bindchange="onMoveGroupOk" range="{{localEmployeeGroup}}">
+    <view class="margin-top-sm bg-white">
+      <view class="cu-item content text-center">移动分组</view>
+    </view>
+  </picker>
+  <!-- 删除员工 -->
+  <view class="cu-item margin-top-sm" bindtap="removeEmployee">
+    <view class="content text-center">
+      <text class="text-red ">删除员工</text>
+    </view>
+  </view>
+</view>
+

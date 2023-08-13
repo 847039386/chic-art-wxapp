@@ -9,7 +9,7 @@ Page({
     logo:null
   },
   onLoad(options){
-    let company_id = options.company_id
+    let company_id = options.id
     let company_name = options.company_name
     let company_logo = options.company_logo
     this.setData({ company_id ,company_name ,company_logo : company_logo || '/images/nlogo.png'})
@@ -17,7 +17,7 @@ Page({
       width: 130,
       height: 130,
       canvasId: 'myQrcode',
-      text: 'test drawQrcode in component',
+      text: company_id,
     })
   },
   /**

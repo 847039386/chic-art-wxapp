@@ -11,9 +11,20 @@ Component({
     username:'',
     avatar:''
   },
-
+  onShow(){
+    console.log('我时设置页面')
+  },
   lifetimes : {
     attached:function(){
+      let userinfo = getUserInfo()
+      let nickname = userinfo.nickname;
+      let avatar = userinfo.avatar
+      this.setData({nickname,avatar})
+    }
+  },
+  pageLifetimes:{
+    // 当用户修改昵称后返回上层页面的时候会走这个方法
+    show(){
       let userinfo = getUserInfo()
       let nickname = userinfo.nickname;
       let avatar = userinfo.avatar

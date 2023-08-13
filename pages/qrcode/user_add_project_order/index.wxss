@@ -1,0 +1,3 @@
+/* pages/qrcode/user_add_project_order/index.wxss */
+@import "./index.skeleton.wxss";
+page{ background-color: #FFF; }

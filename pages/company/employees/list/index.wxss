@@ -1,0 +1,5 @@
+/* pages/company/employees/index.wxss */
+
+.cu-loading3 text::before {
+  background-color: #969696;
+}

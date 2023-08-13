@@ -32,7 +32,7 @@
     <!-- 公司简介 -->
     <view class="cu-form-group align-start" style="border-top: 1rpx solid #EEE;border-bottom: 1rpx solid #EEE">
       <view class="title text-bold text-black">公司简介</view>
-      <textarea model:value="{{formData.description}}" bindinput="handleCompanyDescriptionInput"  placeholder="请输入公司简介">
+      <textarea value="{{formData.description}}" bindinput="handleCompanyDescriptionInput"  placeholder="请输入公司简介">
       </textarea>
     </view>
     <!-- 创建按钮 -->

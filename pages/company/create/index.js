@@ -74,24 +74,9 @@ Page({
   createCompany (data){
     Company.create(data).then((res) => {
       this.setData({ errMsg:null ,bcc_loading:false})
-      wx.showToast({
-        mask:true,
-        title: '成功',
-        icon: 'success',
-        duration: 2000,
-        success() { 
-          setTimeout(()=>{
-            wx.navigateBack({ delta: 1 })
-          },1500)
-        }
-      })
-    }).catch((err) =>{
-      this.setData({ errMsg:err.message ,bcc_loading:false})
-      wx.showToast({
-        title: '失败',
-        icon: 'error',
-        duration: 2000
-      })
+      wx.navigateBack({ delta: 1 })
+    }).finally(() => {
+      this.setData({ bcc_loading:false})
     })
   },
   bindCreateCompany () {

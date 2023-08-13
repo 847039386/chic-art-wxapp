@@ -1,0 +1,90 @@
+<!--pages/company/employees/index.wxml-->
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+  <view slot="content">员工管理</view>
+</cu-custom>
+<!-- 申请列表 -->
+<view wx:if="{{ loading }}" class="cu-load loading bg-gray"></view>
+<!-- 模板 -->
+<view wx:if="{{ !loading }}">
+  <view>
+    <block wx:if="{{auditEmployeeDatas.length > 0 && isAllowOperation}}">
+      <view class="padding bg-white">申请列表</view>
+      <view class="cu-list menu-avatar no-padding bg-gray">
+        <view class="cf padding-sm" wx:for="{{ auditEmployeeDatas }}" wx:key="_id" wx:for-index="index"  wx:for-item="employee">
+          <view class="cu-avatar radius sm fl margin-left-sm" style="background-image:url({{employee.user_id.avatar}});"></view>
+          <view class="content fl  margin-left-sm">
+            <view class="text-black">
+              <text class="text-Abc text-lg">{{ employee.user_id.name || employee.user_id.nickname }}</text>
+            </view>
+          </view>
+          <view class="fr margin-left-sm">
+            <button bindtap="auditNotEmployee" data-index="{{index}}" data-id="{{employee._id}}" class="cu-btn sm bg-grey">拒绝</button>
+          </view>
+          <view class="fr margin-left-sm">
+            <button bindtap="auditEmployee" data-index="{{index}}" data-id="{{employee._id}}" class="cu-btn sm bg-green">允许</button>
+          </view>
+        </view>
+      </view>
+    </block>
+    <!-- 创始人-->
+    <block wx:if="{{company}}">
+      <view class="padding bg-white">创始人</view>
+      <view class="cu-list menu-avatar no-padding bg-gray">
+        <view class="cu-item">
+          <view class="cu-avatar radius lg" style="background-image:url({{company.user_id.avatar}});"></view>
+          <view class="content">
+            <view class="text-black">
+              <text class="text-Abc text-xl">{{ company.user_id.name || company.user_id.nickname }}</text>
+            </view>
+            <view class="text-gray text-sm margin-top-xs">
+              {{ company.user_id.phone || '无联系方式'}}
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+    <!-- 员工列表 -->
+    <block wx:for="{{ formatEmployeeDatas }}" wx:for-item="group" wx:key="index">
+      <view class="padding cf bg-white"  bindtap="toggleCell" data-index="{{ index }}">
+          <view class="fl">{{ group.group_name}}</view>
+          <view class="fr action padding-left-xs">
+            <text class="cuIcon-{{group.checked ? 'unfold' : 'right'}}"></text>
+          </view>
+          <view class="fr text-grey text-sm">{{ group.list.length}}</view>
+      </view>
+      <view class="cu-list menu-avatar no-padding bg-gray {{group.checked ? '' : 'piano-hidden-content'}}">
+        <view class="cu-item" bindtap="toEmployeeSettingsPage" wx:for="{{ group.list }}" wx:key="_id"  wx:for-item="item"  data-id="{{item._id}}" data-remark="{{item.remark}}" data-group_name="{{item.group_name}}" data-identity_type="{{item.identity_type}}">
+          <view class="cu-avatar radius lg" style="background-image:url({{item.user_id.avatar}});"></view>
+          <view class="content">
+            <view class="text-black">
+              <text class="text-Abc text-xl">{{ item.user_id.name || item.user_id.nickname }}</text>
+            </view>
+            <view class="text-gray text-sm margin-top-xs">
+              <text>{{ item.user_id.phone || '无联系方式'}}</text>
+              <text class="text-Abc text-xs text-blue margin-left">{{ item.remark || '普通员工' }}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <!-- 底部导航 -->
+  <view class="cu-tabbar-height" wx:if="{{isAllowOperation}}"></view>
+  <view class="cu-bar tabbar bg-white shadow foot" wx:if="{{isAllowOperation}}">
+    <view class="action" bindtap="createGroup" data-cur="basics">
+      <view class="cuIcon-friendfill text-blue"></view>
+      <text class="text-blue">创建群组</text>
+    </view>
+    <view class="action" data-cur="basics">
+      <picker bindchange="removeGroup" range="{{allEmployeeGroup}}">
+        <view class="cuIcon-deletefill text-red"></view>
+        <text class="text-red">删除分组</text>
+      </picker>
+    </view>
+  </view>
+
+</view>
+
+
+

@@ -4,7 +4,8 @@ page {
 }
 
 .check_item {
-  background: #F4F5F9;
+  background-color: #e7ebed;
+  color: #8799a3;
   border-radius: 6rpx;
   text-align: center;
   line-height: 64rpx;
@@ -12,8 +13,8 @@ page {
 }
 
 .checked {
-  background: #DBE9FC;
-  color: #1E79EC;
+  background-color: #cce6ff;
+  color: #0081ff;
 }
 
 .checkicon { 
