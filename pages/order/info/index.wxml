@@ -1,0 +1,32 @@
+<!--pages/order/info/index.wxml-->
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+  <!-- <view slot="content"></view> -->
+</cu-custom>
+
+<InfoTemplate aid="{{id}}"  wx:if="{{PageCur=='InfoTemplate' && id }}"></InfoTemplate>
+<EmployeesTemplate aid="{{id}}" wx:if="{{PageCur=='EmployeesTemplate' && id}}"></EmployeesTemplate>
+<CustomersTemplate aid="{{id}}" wx:if="{{PageCur=='CustomersTemplate' && id}}"></CustomersTemplate>
+<CamerasTemplate aid="{{id}}" wx:if="{{PageCur=='CamerasTemplate' && id}}"></CamerasTemplate>
+
+<block>
+  <view class="cu-tabbar-height"></view>
+  <view class="cu-bar tabbar bg-white shadow foot">
+    <view class="action {{ PageCur == 'InfoTemplate' ? 'text-blue' : 'text-black' }}" bindtap="onSwitchTab" data-cur="InfoTemplate" >
+      <view class="{{ PageCur == 'InfoTemplate' ? 'cuIcon-formfill' : 'cuIcon-form' }}"></view>
+      <text>订单</text>
+    </view>
+    <view class="action {{ PageCur == 'EmployeesTemplate' ? 'text-blue' : 'text-black' }}" bindtap="onSwitchTab" data-cur="EmployeesTemplate" >
+      <view class="{{ PageCur == 'EmployeesTemplate' ? 'cuIcon-group_fill' : 'cuIcon-group' }}"></view>
+      <text>订单员工</text>
+    </view>
+    <view class="action {{ PageCur == 'CustomersTemplate' ? 'text-blue' : 'text-black' }}" bindtap="onSwitchTab" data-cur="CustomersTemplate">
+      <view class="{{ PageCur == 'CustomersTemplate' ? 'cuIcon-friendfill' : 'cuIcon-friend' }}"></view>
+      <text>客户</text>
+    </view>
+    <view class="action {{ PageCur == 'CamerasTemplate' ? 'text-blue' : 'text-black' }}" bindtap="onSwitchTab" data-cur="CamerasTemplate">
+      <view class="{{ PageCur == 'CamerasTemplate' ? 'cuIcon-recordfill' : 'cuIcon-record' }}"></view>
+      <text>监控</text>
+    </view>
+  </view>
+</block>
+

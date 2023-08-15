@@ -5,7 +5,7 @@
 <!-- 申请列表 -->
 <view wx:if="{{ loading }}" class="cu-load loading bg-gray"></view>
 <!-- 模板 -->
-<view wx:if="{{ !loading }}">
+<block wx:if="{{ !loading }}">
   <view>
     <block wx:if="{{auditEmployeeDatas.length > 0 && isAllowOperation}}">
       <view class="padding bg-white">申请列表</view>
@@ -84,7 +84,7 @@
     </view>
   </view>
 
-</view>
+</block>
 
 
 

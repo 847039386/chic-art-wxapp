@@ -208,7 +208,6 @@ Page({
     }else{
       employee_ids = employee_ids.concat(employee_ids)
       let data = {customer,address,phone ,employee_ids ,progress_template ,company_id ,name}
-      console.log(data)
       this.setData({createProjectOrderLoading :true})
       ProjectOrder.add(data).then((result) => {
         wx.redirectTo({

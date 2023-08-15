@@ -40,8 +40,8 @@ Page({
           wx.removeStorage({
             key: 'accessToken',
             success (res) {
-              wx.navigateTo({
-                url: '/pages/login/index',
+              wx.redirectTo({
+                url: '/pages/login/index/index',
               })
             }
           })

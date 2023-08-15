@@ -7,8 +7,8 @@ Page({
   },
   onLoad(){
     if(!verifyToken()){
-      wx.navigateTo({
-        url: '/pages/login/index',
+      wx.redirectTo({
+        url: '/pages/login/index/index',
       })
     }
   },

@@ -1,5 +1,6 @@
 // pages/qrcode/user_add_project_order/index.js
 const { ProjectOrder } = require('../../../api/index')
+const { getImageUrl } = require('../../../utils/util')
 const drawQrcode = require('../../../common/weapp_qrcode/weapp.qrcode.common')
 Page({
 
@@ -29,6 +30,9 @@ Page({
   getInfo(id){
     this.setData({loading:true})
     ProjectOrder.getInfoById(id).then((result) => {
+      if(result.data.user_id){
+        result.data.user_id.avatar = getImageUrl(result.data.user_id.avatar)
+      }
       this.setData({ projectOrder : result.data })
     }).finally(() => {
       this.setData({loading:false})

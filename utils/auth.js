@@ -1,3 +1,4 @@
+const { getImageUrl } = require('./util')
 
 function getToken() {
   // 此处与`TokenKey`相同，此写法解决初始化时`Cookies`中不存在`TokenKey`报错
@@ -43,6 +44,9 @@ function verifyToken() {
 }
 
 function setUserInfo(user){
+  if(user.avatar){
+    user = Object.assign(user,{ avatar :getImageUrl(user.avatar) })
+  }
   wx.setStorageSync("userInfo", user);
 }
 

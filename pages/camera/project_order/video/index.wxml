@@ -1,0 +1,16 @@
+<!--pages/camera/project_order/video/index.wxml-->
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+  <view slot="content">监控</view>
+</cu-custom>
+<view class="flex justify-center margin-top">
+    <view>
+      <live-player src="{{url}}" 
+      mode="RTC" autoplay 
+      bindstatechange="statechange" 
+      binderror="error" 
+       />
+    </view>
+</view>
+<view class="text-center">{{url}}</view>
+
+

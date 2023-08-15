@@ -24,7 +24,7 @@ Component({
       })
     },
     getList(){
-       const user_id = getUserInfo()._id;
+       const user_id = getUserInfo().user_id;
        this.setData({loading :true})
        Company.getUser(user_id).then((result) => {
         let data = result.data;

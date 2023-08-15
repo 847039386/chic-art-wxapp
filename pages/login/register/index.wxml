@@ -1,0 +1,22 @@
+<!--pages/login/info/index.wxml-->
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+  <view slot="content">个人信息</view>
+</cu-custom>
+<form class="bg-white">
+  <view class="padding-lg">
+    <view class="flex justify-center" style="margin:40px 0;">
+      <image class="cu-avatar radius xl solid" src="{{ avatar ? avatar :'/images/nuser.png'}}" mode='aspectFill' bindtap="bindAvatarChange"></image>
+    </view>
+    <!-- 标签选择 -->
+    <view class="cu-form-group margin-top-sm" style="border-top: 1rpx solid #EEE">
+      <view class="title text-bold text-black">昵称</view>
+      <input value="{{nickname}}"  bindinput="handleNickNameInput" placeholder="请输入昵称"></input>
+    </view>
+    
+  </view>
+</form>
+
+<!-- 注册按钮 -->
+<view class="padding margin-top-xs">
+  <button loading="{{loading}}" disabled="{{loading}}" bindtap="onRegister" class="cu-btn block bg-blue xxl">注册</button>
+</view>

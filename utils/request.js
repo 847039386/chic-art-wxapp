@@ -28,51 +28,33 @@ function refreshToken() {
   })
 }
 
-const wxLogin = () => {
+const wxLogin = (data) => {
   return new Promise((resolve, reject) => {
-      wx.getUserProfile({
-      desc: '展示用户信息', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
-      success: (wx_ProfileRes) => {
-        let nickname = wx_ProfileRes.userInfo.nickName
-        let avatar = wx_ProfileRes.userInfo.avatarUrl
-        wx.login({
-          success: async (wx_LoginRes) => {
-            let code = wx_LoginRes.code
-            wx.request({
-              url: baseURL + '/auth/wx_login',
-              data:{code,avatar,nickname},
-              method:"POST",
-              success:(res) => {
-                if(res.data.success){
-                  let nickname = res.data.data.nickname;
-                  let name = res.data.data.name || null;
-                  let avatar = res.data.data.avatar;
-                  let phone = res.data.data.phone;
-                  let _id = res.data.data.user_id
-                  setToken(res.data.data)
-                  setUserInfo({_id,nickname,avatar,name ,phone})
-                  resolve(res.data)
-                }else{
-                  reject({message : res.data.message})
-                }
-              },
-              fail:(err) => {
-                reject(err)
-              }
-            })
+    let avatar = data.avatar;
+    let nickname = data.nickname;
+    wx.login({
+      success: (wx_LoginRes) => {
+        let code = wx_LoginRes.code
+        wx.request({
+          url: baseURL + '/auth/wx_login',
+          data:{code,avatar ,nickname},
+          method:"POST",
+          success:(res) => {
+            if(res.data.success){
+              setToken(res.data.data)
+              setUserInfo(res.data.data)
+              resolve(res.data)
+            }else{
+              reject({message : res.data.message})
+            }
           },
-          fail :(wx_LoginRes_err)=>{
-            reject(wx_LoginRes_err)
+          fail:(err) => {
+            reject(err)
           }
         })
       },
-      fail :(wx_ProfileRes_err)=>{
-        wx.showToast({
-          title: '需要个人信息',
-          icon: 'error',
-          duration: 2000
-        })
-        reject(wx_ProfileRes_err)
+      fail :(wx_LoginRes_err)=>{
+        reject(wx_LoginRes_err)
       }
     })
   });

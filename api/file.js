@@ -6,6 +6,12 @@ const uploadCompanyLogo = (filePath) => {
   return uploadFile(url,filePath)
 }
 
+const uploadUserAvatarLogo = (filePath) => {
+  let url = host + '/file/upload'
+  return uploadFile(url,filePath)
+}
+
 module.exports = {
-  uploadCompanyLogo
+  uploadCompanyLogo,
+  uploadUserAvatarLogo
 }

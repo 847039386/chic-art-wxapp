@@ -13,7 +13,7 @@
       <view class="title text-bold text-black">备注</view>
       <input value="{{remark}}" bindinput="handleRemarkInput" placeholder="请输入备注"></input>
     </view>
-    <view class="text-grey margin-top-sm">备注长度应是1-16位，不宜过长</view>
+    <view class="text-grey margin-top-sm">备注长度应是1-16位，不宜过长，备注将在员工列表和项目订单员工列表中展现，方便客户联系负责人，请起一些与职务相关的备注例如：工人、木工、电工</view>
 
     <!-- 修改按钮 -->
     <view class="flex justify-center margin-top-xl" bindtap="updateRemark">
