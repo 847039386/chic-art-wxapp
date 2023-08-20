@@ -5,44 +5,61 @@
 <view class="{{loading ? 'bg-white' :''}}">
   <cu-skeleton loading="{{loading}}" column="8" columnWidth="{{['60%','90%','70%','70%']}}" endHeight="36rpx">
     <view class="margin-top-sm">
-      <view class="cf padding-sm" wx:if="{{company}}" bindtap="toCompanyInfoPage" data-id="{{company._id}}" >
-        <view class="cu-avatar xl radius fl" style="background-image:url({{company.logo}});"></view>
-        <view class=" text-xl text-black margin-left-sm fl">
-          <view class="margin-top-xs">
-            <text class="text-xl text-bold">{{ company.name }}</text>
-            <text class="text-df margin-left-sm text-gray">创始人</text>
+      <view class="padding-sm flex flex-wrap"  >
+        <view class="cu-avatar xl radius basis-xs" style="background-image:url({{company.logo}});"></view>
+        <view class="padding-xs text-xl text-black basis-xl">
+          <view class="flex justify-between margin-left-xs">
+            <view>
+              <text class="text-xl text-bold ">{{ company.name }}</text>
+              <text class="text-df margin-left-sm text-gray">{{ remark }}</text>
+            </view>
+            <view>
+              <view wx:if="{{company.audit_state == 1}}" class="text-df text-yellow">审核中</view>
+              <view wx:if="{{company.audit_state == 2}}" class="text-df text-gray">待审核</view>
+              <view wx:if="{{isADM}}" class="text-df text-blue">管理员</view>
+            </view>
           </view>
-          <view class="padding-top-sm">
+          <view class="padding-top-sm margin-left-xs">
             <view class="cu-tag bg-blue light radius" wx:for="{{company.tag_ids}}" wx:key="_id">{{ item.name }}</view>
           </view>
-        </view>
-        <view class="padding-xs text-xl text-black margin-left-sm fr">
-          <view wx:if="{{company.censor == 1}}" class="text-df text-yellow">审核中</view>
-          <view wx:if="{{company.censor == 2}}" class="text-df text-gray">待审核</view>
         </view>
       </view>
     </view>
     <view class="padding-sm">
       <view class="text-df text-grey" >{{ company.description }}</view>
     </view>
-
     <!-- <view class="cu-bar margin-lr-xs margin-top grid col-4 no-border bg-white radius-lg-top">
       <view class="action">
         <text class="text-xl">其他功能</text>
       </view>
     </view> -->
-
-    <view class="cu-list grid col-5 no-border text-black margin-lr-sm radius">
-      <view class="cu-item-my" wx:for="{{iconOtherList}}" wx:key="idx" bindtap="{{item.bindtap}}">
-        <view class="cuIcon-{{item.icon}} text-{{item.color}} text-shadow" style="font-size: 56rpx;">
-          <view class="cu-tag badge" wx:if="{{item.badge!=0}}">
-            <block wx:if="{{item.badge!=1}}">{{item.badge>99?"99+":item.badge}}</block>
-          </view>
-        </view>
-        <text class="margin-top-xs">{{item.name}}</text>
+    <view class="cu-list grid col-5 no-border text-black margin-lr-sm radius margin-top">
+      <!-- 创建订单 -->
+      <view class="cu-item-my" wx:if="{{isCSR || isADM}}" bindtap="toCompanyOrderPage">
+        <view class="cuIcon-form text-blue text-shadow" style="font-size: 56rpx;"></view>
+        <text class="margin-top-xs">创建订单</text>
+      </view>
+      <!-- 申请监控 -->
+      <view class="cu-item-my"  bindtap="bindZan">
+        <view class="cuIcon-service text-blue text-shadow" style="font-size: 56rpx;"></view>
+        <text class="margin-top-xs">申请监控</text>
+      </view>
+      <!-- 员工管理 -->
+      <view class="cu-item-my"  bindtap="toCompanyEmployeesPage">
+        <view class="cuIcon-group text-blue text-shadow" style="font-size: 56rpx;"></view>
+        <text class="margin-top-xs">员工管理</text>
+      </view>
+      <!-- 二维码 -->
+      <view class="cu-item-my"  bindtap="toCompanyEmployeesQrcodePage">
+        <view class="cuIcon-qrcode text-blue text-shadow" style="font-size: 56rpx;"></view>
+        <text class="margin-top-xs">二维码</text>
+      </view>
+      <!-- 二维码 -->
+      <view class="cu-item-my" wx:if="{{isCSR}}" bindtap="toCompanySettingsPage">
+        <view class="cuIcon-settings text-blue text-shadow" style="font-size: 56rpx;"></view>
+        <text class="margin-top-xs">设置</text>
       </view>
     </view>
-    
   </cu-skeleton>
 </view>
 

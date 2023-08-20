@@ -8,28 +8,42 @@
       <text class="cuIcon-titles text-blue "></text>
       <text>我的加入</text>
     </view>
-    <view class="action">
+    <view class="action" wx:if="{{ !userIsHaveCompany }}">
+      <!-- 用户没有创建自己的公司才会显示此按钮 -->
       <text class="cuIcon-shopfill text-blue text-xl" bindtap="toCreateCompanyPage" style="font-size: 38rpx;"></text>
     </view>
 </view>
-
-<view class="bg-white">
-  <view class="cf padding-sm" wx:if="{{userCompany}}" bindtap="toCompanyInfoPage" data-id="{{userCompany._id}}" >
-    <view class="cu-avatar xl radius fl" style="background-image:url({{userCompany.logo}});"></view>
-    <view class="padding-xs text-xl text-black margin-left-sm fl">
-      <view>
-        <text class="text-xl text-bold">{{ userCompany.name }}</text>
-        <text class="text-df margin-left-sm text-gray">创始人</text>
+<!-- 公司列表 -->
+<scroll-view scroll-y 
+style="height: {{contentH}}rpx;" 
+refresher-enabled="{{true}}"  
+refresher-default-style="black" 
+refresher-triggered="{{refreshLoading}}"  
+bindrefresherrefresh="_onRefresh"
+bindscrolltolower='_onLoadmore'>
+  <!-- 列表内容 -->
+  <view class="bg-white">
+    <view class="padding-sm flex flex-wrap" wx:key="_id" wx:for="{{companyList}}" bindtap="toCompanyInfoPage" data-id="{{item._id}}" >
+      <view class="cu-avatar xl radius basis-xs" style="background-image:url({{item.logo}});"></view>
+      <view class="padding-xs text-xl text-black basis-xl">
+        <view class="flex justify-between margin-left-xs">
+          <view>
+            <text class="text-xl text-bold ">{{ item.name }}</text>
+            <text class="text-df margin-left-sm text-gray">{{ item.cmy_remark }}</text>
+          </view>
+          <view>
+            <view wx:if="{{item.audit_state == 1}}" class="text-df text-yellow">审核中</view>
+            <view wx:if="{{item.audit_state == 2}}" class="text-df text-gray">待审核</view>
+            <view wx:if="{{item.company_identity_type && item.company_identity_type == 2}}" class="text-df text-blue">管理员</view>
+          </view>
+        </view>
+        <view class="padding-top-sm margin-left-xs">
+          <view class="cu-tag bg-blue light radius" wx:for="{{item.tag_ids}}" wx:key="_id">{{ item.name }}</view>
+        </view>
       </view>
-      <view class="padding-top-sm">
-        <view class="cu-tag bg-blue light radius" wx:for="{{userCompany.tag_ids}}" wx:key="_id">{{ item.name }}</view>
-      </view>
-    </view>
-    <view class="padding-xs text-xl text-black margin-left-sm fr">
-      <view wx:if="{{userCompany.censor == 1}}" class="text-df text-yellow">审核中</view>
-      <view wx:if="{{userCompany.censor == 2}}" class="text-df text-gray">待审核</view>
     </view>
   </view>
-</view>
-
-<view class="cu-load loading" wx:if="{{loading}}"></view>
+  <!-- 下拉翻页loading -->
+  <view class="cu-load loading" wx:if="{{moreLoading}}"></view>
+  <view class="cu-load text-gray" wx:if="{{isMore}}">暂无更多</view>
+</scroll-view>

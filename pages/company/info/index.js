@@ -1,5 +1,6 @@
 // pages/company/info/index.js
 const { Company } = require('../../../api/index')
+const { getUserInfo } = require('../../../utils/auth')
 const { getImageUrl } = require('../../../utils/util')
 
 Page({
@@ -8,16 +9,14 @@ Page({
    * 页面的初始数据
    */
   data: {
+    remark :'普通员工',
     company_id:null,    //公司ID
     company_name :null, //公司名称
     company_logo:null,  //公司LOGO
     loading:false,
     company: null,
-    iconOtherList: [{icon: 'location', color: 'blue',badge: 0,name: '创建订单' ,bindtap:"toCompanyOrderPage"}, 
-    {icon: 'service',color: 'blue',badge: 0,name: '申请监控',bindtap: "bindZan"}, 
-    {icon: 'mark',color: 'blue', badge: 0,name: '员工管理',bindtap: "toCompanyEmployeesPage"}, 
-    {icon: 'qrcode',color: 'blue',badge: 0,name: '二维码',bindtap: "toCompanyEmployeesQrcodePage"}, 
-    {icon: 'settings',color: 'blue',badge: 0,name: '设置',bindtap: "toCompanySettingsPage"}],
+    isCSR :false,  //是否是公司创始人
+    isADM :false,  //是否是公司管理员
   },
 
   /**
@@ -37,10 +36,29 @@ Page({
 
   // 获取公司信息
   getCompanyInfo(id){
+    const user_id = getUserInfo().user_id;
     this.setData({loading :true})
     Company.getInfo(id).then((result) => {
       let data = result.data;
       data.logo = getImageUrl(data.logo)
+      if(user_id == data.user_id._id){
+        // 如果登陆的用户是创世人的话允许操作
+
+        this.setData({isCSR : true , remark :'创始人'})
+      }else{
+        // 否则去库里看看这个用户是否为管理员
+        Company.getUtoCInfo(id).then((result) => {
+          let utc = result.data
+          let identity_type = utc.identity_type;
+          if(utc){
+            this.setData({isADM : true ,remark :utc.remark })
+          }
+          // 2就是管理员
+          if(identity_type == 2){
+            this.setData({isADM : true })
+          }
+        })
+      }
       this.setData({ company :data ,loading :false ,company_name :data.name ,company_logo:data.logo})
     }).finally(()=>{
       this.setData({loading :false})

@@ -39,9 +39,12 @@ Page({
       let company = result.data.company;
       // 验证登陆的userid是否是创始人
       let userInfo = getUserInfo()
-      let uid = userInfo._id
-      if(company.user_id._id == userInfo._id){
+      let uid = userInfo.user_id
+      if(company.user_id._id == uid){
         this.setData({isAllowOperation :true})
+      }
+      if(company.user_id){
+        company.user_id.avatar = getImageUrl(company.user_id.avatar)
       }
       if(employeeList.length > 0){
         employeeList.map((element) => {

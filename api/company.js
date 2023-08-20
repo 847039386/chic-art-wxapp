@@ -1,10 +1,5 @@
 const { request }  = require('../utils/request');
 
-// 获取公司列表
-const getList = (data) => {
-  return request({ url: '/company/list' ,method: 'POST' , data })
-}
-
 // 根据用户ID获取公司，该用户是创始人通常只有一条数据
 const getUser = (user_id) => {
   return request({ url: `/company/user?user_id=${user_id}` ,method: 'GET' })
@@ -38,6 +33,10 @@ const updateEmployeeGroupName = (id ,group_name) => {
 const updateAllEmployeeGroupName = (company_id ,group_name) => {
   return request({ url: `/company-employee/up_call_group_name` ,method: 'PATCH' ,data :{ company_id ,group_name } })
 }
+//获取员工在公司的身份信息
+const getUtoCInfo = (company_id) => {
+  return request({ url: `/company-employee/one_uc_info?company_id=${company_id}` ,method: 'GET' })
+}
 
 // 删除公司员工
 const removeEmployee = (id) => {
@@ -54,6 +53,12 @@ const updateEmployeeRemark = (id ,remark) => {
   return request({ url: `/company-employee/up_remark` ,method: 'PATCH' ,data :{ id ,remark } })
 }
 
+// 获取该与该用户所有有关系的公司，及用户加入的公司
+const getList = (page) => {
+  const limit = 10;
+  return request({ url: `/company-employee/list_by_userid?page=${page}&limit=${limit}` ,method: 'GET' })
+}
+
 module.exports = {
   create,
   getList,
@@ -65,5 +70,6 @@ module.exports = {
   updateEmployeeGroupName,
   updateAllEmployeeGroupName,
   updateEmployeeIdentityType,
-  updateEmployeeRemark
+  updateEmployeeRemark,
+  getUtoCInfo
 }

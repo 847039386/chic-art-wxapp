@@ -50,7 +50,7 @@ Page({
         item.checked = !item.checked
       }
       if (item.checked == true) {
-        selectTagIds.push(value)
+        selectTagIds.push(item._id)
       }
     })
     this.setData({
@@ -103,6 +103,7 @@ Page({
       //如果用户填写了图片则先上传图片在创建公司，否则直接创建公司公司LOGO使用默认LOGO
       let logoImagePath = that.data.logoImagePath
       this.setData({ bcc_loading:true })
+      console.log(that.data.formData)
       if(logoImagePath){
         File.uploadCompanyLogo(logoImagePath).then((res) => {
           let logoLocalPath = res.data.url;
