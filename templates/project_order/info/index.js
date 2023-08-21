@@ -13,7 +13,6 @@ Component({
       const id = this.properties.aid;
       this.setData({id})
       this.getInfo(id);
-      console.log('read',id,this.data)
     }
   },
   data: {

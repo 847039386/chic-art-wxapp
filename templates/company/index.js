@@ -14,11 +14,9 @@ Component({
     userIsHaveCompany : true, 
     // 分页数据
     currentPage:1,
-    total:0,
     totalPage :0,
-    pageSize:10,
-    // 其他信息
-    isMore :false,
+    // 是否有更多，默认有
+    isMore :true,
     
   },
   lifetimes : {
@@ -34,21 +32,15 @@ Component({
   },
   methods: {
     _onRefresh() {
-      if(!this.data.refreshLoading){
-        this.setData({refreshLoading :true ,isMore :false })
+      if(this.data.refreshLoading == false){
+        this.setData({refreshLoading :true })
         let companyList = [];
         let currentPage  = 1;
         let totalPage  = 1;
-        let total = 0;
-        let pageSize = 0;
-        let isMore = false;
         this.getList(1).then((companys) => {
           companyList = companys.rows;
           currentPage = companys.currentPage;
           totalPage = companys.totalPage;
-          isMore = companys.isMore;
-          total = companys.total;
-          pageSize = companys.pageSize;
           return this.getUserCompany();
         }).then((data) => {
           if(data){
@@ -59,17 +51,18 @@ Component({
           }
           this.setData({companyList })
         }).finally(() => {
-          this.setData({ companyList, currentPage,totalPage,isMore ,total,pageSize,refreshLoading:false })
-          console.log(this.data)
+          if(companyList.length == 0){
+            this.setData({ isMore :false })
+          }
+          this.setData({ companyList, currentPage,totalPage ,refreshLoading:false })
         })
-        console.log('msg_onRefresh_compay')
       }
     },
     _onLoadmore(e) {
       let currentPage = this.data.currentPage;
       let totalPage = this.data.totalPage;
+      this.setData({moreLoading:true})
       if(currentPage < totalPage){
-        this.setData({moreLoading:true})
         let companyList = this.data.companyList;
         let page = currentPage + 1;
         this.getList(page).then((companys) => {
@@ -77,13 +70,13 @@ Component({
             companyList :companyList.concat(companys.rows), 
             currentPage :companys.currentPage,
             totalPage :companys.totalPage,
-            isMore :companys.isMore,
-            total :companys.total,
-            pageSize :companys.pageSize })
+          })
           console.log(this.data)
         }).finally(() =>{
           this.setData({moreLoading:false})
         })
+      }else{
+        this.setData({moreLoading:false ,isMore :false})
       }
     },
     toCreateCompanyPage(){
@@ -116,7 +109,6 @@ Component({
       page = page || 1;
       // 获取用户加入的公司与上边方法不一样上边获取的是自己的公司
       return new Promise((resolve, reject) => {
-        this.setData({ isMore :false })
         Company.getList(page).then((result) =>{
           let rows = result.data.rows;
           let companyList = [];
@@ -135,9 +127,6 @@ Component({
           resolve({
             currentPage:result.data.currentPage ,
             totalPage :result.data.totalPage ,
-            total:result.data.total,
-            pageSize:result.data.pageSize,
-            isMore:result.data.currentPage >= result.data.totalPage ? true :false,
             rows :companyList
           });
         }).catch(()=>{

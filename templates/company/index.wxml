@@ -45,5 +45,5 @@ bindscrolltolower='_onLoadmore'>
   </view>
   <!-- 下拉翻页loading -->
   <view class="cu-load loading" wx:if="{{moreLoading}}"></view>
-  <view class="cu-load text-gray" wx:if="{{isMore}}">暂无更多</view>
+  <view class="cu-load text-gray" wx:if="{{!isMore}}">暂无更多</view>
 </scroll-view>

@@ -20,7 +20,7 @@ bindrefresherrefresh="_onRefresh"
 bindscrolltolower='_onLoadmore'>
   <!-- 列表内容 -->
   <view wx:for="{{orderList}}" wx:key="index" class="bg-white light margin-sm radius">
-    <view bindtap="toProjectOrderInfoPage" data-id="{{item.project_order_id._id}}">
+    <view bindtap="toProjectOrderInfoPage" data-id="{{item.project_order_id._id}}" data-company_id="{{item.project_order_id.company_id._id}}" >
       <view class="cf padding-lr padding-top">
         <view class="cu-avatar radius sm fl" style="background-image:url({{item.project_order_id.company_id.logo}});"></view>
         <view class="fl margin-left-sm text-lg" >{{item.project_order_id.company_id.name}}</view>
@@ -51,7 +51,7 @@ bindscrolltolower='_onLoadmore'>
   </view>
   <!-- 下拉翻页loading -->
   <view class="cu-load loading" wx:if="{{moreLoading}}"></view>
-  <view class="cu-load text-gray" wx:if="{{isMore}}">暂无更多</view>
+  <view class="cu-load text-gray" wx:if="{{!isMore}}">暂无更多</view>
 </scroll-view>
 
 

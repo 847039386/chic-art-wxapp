@@ -11,7 +11,7 @@ Component({
     CustomBar: app.globalData.CustomBar,
     refreshLoading:false,
     moreLoading:false,
-    isMore :false,
+    isMore :true,
     state:0,
     // 数据
     currentPage:1,
@@ -33,10 +33,13 @@ Component({
   },
   methods: {
     _onRefresh() {
-      if(!this.data.refreshLoading){
-        console.log('msg_onRefresh')
+      this.setData({ isMore :true })
+      if(this.data.refreshLoading == false){
         this.setData({ refreshLoading :true })
         this.getList(1).then((data) =>{
+          if(data.rows.length == 0){
+            this.setData({ isMore :false })
+          }
           this.setData({ 
             currentPage :data.currentPage,
             orderList :data.rows,
@@ -67,18 +70,20 @@ Component({
         }).finally(() => {
           this.setData({ moreLoading :false })
         })
+      }else{
+        this.setData({ isMore:false })
       }
     },
     toProjectOrderInfoPage(event){
       const id = event.currentTarget.dataset.id;
+      const company_id = event.currentTarget.dataset.company_id;
       wx.navigateTo({
-        url: `/pages/order/info/index?id=${id}`,
+        url: `/pages/order/info/index?id=${id}&company_id=${company_id}`,
       })
     },
     getList:function(page){
       let state = this.data.state;
       let data = { page ,state}
-      this.setData({ isMore :false })
       return new Promise((resolve, reject) => {
         ProjectOrder.getList(data).then((result) =>{
           let rows = result.data.rows;
@@ -90,7 +95,6 @@ Component({
             item.project_order_id.progress_state = (step/progress_template.length*100).toFixed(0)+"%"
             return item
           })
-          this.setData({ isMore:result.data.currentPage >= result.data.totalPage ? true :false })
           resolve(result.data);
         }).catch(()=>{
           reject();
@@ -99,18 +103,8 @@ Component({
     },
     onSwitchOrderTab(event){
       let state = event.currentTarget.dataset.state;
-      this.setData({ refreshLoading :true ,state ,orderList :[] })
-      this.getList(1).then((data) =>{
-        this.setData({ 
-          currentPage :data.currentPage,
-          orderList :data.rows,
-          total :data.total,
-          totalPage :data.totalPage,
-          pageSize :data.pageSize
-        })
-      }).finally(() => {
-        this.setData({ refreshLoading :false })
-      })
+      this.setData({ state ,orderList :[] });
+      this._onRefresh();
     }
   }
 })

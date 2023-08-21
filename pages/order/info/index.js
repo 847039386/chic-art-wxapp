@@ -1,16 +1,14 @@
 // pages/order/info/index.js
-const { ProjectOrder } = require('../../../api/index')
 Page({
   data: {
     id:null,
+    company_id :null,
     PageCur: 'InfoTemplate'
   },
   onLoad(options){
     let id = options.id;
-    this.setData({id})
-  },
-  onShow(){
-
+    let company_id = options.company_id;
+    this.setData({id ,company_id})
   },
   onSwitchTab:function(e){
     const PageCur = e.currentTarget.dataset.cur;

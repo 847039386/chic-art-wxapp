@@ -1,0 +1,47 @@
+<!--pages/company/camera/settings/index.wxml-->
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+  <!-- <view slot="content"></view> -->
+</cu-custom>
+<view class="cu-bar bg-white solid-bottom">
+  <view class="action">
+    <text class="cuIcon-titles text-blue"></text>
+    <text>监控信息</text>
+  </view>
+</view>
+<view class="cu-load loading" wx:if="{{loading}}"></view>
+<view wx:if="{{!loading}}" class="cu-list menu">
+  <view class="cu-item">
+    <view class="content">
+      <text class="cuIcon-recordfill text-blue"></text>
+      <text class="text-grey">监控编号：{{CompanyCameraInfo.camera_id.no}}</text>
+    </view>
+  </view>
+  <view class="cu-item">
+    <view class="content">
+      <text class="cuIcon-vipcard text-orange"></text>
+      <text class="text-grey">
+        <text>到期时间：</text>
+        <text>{{CompanyCameraInfo.expire_time_str}}</text>
+      </text>
+    </view>
+  </view>
+  <view class="cu-item">
+    <view class="content">
+      <text class="cuIcon-timefill {{CompanyCameraInfo.diff_color}}"></text>
+      <text class="text-grey">
+        <text>剩余时间：</text>
+        <text class="{{CompanyCameraInfo.diff_color}}">{{CompanyCameraInfo.diff_str}}</text>
+      </text>
+    </view>
+  </view>
+  <view class="cu-item">
+    <view class="content">
+      <text class="cuIcon-formfill text-pink"></text>
+      <text class="text-grey">
+        <text>服务订单：</text>
+        <text wx:if="{{CompanyCameraInfo.project_order_id}}">{{CompanyCameraInfo.project_order_id.name}}</text>
+        <text class="text-gray" wx:else>暂无</text>
+      </text>
+    </view>
+  </view>
+</view>

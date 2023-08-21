@@ -19,7 +19,6 @@ Page({
   },
 
   onLoad(options) {
-    
     this.setData({ company_id :options.id })
   },
   onShow(){

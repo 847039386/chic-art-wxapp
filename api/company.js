@@ -59,6 +59,21 @@ const getList = (page) => {
   return request({ url: `/company-employee/list_by_userid?page=${page}&limit=${limit}` ,method: 'GET' })
 }
 
+// 获取公司的摄像头
+const getCameras = (id,page,limit) => {
+  limit = limit || 10
+  return request({ url: `/company-camera/list_by_companyid?company_id=${id}&page=${page}&limit=${limit}` ,method: 'GET' })
+}
+// 获取公司摄像头关系表中的信息
+const getCompanyCameraInfo = (id) => {
+  return request({ url: `/company-camera/info?id=${id}` ,method: 'GET' })
+}
+//获取公司可分配的摄像头，这里过滤掉工作状态和过期的摄像头，供用户在订单摄像头中添加使用
+const getCamerasAssignList = (id,page,limit) => {
+  page = page || 1
+  limit = limit || 999
+  return request({ url: `/company-camera/list_by_companyid_assign?company_id=${id}&page=${page}&limit=${limit}` ,method: 'GET' })
+}
 module.exports = {
   create,
   getList,
@@ -71,5 +86,8 @@ module.exports = {
   updateAllEmployeeGroupName,
   updateEmployeeIdentityType,
   updateEmployeeRemark,
-  getUtoCInfo
+  getUtoCInfo,
+  getCameras,
+  getCompanyCameraInfo,
+  getCamerasAssignList
 }

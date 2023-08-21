@@ -1,0 +1,38 @@
+<!--pages/company/cameras/index.wxml-->
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+  <!-- <view slot="content"></view> -->
+</cu-custom>
+<!--加载显示-->
+<view class="cu-bar bg-white solid-bottom">
+  <view class="action">
+    <text class="cuIcon-titles text-blue"></text>
+    <text>监控列表</text>
+  </view>
+</view>
+<!-- 内容 -->
+
+<scroll-view scroll-y 
+style="height: {{contentH}}rpx;" 
+refresher-enabled="{{true}}"  
+refresher-default-style="black" 
+refresher-triggered="{{refreshLoading}}"  
+bindrefresherrefresh="_onRefresh"
+bindscrolltolower='_onLoadmore'>
+  <!-- 列表内容 -->
+  <block wx:if="{{!loading && cameraList.length > 0}}">
+    <view class="cu-list menu">
+      <view data-id="{{item._id}}" bindtap="toCompanyCameraSettingsPage" class="cu-item arrow" wx:for="{{cameraList}}" wx:key="_id">
+        <view class="content">
+          <text class="cuIcon-recordfill text-blue"></text>
+          <text class="text-grey">编号：{{item.camera_id.no}}</text>
+        </view>
+        <view class="action">
+          <text class="{{item.diff_color}} text-sm">{{item.diff_str}}</text>
+        </view>
+      </view>
+    </view>
+  </block>
+  <!-- 下拉翻页loading -->
+  <view class="cu-load loading" wx:if="{{moreLoading}}"></view>
+  <view class="cu-load text-gray" wx:if="{{!isMore}}">暂无更多</view>
+</scroll-view>

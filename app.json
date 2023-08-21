@@ -17,7 +17,9 @@
     "pages/company/employees/settings/update_remark/index",
     "pages/qrcode/user_add_project_order/index",
     "pages/order/info/index",
-    "pages/camera/project_order/video/index"
+    "pages/camera/project_order/video/index",
+    "pages/company/camera/list/index",
+    "pages/company/camera/settings/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

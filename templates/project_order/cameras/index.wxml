@@ -1,4 +1,17 @@
 <!--templates/project_order/camera/index.wxml-->
+<view class="cu-bar bg-white solid-bottom">
+  <view class="action">
+    <text class="cuIcon-titles text-blue"></text>
+    <text>监控列表</text>
+  </view>
+  <view class="action">
+    <button bindtap="showModal" class="cu-btn sm bg-blue">
+      <text class="cuIcon-add margin-right-xs"></text> 
+      <text class="text-sm">添加监控</text>
+     </button>
+    <!-- <view  class="cuIcon-roundaddfill text-blue"></view> -->
+  </view>
+</view>
 <!--加载显示-->
 <view class="cu-load loading" wx:if="{{loading}}" ></view>
 <!--无数据显示-->
@@ -12,20 +25,41 @@
 </view>
 <!--监控列表-->
 <block wx:if="{{!loading && cameraList.length > 0}}">
-  <view class="cu-bar bg-white solid-bottom">
-      <view class="action">
-        <text class="cuIcon-titles text-blue"></text>
-        <text>监控列表</text>
-      </view>
-  </view>
   <view class="cu-list menu">
-    <view bindtap="toCameraVideoPage" data-url="{{item.camera_id.url}}" class="cu-item arrow" wx:for="{{cameraList}}" wx:key="_id">
+    <view bindtap="toCameraVideoPage" data-url="{{item.company_camera_id.camera_id.url}}" class="cu-item arrow" wx:for="{{cameraList}}" wx:key="_id">
       <view class="content">
         <text class="cuIcon-recordfill text-blue"></text>
-        <text class="text-grey">{{item.name}}</text>
+        <text class="text-grey">No.{{item.company_camera_id.camera_id.no}}：{{item.name}}</text>
       </view>
     </view>
   </view>
 </block>
+<!-- 添加监控侧面抽屉 -->
+<view class="cu-modal drawer-modal justify-start {{ camerasModal ? 'show' : '' }}" bindtap="hideModal">
+  <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;height:calc(100vh - {{CustomBar}}px)">
+    <view class="cu-bar bg-white solid-bottom">
+      <view class="action">
+        <text class="cuIcon-titles text-blue"></text>
+        <text>监控</text>
+        <text class="margin-left-sm text-sm text-gray margin-top-xs">
+          <text class="cuIcon-infofill"></text>
+          <text>点击后即可添加</text>
+        </text>
+      </view>
+    </view>
+    <view wx:if="{{!cameraAllListLoading}}" class="cu-list menu text-left">
+      <view class="cu-item" data-id="{{item._id}}" bindtap="addCamera" wx:for="{{cameraAllList}}" wx:key="_id">
+        <view class="content">
+          <text class="cuIcon-recordfill text-orange"></text>
+          <text>编号：{{item.camera_id.no}}</text>
+        </view>
+      </view>
+    </view>
+    <!-- 加载中 -->
+    <view class="cu-load loading" wx:if="{{cameraAllListLoading}}"></view>
+    <!-- 无更多 -->
+    <view class="cu-load text-gray" wx:if="{{ !cameraAllListLoading && cameraAllList.length == 0}}">无可用监控</view>
+  </view>
+</view>
 
 

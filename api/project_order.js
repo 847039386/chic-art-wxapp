@@ -50,7 +50,11 @@ const auditNotCustomer = (id) => {
 const getCameras = (project_order_id) => {
   return request({ url: `/project-order-camera/list_by_projectorderid?project_order_id=${project_order_id}` ,method: 'GET' })
 }
-
+// 给订单添加监控
+const addCamera = (company_camera_id ,project_order_id) => {
+  return request({ url: `/project-order-camera/add` ,method: 'POST' ,data :{ 
+    company_camera_id,project_order_id} });
+}
 module.exports = {
   add,
   getInfoById,
@@ -60,5 +64,6 @@ module.exports = {
   getCustomers,
   auditCustomer,
   auditNotCustomer,
-  getCameras
+  getCameras,
+  addCamera
 }

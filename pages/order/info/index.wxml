@@ -6,7 +6,7 @@
 <InfoTemplate aid="{{id}}"  wx:if="{{PageCur=='InfoTemplate' && id }}"></InfoTemplate>
 <EmployeesTemplate aid="{{id}}" wx:if="{{PageCur=='EmployeesTemplate' && id}}"></EmployeesTemplate>
 <CustomersTemplate aid="{{id}}" wx:if="{{PageCur=='CustomersTemplate' && id}}"></CustomersTemplate>
-<CamerasTemplate aid="{{id}}" wx:if="{{PageCur=='CamerasTemplate' && id}}"></CamerasTemplate>
+<CamerasTemplate cid="{{company_id}}" aid="{{id}}" wx:if="{{PageCur=='CamerasTemplate' && id}}"></CamerasTemplate>
 
 <block>
   <view class="cu-tabbar-height"></view>

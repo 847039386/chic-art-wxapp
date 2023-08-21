@@ -71,6 +71,13 @@ Page({
       url: `/pages/company/employees/list/index?id=${company_id}`,
     })
   },
+  // 去往公司监控列表页面
+  toCompanyCamerasPage(){
+    let company_id = this.data.company_id
+    wx.navigateTo({
+      url: `/pages/company/camera/list/index?id=${company_id}`,
+    })
+  },
   // 去往公司设置页面
   toCompanySettingsPage(){
     let company_id = this.data.company_id

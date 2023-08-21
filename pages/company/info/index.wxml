@@ -40,9 +40,9 @@
         <text class="margin-top-xs">创建订单</text>
       </view>
       <!-- 申请监控 -->
-      <view class="cu-item-my"  bindtap="bindZan">
-        <view class="cuIcon-service text-blue text-shadow" style="font-size: 56rpx;"></view>
-        <text class="margin-top-xs">申请监控</text>
+      <view class="cu-item-my"  bindtap="toCompanyCamerasPage">
+        <view class="cuIcon-record text-blue text-shadow" style="font-size: 56rpx;"></view>
+        <text class="margin-top-xs">监控管理</text>
       </view>
       <!-- 员工管理 -->
       <view class="cu-item-my"  bindtap="toCompanyEmployeesPage">
