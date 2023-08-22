@@ -1,4 +1,4 @@
-<!--templates/project_order/camera/index.wxml-->
+<!--templates/project_order/cameras/settings/index.wxml-->
 <view class="cu-bar bg-white solid-bottom">
   <view class="action">
     <text class="cuIcon-titles text-blue"></text>
@@ -26,7 +26,7 @@
 <!--监控列表-->
 <block wx:if="{{!loading && cameraList.length > 0}}">
   <view class="cu-list menu">
-    <view bindtap="toCameraVideoPage" data-url="{{item.company_camera_id.camera_id.url}}" class="cu-item arrow" wx:for="{{cameraList}}" wx:key="_id">
+    <view bindtap="toCameraSettingPage" data-id="{{item._id}}" class="cu-item arrow" wx:for="{{cameraList}}" wx:key="_id">
       <view class="content">
         <text class="cuIcon-recordfill text-blue"></text>
         <text class="text-grey">No.{{item.company_camera_id.camera_id.no}}：{{item.name}}</text>
@@ -61,5 +61,3 @@
     <view class="cu-load text-gray" wx:if="{{ !cameraAllListLoading && cameraAllList.length == 0}}">无可用监控</view>
   </view>
 </view>
-
-

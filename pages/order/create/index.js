@@ -72,7 +72,7 @@ Page({
       let employeeList = result.data.list;
       // 验证登陆的userid是否是创始人
       let userInfo = getUserInfo()
-      let uid = userInfo._id  // 自己的ID
+      let uid = userInfo.user_id  // 自己的ID
       if(employeeList.length > 0){
         employeeList.map((element) => {
           if(element.user_id && element.user_id.avatar){
@@ -206,7 +206,6 @@ Page({
         showCancel:false
       })
     }else{
-      employee_ids = employee_ids.concat(employee_ids)
       let data = {customer,address,phone ,employee_ids ,progress_template ,company_id ,name}
       this.setData({createProjectOrderLoading :true})
       ProjectOrder.add(data).then((result) => {

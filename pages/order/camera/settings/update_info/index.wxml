@@ -1,0 +1,49 @@
+<!--pages/order/camera/settings/index.wxml-->
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+  <!-- <view slot="content"></view> -->
+</cu-custom>
+<!-- 错误显示 -->
+<view wx:if="{{ errMsg }}" class="margin-tb-sm padding-top-lg padding-bottom-xl">
+  <view class="flex justify-center text-xsl">
+    <view class="cuIcon-evaluate text-gray icon"></view>
+  </view>
+  <view class="flex justify-center padding-top-sm">
+    <view class="text-gray text">{{ errMsg }}</view>
+  </view>
+</view>
+<!-- 加载中 -->
+<view class="cu-load loading" wx:if="{{loading}}"></view>
+
+<block wx:if="{{!errMsg && !loading && dataInfo }}">
+  <!-- 信息列表 -->
+  <view class="cu-list menu" >
+    <view class="cu-item arrow" bindtap="toUpdateNamePage">
+      <view class="content">
+        <text class="">别名</text>
+      </view>
+      <view class="action">
+        <text class="text-grey text-sm">{{ name || '未设置' }}</text>
+      </view>
+    </view>
+    <view class="cu-item">
+      <view class="content padding-tb-sm">
+        <view>允许客户观看</view>
+        <!-- <view class="text-gray text-sm">管理员可以创建订单</view> -->
+      </view>
+      <view class="action">
+        <switch disabled="{{ switchAllowCustomerSeeLoading }}" checked="{{ isAllowCustomerSee }}" class="blue" bindchange="updateState"></switch>
+      </view>
+    </view>
+    <view class="cu-item arrow" data-url="{{dataInfo.camera_id.url}}" bindtap="toCameraVideoPage">
+      <view class="content">
+        <text class="">监控视频</text>
+      </view>
+      <view class="action">
+      </view>
+    </view>
+  </view>
+  <!-- 删除订单摄像头-->
+  <view class="padding margin-top">
+    <button loading="{{delButtonLoading}}" disabled="{{isDel || delButtonLoading}}" bindtap="removeCamera" class="cu-btn block bg-red xxl">删除监控</button>
+  </view>
+</block>

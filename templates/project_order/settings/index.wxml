@@ -1,0 +1,39 @@
+<!--templates/project_order/settings/index.wxml-->
+<!-- 错误显示 -->
+<view wx:if="{{ errMsg }}" class="margin-tb-sm padding-top-lg padding-bottom-xl">
+  <view class="flex justify-center text-xsl">
+    <view class="cuIcon-evaluate text-gray icon"></view>
+  </view>
+  <view class="flex justify-center padding-top-sm">
+    <view class="text-gray text">{{ errMsg }}</view>
+  </view>
+</view>
+<!-- 加载中 -->
+<view class="cu-load loading" wx:if="{{loading}}"></view>
+
+<block wx:if="{{!errMsg && !loading && projectOrder }}">
+  <!-- 信息列表 -->
+  <view class="cu-list menu" >
+    <view class="cu-item arrow" bindtap="toUpdateNamePage">
+      <view class="content">
+        <text class="">项目名称</text>
+      </view>
+      <view class="action">
+        <text class="text-grey text-sm">{{ projectOrder.name }}</text>
+      </view>
+    </view>
+    <view class="cu-item arrow" bindtap="toUpdateAddressPage">
+      <view class="content padding-tb-sm">
+        <view class="">项目地址</view>
+        <view class="text-grey text-sm">
+          <text class="cuIcon-locationfill text-orange margin-right-xs"></text>
+          <text>{{ projectOrder.address }}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 删除订单摄像头-->
+  <view class="padding margin-top">
+    <button loading="{{delButtonLoading}}" disabled="{{isDel || delButtonLoading}}" bindtap="removeOrder" class="cu-btn block bg-red xxl">删除订单</button>
+  </view>
+</block>

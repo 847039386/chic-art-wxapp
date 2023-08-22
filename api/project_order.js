@@ -5,6 +5,16 @@ const add = (data) => {
   return request({ url: '/project-order/add' ,method: 'POST' ,data })
 }
 
+// 删除订单
+const remove = (id) => {
+  return request({ url: `/project-order/del?id=${id}` ,method: 'DELETE' })
+}
+
+// 给订单添加客户
+const addCustomer = (project_order_id) => {
+  return request({ url: '/project-order-customer/add' ,method: 'POST' ,data :{ project_order_id } })
+}
+
 // 根据id获取订单信息
 const getInfoById = (id) => {
   return request({ url: `/project-order/info?id=${id}` ,method: 'GET' })
@@ -55,8 +65,39 @@ const addCamera = (company_camera_id ,project_order_id) => {
   return request({ url: `/project-order-camera/add` ,method: 'POST' ,data :{ 
     company_camera_id,project_order_id} });
 }
+
+// project-order-camera 这个表的ID，获取该订单的一个摄像头
+const getCameraById = (id) => {
+  return request({ url: `/project-order-camera/info?id=${id}` ,method: 'GET' });
+}
+
+// 修改项目订单摄像头的别名
+const updateCameraName = (id,name) => {
+  return request({ url: '/project-order-camera/up_name' ,method: 'PATCH' ,data :{ id,name } });
+}
+// 修改项目名称
+const updateName = (id,name) => {
+  return request({ url: `/project-order/up_name?id=${id}&name=${name}` ,method: 'PATCH' });
+}
+// 修改项目地址
+const updateAddress = (id,address) => {
+  return request({ url: `/project-order/up_address?id=${id}&address=${address}` ,method: 'PATCH' });
+}
+
+// 修改项目订单摄像头的状态---0：所有人，1：客户不允许看
+const updateCameraState = (id,state) => {
+  return request({ url: '/project-order-camera/up_state' ,method: 'PATCH' ,data :{ id,state } });
+}
+
+// 将公司摄像头移除该订单
+const removeCamera = (id) => {
+  return request({ url: `/project-order-camera/del?id=${id}` ,method: 'DELETE' });
+}
+
+
 module.exports = {
   add,
+  remove,
   getInfoById,
   getList,
   updateProjectOrderStep,
@@ -65,5 +106,12 @@ module.exports = {
   auditCustomer,
   auditNotCustomer,
   getCameras,
-  addCamera
+  addCamera,
+  getCameraById,
+  updateCameraName,
+  removeCamera,
+  updateCameraState,
+  addCustomer,
+  updateName,
+  updateAddress
 }

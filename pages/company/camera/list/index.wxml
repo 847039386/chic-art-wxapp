@@ -9,8 +9,16 @@
     <text>监控列表</text>
   </view>
 </view>
+<!--无数据显示-->
+<view class="margin-tb-sm padding-top-lg padding-bottom-xl" wx:if="{{ !refreshLoading && cameraList.length == 0}}">
+  <view class="flex justify-center text-xsl">
+    <view class="cuIcon-searchlist text-gray icon"></view>
+  </view>
+  <view class="flex justify-center padding-top-sm">
+    <view class="text-gray text">暂无监控</view>
+  </view>
+</view>
 <!-- 内容 -->
-
 <scroll-view scroll-y 
 style="height: {{contentH}}rpx;" 
 refresher-enabled="{{true}}"  
@@ -19,7 +27,7 @@ refresher-triggered="{{refreshLoading}}"
 bindrefresherrefresh="_onRefresh"
 bindscrolltolower='_onLoadmore'>
   <!-- 列表内容 -->
-  <block wx:if="{{!loading && cameraList.length > 0}}">
+  <block wx:if="{{!refreshLoading && cameraList.length > 0}}">
     <view class="cu-list menu">
       <view data-id="{{item._id}}" bindtap="toCompanyCameraSettingsPage" class="cu-item arrow" wx:for="{{cameraList}}" wx:key="_id">
         <view class="content">

@@ -1,5 +1,5 @@
-// templates/project_order/camera/index.js
-const { ProjectOrder, Company } = require('../../../api/index');
+// templates/project_order/cameras/settings/index.js
+const { ProjectOrder, Company } = require('../../../../api/index');
 const app = getApp();
 Component({
   options: {
@@ -18,6 +18,13 @@ Component({
       this.getCameras()
     }
   },
+  pageLifetimes:{
+    // 当用户设置了订单摄像头某个东西后重返这个页面走这个方法
+    show(){
+      this.getCameras();
+      this.getCompanyCameras();
+    }
+  },
   data: {
     project_order_id:null,
     company_id :null,
@@ -31,22 +38,22 @@ Component({
   methods: {
     getCameras(){
       const project_order_id = this.data.project_order_id;
-      this.setData({loading :true})
+      this.setData({loading :true ,cameraList:[]})
       ProjectOrder.getCameras(project_order_id).then((result) => {
         this.setData({cameraList : result.data})
       }).finally(() => {
         this.setData({loading:false})
       })
     },
-    toCameraVideoPage(event){
-      let url = event.currentTarget.dataset.url
+    toCameraSettingPage(event){
+      const id = event.currentTarget.dataset.id;  
       wx.navigateTo({
-        url: `/pages/camera/project_order/video/index?url=${url}`,
+        url: `/pages/order/camera/settings/update_info/index?id=${id}`,
       })
     },
     getCompanyCameras(){
       const company_id = this.data.company_id;
-      this.setData({cameraAllListLoading:true})
+      this.setData({cameraAllListLoading:true ,cameraAllList:[]})
       Company.getCamerasAssignList(company_id).then((result) => {
         let cameraAllList = result.data.rows;
         this.setData({cameraAllList})
@@ -67,7 +74,6 @@ Component({
         content: '是否添加该监控',
         complete: (res) => {
           if (res.confirm) {
-            this.setData({ cameraAllListLoading :true ,loading:true})
             wx.showLoading({mask:true});
             ProjectOrder.addCamera(company_camera_id,project_order_id).then((result) => {
               wx.showToast({title: '成功'})

@@ -21,7 +21,7 @@ Component({
     orderList:[],
   },
   lifetimes : {
-    attached:function(){
+    ready:function(){
       // 获取内容高度根据wx小程序屏幕高度
       let windowHeight = wx.getSystemInfoSync().windowHeight
       let rate = 750 / wx.getSystemInfoSync().windowWidth
@@ -29,6 +29,18 @@ Component({
       contentH = contentH - 355
       this.setData({ contentH })
       this._onRefresh();
+    }
+  },
+  pageLifetimes:{
+    // 当用户设置了订单摄像头某个东西后重返这个页面走这个方法
+    show(){
+      // 此方法与删除订单返回这个页面相对应
+      let needRefresh = wx.getStorageSync("needRefresh")
+      if(needRefresh){
+        this.setData({orderList :[] })
+        wx.removeStorageSync('needRefresh')
+        this._onRefresh();
+      }
     }
   },
   methods: {
@@ -77,8 +89,9 @@ Component({
     toProjectOrderInfoPage(event){
       const id = event.currentTarget.dataset.id;
       const company_id = event.currentTarget.dataset.company_id;
+      const user_id = event.currentTarget.dataset.user_id;
       wx.navigateTo({
-        url: `/pages/order/info/index?id=${id}&company_id=${company_id}`,
+        url: `/pages/order/info/index?id=${id}&company_id=${company_id}&user_id=${user_id}`,
       })
     },
     getList:function(page){

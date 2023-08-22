@@ -9,10 +9,9 @@
   <view bindtap="onSwitchOrderTab" data-state="2" class="cu-item {{ state == 2 ? 'text-blue cur' :'' }}">已取消</view>
   <view bindtap="onSwitchOrderTab" data-state="-1" class="cu-item {{ state == -1 ? 'text-blue cur' :'' }}">全部</view>
 </scroll-view>
-<view class="nav"><view class="cu-item"></view></view>
 <!--项目列表-->
 <scroll-view scroll-y 
-style="height: {{contentH}}rpx;" 
+style="height: {{contentH}}rpx;margin-top: 90rpx;" 
 refresher-enabled="{{true}}"  
 refresher-default-style="black" 
 refresher-triggered="{{refreshLoading}}"  
@@ -20,7 +19,7 @@ bindrefresherrefresh="_onRefresh"
 bindscrolltolower='_onLoadmore'>
   <!-- 列表内容 -->
   <view wx:for="{{orderList}}" wx:key="index" class="bg-white light margin-sm radius">
-    <view bindtap="toProjectOrderInfoPage" data-id="{{item.project_order_id._id}}" data-company_id="{{item.project_order_id.company_id._id}}" >
+    <view bindtap="toProjectOrderInfoPage" data-user_id="{{item.project_order_id.user_id._id}}" data-id="{{item.project_order_id._id}}" data-company_id="{{item.project_order_id.company_id._id}}" >
       <view class="cf padding-lr padding-top">
         <view class="cu-avatar radius sm fl" style="background-image:url({{item.project_order_id.company_id.logo}});"></view>
         <view class="fl margin-left-sm text-lg" >{{item.project_order_id.company_id.name}}</view>

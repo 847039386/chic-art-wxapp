@@ -6,7 +6,11 @@
 <InfoTemplate aid="{{id}}"  wx:if="{{PageCur=='InfoTemplate' && id }}"></InfoTemplate>
 <EmployeesTemplate aid="{{id}}" wx:if="{{PageCur=='EmployeesTemplate' && id}}"></EmployeesTemplate>
 <CustomersTemplate aid="{{id}}" wx:if="{{PageCur=='CustomersTemplate' && id}}"></CustomersTemplate>
-<CamerasTemplate cid="{{company_id}}" aid="{{id}}" wx:if="{{PageCur=='CamerasTemplate' && id}}"></CamerasTemplate>
+<!-- 只有项目负责人才可以管理项目监控 -->
+<AdmCamerasTemplate cid="{{company_id}}" aid="{{id}}" wx:if="{{PageCur=='CamerasTemplate' && id && isAdm}}"></AdmCamerasTemplate>
+<CamerasTemplate cid="{{company_id}}" aid="{{id}}" wx:if="{{PageCur=='CamerasTemplate' && id && !isAdm}}"></CamerasTemplate>
+<SettingsTemplate cid="{{company_id}}" aid="{{id}}" wx:if="{{PageCur=='SettingsTemplate' && id && isAdm}}"></SettingsTemplate>
+
 
 <block>
   <view class="cu-tabbar-height"></view>
@@ -26,6 +30,10 @@
     <view class="action {{ PageCur == 'CamerasTemplate' ? 'text-blue' : 'text-black' }}" bindtap="onSwitchTab" data-cur="CamerasTemplate">
       <view class="{{ PageCur == 'CamerasTemplate' ? 'cuIcon-recordfill' : 'cuIcon-record' }}"></view>
       <text>监控</text>
+    </view>
+    <view wx:if="{{isAdm}}" class="action {{ PageCur == 'SettingsTemplate' ? 'text-blue' : 'text-black' }}" bindtap="onSwitchTab" data-cur="SettingsTemplate">
+      <view class="{{ PageCur == 'SettingsTemplate' ? 'cuIcon-settingsfill' : 'cuIcon-settings' }}"></view>
+      <text>设置</text>
     </view>
   </view>
 </block>

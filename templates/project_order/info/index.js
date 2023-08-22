@@ -77,6 +77,7 @@ Component({
       let projectOrder = this.data.projectOrder
       this.setData({finishCurrentProgressLoading:true})
       ProjectOrder.updateProjectOrderStep(id,step,total).then(() => {
+        wx.setStorageSync("needRefresh", true);
         let progress_template = projectOrder.progress_template;
         let step_next = step + 1
         let progress_str = projectOrder.progress_template[step_next];
@@ -94,11 +95,5 @@ Component({
         this.setData({finishCurrentProgressLoading:false})
       })
     },
-    toOrderEmployeePage(){
-      const id = this.data.id;
-      wx.navigateTo({
-        url: `/pages/order/employees/index?id=${id}`,
-      })
-    }
   }
 })

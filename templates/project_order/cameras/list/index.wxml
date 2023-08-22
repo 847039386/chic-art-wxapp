@@ -1,0 +1,31 @@
+<!--templates/project_order/camera/index.wxml-->
+<view class="cu-bar bg-white solid-bottom">
+  <view class="action">
+    <text class="cuIcon-titles text-blue"></text>
+    <text>监控列表</text>
+  </view>
+</view>
+<!--加载显示-->
+<view class="cu-load loading" wx:if="{{loading}}" ></view>
+<!--无数据显示-->
+<view class="margin-tb-sm padding-top-lg padding-bottom-xl" wx:if="{{ !loading && cameraList.length == 0}}">
+  <view class="flex justify-center text-xsl">
+    <view class="cuIcon-searchlist text-gray icon"></view>
+  </view>
+  <view class="flex justify-center padding-top-sm">
+    <view class="text-gray text">暂无监控</view>
+  </view>
+</view>
+<!--监控列表-->
+<block wx:if="{{!loading && cameraList.length > 0}}">
+  <view class="cu-list menu">
+    <view bindtap="toCameraVideoPage" data-url="{{item.company_camera_id.camera_id.url}}" class="cu-item arrow" wx:for="{{cameraList}}" wx:key="_id">
+      <view class="content">
+        <text class="cuIcon-recordfill text-blue"></text>
+        <text class="text-grey">No.{{item.company_camera_id.camera_id.no}}：{{item.name}}</text>
+      </view>
+    </view>
+  </view>
+</block>
+
+

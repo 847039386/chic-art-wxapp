@@ -1,5 +1,6 @@
 // pages/template/home/index.js
 const { getUserInfo } = require('../../utils/auth')
+const { userScanCode } = require('../../utils/scan_code')
 Component({
   options: {
     addGlobalClass: true
@@ -36,7 +37,13 @@ Component({
     scan :function(){
       wx.scanCode({
         success(res) {
-          console.log('扫描成功：', JSON.stringify(res))
+          const datajson = res.result;
+          wx.showLoading()
+          userScanCode(datajson).then(() => {
+            wx.showToast({ title: '成功' })
+          }).finally(() => {
+            wx.hideLoading()
+          })
         }
       })
     },

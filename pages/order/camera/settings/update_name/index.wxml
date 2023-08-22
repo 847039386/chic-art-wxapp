@@ -1,0 +1,23 @@
+<!--pages/order/camera/settings/update_name/index.wxml-->
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+  <!-- <view slot="content"></view> -->
+</cu-custom>
+
+<form class="">
+  <view class="padding-lg">
+    <view class="flex justify-center">
+        <view class="text-xxl text-bold text-black">别名</view>
+    </view>
+    <!-- 标签选择 -->
+    <view class="cu-form-group margin-top-xl" style="border-top: 1rpx solid #EEE">
+      <view class="title text-bold text-black">别名</view>
+      <input value="{{name}}" bindinput="handleNameInput" placeholder="请输入姓名"></input>
+    </view>
+    <view class="text-grey margin-top-sm">设置项目监控别名方便更好的管理</view>
+
+    <!-- 创建按钮 -->
+    <view class="flex justify-center margin-top-xl" bindtap="updateName">
+      <button loading="{{loading}}" disabled="{{loading}}" class="cu-btn xxl" style="background-color:#1AAD19;color:#FFF;width: 50vw;">确定</button>
+    </view>
+  </view>
+</form>

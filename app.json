@@ -19,7 +19,11 @@
     "pages/order/info/index",
     "pages/camera/project_order/video/index",
     "pages/company/camera/list/index",
-    "pages/company/camera/settings/index"
+    "pages/company/camera/settings/index",
+    "pages/order/camera/settings/update_info/index",
+    "pages/order/camera/settings/update_name/index",
+    "pages/order/settings/update_name/index",
+    "pages/order/settings/update_address/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -5,6 +5,11 @@ const getUser = (user_id) => {
   return request({ url: `/company/user?user_id=${user_id}` ,method: 'GET' })
 }
 
+// 员工扫码进入公司
+const addEmployee = (company_id) => {
+  return request({ url: `/company-employee/add` ,method: 'POST' , data :{company_id} })
+}
+
 // 创建公司
 const create = (data) => {
   return request({ url: '/company/add' ,method: 'POST' , data })
@@ -79,6 +84,7 @@ module.exports = {
   getList,
   getUser,
   getInfo,
+  addEmployee,
   getEmployees,
   auditEmployeeOk,
   removeEmployee,

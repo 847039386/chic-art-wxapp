@@ -2,8 +2,7 @@
 <view class="cu-load loading" wx:if="{{loading}}" ></view>
 <block wx:if="{{!loading}}">
   <view class="cu-list menu-avatar no-padding bg-gray">
-    <!-- <view class="cu-item" bindtap="toEmployeeSettingsPage" wx:for="{{ employeeList }}" wx:key="_id"  wx:for-item="item"  data-id="{{item._id}}" data-remark="{{item.remark}}" data-group_name="{{item.group_name}}" data-identity_type="{{item.identity_type}}"> -->
-    <view class="cu-item" bindtap="toEmployeeSettingsPage" wx:for="{{ employeeList }}" wx:key="_id"  wx:for-item="item">
+    <view class="cu-item" wx:for="{{ employeeList }}" wx:key="_id"  wx:for-item="item">
       <view class="cu-avatar radius lg" style="background-image:url({{item.avatar}});"></view>
       <view class="content">
         <view class="text-black">

@@ -3,6 +3,8 @@
     "InfoTemplate": "/templates/project_order/info/index",
     "EmployeesTemplate": "/templates/project_order/employees/index",
     "CustomersTemplate": "/templates/project_order/customers/index",
-    "CamerasTemplate": "/templates/project_order/cameras/index"
+    "AdmCamerasTemplate": "/templates/project_order/cameras/settings/index",
+    "CamerasTemplate": "/templates/project_order/cameras/list/index",
+    "SettingsTemplate": "/templates/project_order/settings/index"
   }
 }
