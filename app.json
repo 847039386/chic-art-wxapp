@@ -1,29 +1,31 @@
 {
   "pages": [
-    "pages/index/index",
-    "pages/login/index/index",
-    "pages/login/register/index",
-    "pages/company/create/index",
-    "pages/company/info/index",
-    "pages/company/employees/list/index",
-    "pages/company/settings/index",
-    "pages/user/update_info/index",
-    "pages/user/update_name/index",
-    "pages/user/update_phone/index",
-    "pages/order/create/index",
-    "pages/qrcode/company_employee/index",
-    "pages/company/employees/settings/info/index",
-    "pages/user/update_nickname/index",
-    "pages/company/employees/settings/update_remark/index",
-    "pages/qrcode/user_add_project_order/index",
-    "pages/order/info/index",
-    "pages/camera/project_order/video/index",
-    "pages/company/camera/list/index",
-    "pages/company/camera/settings/index",
-    "pages/order/camera/settings/update_info/index",
-    "pages/order/camera/settings/update_name/index",
-    "pages/order/settings/update_name/index",
-    "pages/order/settings/update_address/index"
+    "pages/shared/index/index",
+    "pages/shared/login/index",
+    "pages/shared/register/index",
+    "pages/shared/user/update_info/index",
+    "pages/shared/user/update_name/index",
+    "pages/shared/user/update_phone/index",
+    "pages/shared/qrcode/company_employee/index",
+    "pages/shared/user/update_nickname/index",
+    "pages/shared/qrcode/user_add_project_order/index",
+    "pages/work/company/create/index",
+    "pages/work/company/info/index",
+    "pages/work/company/employees/list/index",
+    "pages/work/company/settings/index",
+    "pages/work/company/employees/settings/update_remark/index",
+    "pages/work/order/create/index",
+    "pages/work/company/employees/settings/info/index",
+    "pages/work/order/info/index",
+    "pages/work/camera/project_order/video/index",
+    "pages/work/company/camera/list/index",
+    "pages/work/company/camera/settings/index",
+    "pages/work/order/camera/settings/update_info/index",
+    "pages/work/order/camera/settings/update_name/index",
+    "pages/work/order/settings/update_name/index",
+    "pages/work/order/settings/update_address/index",
+    "pages/work/progress_template/create/index",
+    "pages/work/progress_template/list/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -34,6 +36,9 @@
   },
   "usingComponents": {
     "cu-custom": "/common/colorui/components/cu-custom/cu-custom"
+  },
+  "resolveAlias": {
+    "@/*": "/*"
   },
   "sitemapLocation": "sitemap.json"
 }

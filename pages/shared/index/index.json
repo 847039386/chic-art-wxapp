@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "UserTabBar": "/components/user-tab-bar/index",
+    "ProjectOrder": "/templates/work/project_order/list/index",
+    "Home": "/templates/shared/home/index",
+    "Company": "/templates/work/company/index"
+  }
+}

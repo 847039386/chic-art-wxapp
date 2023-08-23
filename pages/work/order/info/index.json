@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+    "InfoTemplate": "/templates/work/project_order/info/index",
+    "EmployeesTemplate": "/templates/work/project_order/employees/index",
+    "CustomersTemplate": "/templates/work/project_order/customers/index",
+    "AdmCamerasTemplate": "/templates/work/project_order/cameras/settings/index",
+    "CamerasTemplate": "/templates/work/project_order/cameras/list/index",
+    "SettingsTemplate": "/templates/work/project_order/settings/index"
+  }
+}

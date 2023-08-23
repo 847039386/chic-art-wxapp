@@ -1,0 +1,49 @@
+<!--pages/work/progress_template/list/index.wxml-->
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+  <!-- <view slot="content"></view> -->
+</cu-custom>
+<!-- 添加和标题 -->
+<view class="cu-bar bg-white solid-bottom">
+  <view class="action">
+    <text class="cuIcon-titles text-blue"></text>
+    <text>我的进度模板</text>
+  </view>
+  <view class="action">
+    <button bindtap="toCreateProgressTemplatePage" class="cu-btn sm bg-blue">
+      <text class="cuIcon-add margin-right-xs"></text> 
+      <text class="text-sm">添加模板</text>
+     </button>
+    <!-- <view  class="cuIcon-roundaddfill text-blue"></view> -->
+  </view>
+</view>
+<!-- 无数据显示 -->
+<view class="margin-tb-sm padding-top-lg padding-bottom-xl" wx:if="{{ myProgressTemplates.length == 0}}">
+  <view class="flex justify-center text-xsl">
+    <view class="cuIcon-searchlist text-gray icon"></view>
+  </view>
+  <view class="flex justify-center padding-top-sm">
+    <view class="text-gray text">暂无进度模板</view>
+  </view>
+</view>
+<!-- 列表模板 -->
+<view style="margin-top: 0;" class="cu-list menu" wx:for="{{myProgressTemplates}}" wx:key="index">
+  <view class="cu-item" bindtap="toggleClick" data-index="{{index}}">
+    <view class="content">
+      <text class="cuIcon-tag text-grey"></text>
+      <text class="text-grey">{{ item.name }}</text>
+    </view>
+    <view class="action">
+      <button class="cu-btn line-red sm text-sm" catchtap="removeTemplate" data-index="{{index}}">
+        <text class="cuIcon-deletefill"></text>
+        <text class="margin-left-xs">删除</text>
+      </button>
+    </view>
+    <view class="margin-left-sm {{ item.checked ? 'cuIcon-unfold' : 'cuIcon-right' }}"></view>
+  </view>
+  <scroll-view wx:if="{{item.checked}}" scroll-x class="response cu-steps steps-bottom margin-top-xs">
+    <view class="cu-item padding-lr-xl" wx:for="{{item.template}}" wx:key="index" >
+      <text class="cu-item">{{ item }}</text>
+      <text class="num" data-index="{{index + 1}}"></text>
+    </view>
+  </scroll-view>
+</view>

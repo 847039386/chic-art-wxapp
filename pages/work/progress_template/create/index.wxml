@@ -1,0 +1,39 @@
+<!--pages/work/progress_template/create/index.wxml-->
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+  <!-- <view slot="content"></view> -->
+</cu-custom>
+<!-- 表单 -->
+<form class="bg-white">
+  <view class="">
+    <!-- 标签选择 -->
+    <view class="cu-form-group margin-top-sm" style="border-top: 1rpx solid #EEE">
+      <view class="title text-bold text-black">模板名称</view>
+      <input value="{{name}}"  bindinput="handleNameInput" placeholder="请输入模板名称"></input>
+    </view>
+    <!-- 公司简介 -->
+    <view class="cu-form-group align-start" style="border-top: 1rpx solid #EEE;border-bottom: 1rpx solid #EEE">
+      <view class="title text-bold text-black">模板内容</view>
+      <textarea value="{{template}}" bindinput="handleTemplateInput"  placeholder="请输入模板内容">
+      </textarea>
+    </view>
+  </view>
+</form>
+<view class="text-grey margin-top-sm padding text-sm">
+  <view class="text-red">注意：</view>
+  <view class="margin-top-xs">进度模板内容之间应用 - 号分割</view>
+  <view class="margin-top-xs">例如模板内容：订单开始-订单进行中-订单停止-订单结束</view>
+  <view class="margin-top-xs">则进度模板为以下<text class="text-blue text-bold">4</text>步：</view>
+  <view class="margin-top-xs">1.订单开始</view>
+  <view>2.订单进行中</view>
+  <view>3.订单停止</view>
+  <view>4.订单结束</view>
+  <view class="margin-top-xs">以上举例中，（订单开始）为进度名，总共<text class="text-blue text-bold">4</text>步为进度长度</view>
+  <view class="margin-top-xs text-red">进度规则：</view>
+  <view class="margin-top-xs">模板名称：2至12位，可以是中文、英文或数字</view>
+  <view class="margin-top-xs">进度名称：应至少为1-10位</view>
+  <view class="margin-top-xs">进度长度：不应超过10步</view>
+</view>
+<!-- 创建按钮 -->
+<view class="padding margin-top">
+  <button disabled="{{createOk}}" bindtap="createTemplate" class="cu-btn block bg-blue xxl">创建模板</button>
+</view>

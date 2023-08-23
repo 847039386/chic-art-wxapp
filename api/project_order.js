@@ -15,6 +15,22 @@ const addCustomer = (project_order_id) => {
   return request({ url: '/project-order-customer/add' ,method: 'POST' ,data :{ project_order_id } })
 }
 
+// 给订单添加员工
+const addEmployee = (user_id ,project_order_id ,company_employee_id) => {
+  return request({ url: '/project-order-employee/add' ,method: 'POST' ,data :{ user_id ,project_order_id ,company_employee_id } })
+}
+
+// 删除订单中的员工
+const removeEmployee = (id) => {
+  return request({ url: `/project-order-employee/del?id=${id}` ,method: 'DELETE' })
+}
+
+// 删除订单中的客户，拒绝审核也走此方法
+const removeCustomer = (id) => {
+  return request({ url: `/project-order-customer/del?id=${id}` ,method: 'DELETE' })
+}
+
+
 // 根据id获取订单信息
 const getInfoById = (id) => {
   return request({ url: `/project-order/info?id=${id}` ,method: 'GET' })
@@ -33,8 +49,8 @@ const getList = (data) => {
 }
 
 // 修改项目订单进度
-const updateProjectOrderStep = (id ,step ,total) => {
-  return request({ url: `/project-order/up_step` ,method: 'PATCH' ,data :{ id ,step ,total } })
+const updateProjectOrderStep = (id) => {
+  return request({ url: `/project-order/up_step?id=${id}` ,method: 'PATCH' })
 }
 // 根据项目订单ID获取它所有的员工
 const getEmployees = (project_order_id) => {
@@ -49,11 +65,6 @@ const getCustomers = (project_order_id) => {
 // 审核通过项目订单的客户
 const auditCustomer = (id) => {
   return request({ url: `/project-order-customer/audit_ok?id=${id}` ,method: 'PATCH' })
-}
-
-// 审核拒绝项目订单的客户
-const auditNotCustomer = (id) => {
-  return request({ url: `/project-order-customer/del?id=${id}` ,method: 'DELETE' })
 }
 
 // 根据项目订单ID获取它所有的监控
@@ -104,7 +115,6 @@ module.exports = {
   getEmployees,
   getCustomers,
   auditCustomer,
-  auditNotCustomer,
   getCameras,
   addCamera,
   getCameraById,
@@ -112,6 +122,9 @@ module.exports = {
   removeCamera,
   updateCameraState,
   addCustomer,
+  addEmployee,
   updateName,
-  updateAddress
+  updateAddress,
+  removeEmployee,
+  removeCustomer
 }

@@ -1,0 +1,56 @@
+<!--templates/order/index.wxml-->
+<cu-custom bgColor="bg-white">
+  <view slot="content"></view>
+</cu-custom>
+<view></view>
+<scroll-view scroll-x class="bg-white nav fixed" style="top:{{CustomBar}}px;" id="#order_nav">
+  <view bindtap="onSwitchOrderTab" data-state="0" class="cu-item {{ state == 0 ? 'text-blue cur' :'' }}">进行中</view>
+  <view bindtap="onSwitchOrderTab" data-state="1" class="cu-item {{ state == 1 ? 'text-blue cur' :'' }}">已完成</view>
+  <view bindtap="onSwitchOrderTab" data-state="-1" class="cu-item {{ state == -1 ? 'text-blue cur' :'' }}">全部</view>
+</scroll-view>
+<!--项目列表-->
+<scroll-view scroll-y 
+style="height: {{contentH}}rpx;margin-top: 90rpx;" 
+refresher-enabled="{{true}}"  
+refresher-default-style="black" 
+refresher-triggered="{{refreshLoading}}"  
+bindrefresherrefresh="_onRefresh"
+bindscrolltolower='_onLoadmore'>
+  <!-- 列表内容 -->
+  <view wx:for="{{orderList}}" wx:key="index" class="bg-white light margin-sm radius">
+    <view bindtap="toProjectOrderInfoPage" data-user_id="{{item.project_order_id.user_id._id}}" data-id="{{item.project_order_id._id}}" data-company_id="{{item.project_order_id.company_id._id}}" >
+      <view class="cf padding-lr padding-top">
+        <view class="cu-avatar radius sm fl" style="background-image:url({{item.project_order_id.company_id.logo}});"></view>
+        <view class="fl margin-left-sm text-lg" >{{item.project_order_id.company_id.name}}</view>
+        <view class="fr" >
+          <text wx:if="{{item.project_order_id.state == 0}}" class="text-gray">进行中</text>
+          <text wx:elif="{{item.project_order_id.state == 1}}" class="text-green">已完成</text>
+          <text wx:else>未知</text>
+        </view>
+      </view>
+      <view class="padding">
+        <view>
+          <text>项目名称：</text>
+          <text class="text-grey">{{item.project_order_id.name}}</text>
+        </view>
+        <view class="margin-top-xs">
+          <text>项目地址：</text>
+          <text class="text-grey">{{item.project_order_id.address}}</text>
+        </view>
+      </view>
+      <view class="solid-top padding-sm flex">
+        <view class="cu-progress round sm {{ item.project_order_id.progress_state!='100%' ? 'striped active' : '' }}">
+          <view class="bg-green" style="width:{{item.project_order_id.progress_state}};"></view>
+        </view>
+        <text class="margin-left text-sm">{{item.project_order_id.progress_state}}</text>
+      </view>
+    </view>
+  </view>
+  <!-- 下拉翻页loading -->
+  <view class="cu-load loading" wx:if="{{moreLoading}}"></view>
+  <view class="cu-load text-gray" wx:if="{{!isMore}}">暂无更多</view>
+</scroll-view>
+
+
+
+
