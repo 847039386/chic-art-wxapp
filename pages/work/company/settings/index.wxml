@@ -1,4 +1,0 @@
-<!--pages/company/settings/index.wxml-->
-<cu-custom bgColor="bg-white" isBack="{{true}}">
-  <view slot="content">设置</view>
-</cu-custom>

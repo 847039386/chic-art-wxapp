@@ -12,6 +12,10 @@ const updateUserPhone = (phone) => {
   return request({ url: `/user/up_phone?phone=${phone}` ,method: 'PATCH' }) 
 }
 
+const updateAvatar = (avatar) => {
+  return request({ url: `/user/up_avatar` ,method: 'PATCH' ,data :{ avatar } }) 
+}
+
 const wxExist = (code) => {
   return request({ url: `/account/wx_exist?code=${code}` ,method: 'GET' })
 }
@@ -20,5 +24,6 @@ module.exports = {
   updateUserName,
   updateUserNickName,
   updateUserPhone,
+  updateAvatar,
   wxExist
 }

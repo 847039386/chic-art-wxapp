@@ -18,7 +18,7 @@ Page({
     const info = getUserInfo();
     this.setData({ nickname : info.nickname })
   },
-  handleUserNameInput (e) {
+  handleNickNameInput (e) {
     this.setData({ nickname :e.detail.value})
   },
   updateUserNickName(){

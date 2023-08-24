@@ -1,0 +1,19 @@
+<!--pages/work/company/settings/update_name/index.wxml-->
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+  <!-- <view slot="content"></view> -->
+</cu-custom>
+
+<form class="">
+  <view class="">
+    <!-- 标签选择 -->
+    <view class="cu-form-group" style="border-top: 1rpx solid #EEE">
+      <view class="title text-bold text-black">公司名称</view>
+      <input value="{{name}}" bindinput="handleNameInput" placeholder="请输入姓名"></input>
+    </view>
+    <view class="text-grey padding">公司名称应是：2至12位，可以是中文、英文或数字</view>
+    <!-- 创建按钮 -->
+    <view class="padding">
+      <button loading="{{loading}}" disabled="{{loading || isUpdate }}" bindtap="updateName" class="cu-btn block bg-green xxl">确定</button>
+    </view>
+  </view>
+</form>

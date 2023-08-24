@@ -1,0 +1,65 @@
+<!--pages/company/settings/index.wxml-->
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+  <view slot="content">设置</view>
+</cu-custom>
+<!-- 加载 -->
+<view class="cu-load loading" wx:if="{{loading}}"></view>
+<!--内容列表-->
+<view class="cu-list menu" wx:if="{{!loading}}">
+  <view class="cu-item arrow ">
+    <view class="content">
+      <text class="">Logo</text>
+    </view>
+    <view class="action padding-tb-sm">
+      <image class="cu-avatar xl radius solid" src="{{ companyData.logo || '/images/nlogo.png'}}" mode='aspectFill' bindtap="toUpdateLogoPage"></image>
+    </view>
+  </view>
+  <view class="cu-item arrow" bindtap="toUpdateNamePage">
+    <view class="content">
+      <text class="">公司名称</text>
+    </view>
+    <view class="action">
+      <text class="text-grey text-sm">{{ companyData.name || '未设置' }}</text>
+    </view>
+  </view>
+  <view class="cu-item arrow" bindtap="toUpdateAddressPage">
+    <view class="content padding-tb">
+      <view>
+        <text>公司地址</text>
+      </view>
+      <view class="text-gray text-sm margin-top-xs">
+        <text class="cuIcon-locationfill text-orange margin-right-xs"></text>
+        <text>{{ companyData.address || '未填写地址' }}</text>
+      </view>
+    </view>
+    <view class="action">
+      <text class="text-grey text-sm"></text>
+    </view>
+  </view>
+  <view class="cu-item arrow" bindtap="toUpdateTagPage">
+    <view class="content padding-tb">
+      <view>
+        <text>公司标签</text>
+      </view>
+      <view class="text-gray text-sm cf">
+        <view wx:for="{{companyData.tag_ids}}" class="margin-top-sm fl margin-right-sm" wx:key="index">
+          <text class="cu-tag radius bg-blue">{{item.name}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="action">
+      <text class="text-grey text-sm"></text>
+    </view>
+  </view>
+  <view class="cu-item arrow" bindtap="toUpdateDescriptionPage">
+    <view class="content padding-tb">
+      <view>
+        <text>公司简介</text>
+      </view>
+      <view class="text-gray text-sm margin-top-xs">{{ companyData.description || '未设置' }} </view>
+    </view>
+    <view class="action">
+      <text class="text-grey text-sm"></text>
+    </view>
+  </view>
+</view>

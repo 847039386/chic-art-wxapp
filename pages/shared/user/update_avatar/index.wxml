@@ -1,0 +1,9 @@
+<!--pages/shared/user/update_avatar/index.wxml-->
+<cu-custom class="text-white" style="background-color: #000000;" isBack="{{true}}">
+  <view slot="content">个人头像</view>
+</cu-custom>
+<view class="flex justify-between">
+    <view class="">between</view>
+    <view bindtap="selectedImage" class="text-white cuIcon-more margin-right margin-top" style="font-size: 64rpx;"></view>
+</view>
+<image style="margin-top: 100rpx;width: 100%;" mode="widthFix" class="" src="{{ avatar ? avatar :'/images/nuser.png'}}"></image>

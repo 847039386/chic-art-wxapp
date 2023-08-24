@@ -1,0 +1,10 @@
+<!--pages/work/company/settings/update_logo/index.wxml-->
+<cu-custom class="text-white" style="background-color: #000000;" isBack="{{true}}">
+  <view slot="content">LOGO</view>
+</cu-custom>
+<view class="flex justify-between">
+    <view class=""></view>
+    <view bindtap="selectedImage" class="text-white cuIcon-more margin-right margin-top" style="font-size: 64rpx;"></view>
+</view>
+<image style="margin-top: 100rpx;width: 100%;" mode="widthFix" class="" src="{{ logo || '/images/nlogo.png'}}"></image>
+

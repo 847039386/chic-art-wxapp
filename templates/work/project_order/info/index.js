@@ -93,7 +93,7 @@ Component({
           progress_str =  projectOrder.progress_template[step_next + 1]
         }
         projectOrder.step = step_next;
-        projectOrder.progress_state = (step_next/projectOrder.progress_template.length*100).toFixed(0)+"%";
+        projectOrder.progress_state = ((step_next+1)/projectOrder.progress_template.length*100).toFixed(0)+"%";
         projectOrder.progress_str = progress_str;
         projectOrder.progress_ok = progress_ok 
         this.setData({ projectOrder ,step :step_next })

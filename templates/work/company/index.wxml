@@ -8,7 +8,7 @@
       <text class="cuIcon-titles text-blue "></text>
       <text>我的加入</text>
     </view>
-    <view class="action" wx:if="{{ !userIsHaveCompany }}">
+    <view class="action" wx:if="{{ !userIsHaveCompany && !loading }}">
       <!-- 用户没有创建自己的公司才会显示此按钮 -->
       <text class="cuIcon-shopfill text-blue text-xl" bindtap="toCreateCompanyPage" style="font-size: 38rpx;"></text>
     </view>

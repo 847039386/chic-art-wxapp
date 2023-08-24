@@ -9,7 +9,6 @@
       <text class="cuIcon-add margin-right-xs"></text> 
       <text class="text-sm">添加监控</text>
      </button>
-    <!-- <view  class="cuIcon-roundaddfill text-blue"></view> -->
   </view>
 </view>
 <!--加载显示-->

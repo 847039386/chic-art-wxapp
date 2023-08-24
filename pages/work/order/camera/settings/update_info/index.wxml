@@ -13,9 +13,8 @@
 </view>
 <!-- 加载中 -->
 <view class="cu-load loading" wx:if="{{loading}}"></view>
-
+<!-- 信息列表 -->
 <block wx:if="{{!errMsg && !loading && dataInfo }}">
-  <!-- 信息列表 -->
   <view class="cu-list menu" >
     <view class="cu-item arrow" bindtap="toUpdateNamePage">
       <view class="content">

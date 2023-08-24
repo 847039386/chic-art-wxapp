@@ -1,5 +1,30 @@
 const { request }  = require('../utils/request');
 
+// 修改公司LOGO
+const updateLogo = (id ,logo) => {
+  return request({ url: '/company/up_logo' ,method: 'PATCH' ,data :{ id ,logo }})
+}
+// 修改公司名称
+const updateName = (id ,name) => {
+  return request({ url: '/company/up_name' ,method: 'PATCH' ,data :{ id ,name }})
+}
+
+// 修改公司地址
+const updateAddress = (id ,address) => {
+  return request({ url: '/company/up_address' ,method: 'PATCH' ,data :{ id ,address }})
+}
+
+// 修改公司简介
+const updateDescription = (id ,description) => {
+  return request({ url: '/company/up_description' ,method: 'PATCH' ,data :{ id ,description }})
+}
+
+// 修改公司标签
+const updateTag = (id ,tag_ids) => {
+  return request({ url: '/company/up_tag' ,method: 'PATCH' ,data :{ id ,tag_ids }})
+}
+
+
 // 根据用户ID获取公司，该用户是创始人通常只有一条数据
 const getUser = (user_id) => {
   return request({ url: `/company/user?user_id=${user_id}` ,method: 'GET' })
@@ -95,5 +120,10 @@ module.exports = {
   getUtoCInfo,
   getCameras,
   getCompanyCameraInfo,
-  getCamerasAssignList
+  getCamerasAssignList,
+  updateLogo,
+  updateName,
+  updateDescription,
+  updateTag,
+  updateAddress
 }

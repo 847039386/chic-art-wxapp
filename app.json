@@ -12,7 +12,7 @@
     "pages/work/company/create/index",
     "pages/work/company/info/index",
     "pages/work/company/employees/list/index",
-    "pages/work/company/settings/index",
+    "pages/work/company/settings/update_info/index",
     "pages/work/company/employees/settings/update_remark/index",
     "pages/work/order/create/index",
     "pages/work/company/employees/settings/info/index",
@@ -25,7 +25,13 @@
     "pages/work/order/settings/update_name/index",
     "pages/work/order/settings/update_address/index",
     "pages/work/progress_template/create/index",
-    "pages/work/progress_template/list/index"
+    "pages/work/progress_template/list/index",
+    "pages/shared/user/update_avatar/index",
+    "pages/work/company/settings/update_logo/index",
+    "pages/work/company/settings/update_name/index",
+    "pages/work/company/settings/update_description/index",
+    "pages/work/company/settings/update_tag/index",
+    "pages/work/company/settings/update_address/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -4,20 +4,16 @@
 </cu-custom>
 
 <form class="">
-  <view class="padding-lg">
-    <view class="flex justify-center">
-        <view class="text-xxl text-bold text-black">修改姓名</view>
-    </view>
+  <view>
     <!-- 标签选择 -->
-    <view class="cu-form-group margin-top-xl" style="border-top: 1rpx solid #EEE">
+    <view class="cu-form-group" style="border-top: 1rpx solid #EEE">
       <view class="title text-bold text-black">姓名</view>
       <input value="{{name}}" bindinput="handleUserNameInput" placeholder="请输入姓名"></input>
     </view>
-    <view class="text-grey margin-top-sm">设置真实姓名不会暴露在公共信息上。</view>
-
+    <view class="text-grey padding">设置真实姓名不会暴露在公共信息上。</view>
     <!-- 创建按钮 -->
-    <view class="flex justify-center margin-top-xl" bindtap="updateUserName">
-      <button loading="{{loading}}" disabled="{{loading}}" class="cu-btn xxl" style="background-color:#1AAD19;color:#FFF;width: 50vw;">确定</button>
+    <view class="padding">
+      <button loading="{{loading}}" disabled="{{loading}}" bindtap="updateUserName" class="cu-btn block bg-green xxl">确定</button>
     </view>
   </view>
 </form>

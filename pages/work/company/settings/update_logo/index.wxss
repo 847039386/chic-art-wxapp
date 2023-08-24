@@ -1,0 +1,4 @@
+/* pages/work/company/settings/update_logo/index.wxss */
+page{
+  background-color: #000000;
+}

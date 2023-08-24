@@ -29,10 +29,22 @@ Component({
       this._onRefresh();
     }
   },
+  pageLifetimes:{
+    // 当用户设置了订单摄像头某个东西后重返这个页面走这个方法
+    show(){
+      // 此方法与删除订单返回这个页面相对应
+      let needRefresh = wx.getStorageSync("needRefresh")
+      if(needRefresh){
+        this.setData({companyList :[] })
+        wx.removeStorageSync('needRefresh')
+        this._onRefresh();
+      }
+    }
+  },
   methods: {
     _onRefresh() {
       if(this.data.refreshLoading == false){
-        this.setData({refreshLoading :true })
+        this.setData({refreshLoading :true  ,userIsHaveCompany:true ,isMore:true })
         let companyList = [];
         let currentPage  = 1;
         let totalPage  = 1;
@@ -43,6 +55,7 @@ Component({
           return this.getUserCompany();
         }).then((data) => {
           if(data){
+            this.setData({userIsHaveCompany : true})
             companyList.unshift(data)
           }else{
             // 用户已注册公司，就不显示按钮了
@@ -70,7 +83,6 @@ Component({
             currentPage :companys.currentPage,
             totalPage :companys.totalPage,
           })
-          console.log(this.data)
         }).finally(() =>{
           this.setData({moreLoading:false})
         })

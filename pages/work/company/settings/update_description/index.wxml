@@ -1,0 +1,19 @@
+<!--pages/work/company/settings/update_description/index.wxml-->
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+  <!-- <view slot="content"></view> -->
+</cu-custom>
+
+<form class="">
+  <view class="">
+    <!-- 标签选择 -->
+    <view class="cu-form-group align-start" style="border-top: 1rpx solid #EEE">
+      <view class="title text-bold">简介</view>
+      <textarea style="height: 200rpx;" maxlength="120" value="{{description}}" bindinput="handleDescriptionInput" placeholder="请输入公司简介"></textarea>
+    </view>
+    <view class="text-grey padding">简介长度应为2-120位</view>
+    <!-- 创建按钮 -->
+    <view class="padding ">
+      <button loading="{{loading}}" disabled="{{loading || isUpdate }}" bindtap="updateDescription" class="cu-btn block bg-green xxl">确定</button>
+    </view>
+  </view>
+</form>

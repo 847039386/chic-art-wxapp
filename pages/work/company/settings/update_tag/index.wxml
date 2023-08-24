@@ -1,0 +1,53 @@
+<!--pages/work/company/settings/update_tag/index.wxml-->
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+  <view slot="content">设置</view>
+</cu-custom>
+<!--加载-->
+<view class="cu-load loading" wx:if="{{loading}}"></view>
+<!--错误信息打印-->
+<view wx:if="{{ errMsg }}" class="margin-tb-sm padding-top-lg padding-bottom-xl">
+  <view class="flex justify-center text-xsl">
+    <view class="cuIcon-evaluate text-gray icon"></view>
+  </view>
+  <view class="flex justify-center padding-top-sm">
+    <view class="text-gray text">{{ errMsg }}</view>
+  </view>
+</view>
+
+
+
+<block wx:if="{{!loading && companyTagList.length > 0}}">
+  <view class="cu-bar bg-white solid-bottom">
+    <view class="action">
+      <text class="cuIcon-titles text-blue"></text>
+      <text>公司标签</text>
+    </view>
+    <view class="action">
+      <button bindtap="showSelectModal" class="cu-btn sm bg-green">
+        <text class="cuIcon-edit margin-right-xs"></text> 
+        <text class="text-sm">修改标签</text>
+      </button>
+    </view>
+  </view>
+  <view class="cu-list grid col-4 padding-bottom-sm">
+      <view wx:for="{{companyTagList}}" class="margin-top-sm" wx:key="index">
+        <text class="cu-tag radius bg-grey light">{{item.name}}</text>
+      </view>
+  </view>
+</block>
+
+<view class="cu-modal bottom-modal {{ ctlModal ? 'show' : ''}}" bindtap="hideSelectModal">
+  <view class="cu-dialog" catchtap>
+    <view class="cu-bar bg-white">
+      <view class="action text-blue" bindtap="hideSelectModal">取消</view>
+      <view class="action text-green" bindtap="updateTag">确定</view>
+    </view>
+    <view class="grid col-3 padding-sm">
+      <view wx:for="{{allTagList}}" class="padding-xs" wx:key="_id">
+        <button class="cu-btn orange lg block {{item.checked?'bg-orange':'line-orange'}}" catchtap="bindTagChange" data-index="{{index}}"> {{item.name}}
+        </button>
+      </view>
+    </view>
+  </view>
+</view>
+

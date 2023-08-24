@@ -23,12 +23,17 @@
       </view>
     </view>
     <view class="cu-item arrow" bindtap="toUpdateAddressPage">
-      <view class="content padding-tb-sm">
-        <view class="">项目地址</view>
-        <view class="text-grey text-sm">
+      <view class="content padding-tb">
+        <view>
+          <text>项目地址</text>
+        </view>
+        <view class="text-grey text-sm margin-top-xs">
           <text class="cuIcon-locationfill text-orange margin-right-xs"></text>
           <text>{{ projectOrder.address }}</text>
         </view>
+      </view>
+      <view class="action">
+        <text class="text-grey text-sm"></text>
       </view>
     </view>
   </view>

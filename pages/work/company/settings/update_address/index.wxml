@@ -1,0 +1,19 @@
+<!--pages/work/company/settings/update_address/index.wxml-->
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+  <!-- <view slot="content">修改地址</view> -->
+</cu-custom>
+<form class="">
+  <view class="">
+    <!-- 标签选择 -->
+    <view class="cu-form-group" style="border-top: 1rpx solid #EEE">
+      <view class="title text-bold text-black">公司地址</view>
+      <input value="{{address}}" bindinput="handleAddressInput" placeholder="请输入地址"></input>
+      <text bindtap="openMap" class="cuIcon-locationfill text-orange"></text>
+    </view>
+    <view class="text-grey padding">设置公司地址更方便用户联系您</view>
+    <!-- 创建按钮 -->
+    <view class="padding">
+      <button loading="{{loading}}" disabled="{{loading || isUpdate }}" bindtap="updateAddress" class="cu-btn block bg-green xxl">确定</button>
+    </view>
+  </view>
+</form>

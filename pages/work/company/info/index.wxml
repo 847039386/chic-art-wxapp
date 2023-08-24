@@ -6,27 +6,31 @@
   <cu-skeleton loading="{{loading}}" column="8" columnWidth="{{['60%','90%','70%','70%']}}" endHeight="36rpx">
     <view class="margin-top-sm">
       <view class="padding-sm flex flex-wrap"  >
-        <view class="cu-avatar xl radius basis-xs" style="background-image:url({{company.logo}});"></view>
+        <view class="cu-avatar xl radius basis-xs" style="background-image:url({{companyData.logo}});"></view>
         <view class="padding-xs text-xl text-black basis-xl">
           <view class="flex justify-between margin-left-xs">
             <view>
-              <text class="text-xl text-bold ">{{ company.name }}</text>
+              <text class="text-xl text-bold ">{{ companyData.name }}</text>
               <text class="text-df margin-left-sm text-gray">{{ remark }}</text>
             </view>
             <view>
-              <view wx:if="{{company.audit_state == 1}}" class="text-df text-yellow">审核中</view>
-              <view wx:if="{{company.audit_state == 2}}" class="text-df text-gray">待审核</view>
+              <view wx:if="{{companyData.audit_state == 1}}" class="text-df text-yellow">审核中</view>
+              <view wx:if="{{companyData.audit_state == 2}}" class="text-df text-gray">待审核</view>
               <view wx:if="{{isADM}}" class="text-df text-blue">管理员</view>
             </view>
           </view>
           <view class="padding-top-sm margin-left-xs">
-            <view class="cu-tag bg-blue light radius" wx:for="{{company.tag_ids}}" wx:key="_id">{{ item.name }}</view>
+            <view class="cu-tag bg-blue light radius" wx:for="{{companyData.tag_ids}}" wx:key="_id">{{ item.name }}</view>
           </view>
         </view>
       </view>
     </view>
+    <view class="text-df text-grey padding-sm">
+        <text class="cuIcon-locationfill text-orange margin-right-xs"></text>
+        <text>{{ companyData.address }}</text>
+      </view>
     <view class="padding-sm">
-      <view class="text-df text-grey" >{{ company.description }}</view>
+      <view class="text-df text-grey" >{{ companyData.description }}</view>
     </view>
     <!-- <view class="cu-bar margin-lr-xs margin-top grid col-4 no-border bg-white radius-lg-top">
       <view class="action">

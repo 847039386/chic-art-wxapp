@@ -4,6 +4,14 @@
 </cu-custom>
 
 <view class="cu-list menu">
+  <view class="cu-item arrow ">
+    <view class="content">
+      <text class="">头像</text>
+    </view>
+    <view class="action padding-tb-sm">
+      <image class="cu-avatar xl radius solid" src="{{ avatar ? avatar :'/images/nuser.png'}}" mode='aspectFill' bindtap="toUserUpdateAvatarPage"></image>
+    </view>
+  </view>
   <view class="cu-item arrow" bindtap="toUserUpdateNickNamePage">
     <view class="content">
       <text class="">昵称</text>

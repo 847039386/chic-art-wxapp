@@ -1,0 +1,4 @@
+/* pages/shared/user/update_avatar/index.wxss */
+page{
+  background-color: #000000;
+}

@@ -14,7 +14,7 @@ Page({
     company_name :null, //公司名称
     company_logo:null,  //公司LOGO
     loading:false,
-    company: null,
+    companyData: null,
     isCSR :false,  //是否是公司创始人
     isADM :false,  //是否是公司管理员
   },
@@ -60,7 +60,7 @@ Page({
           }
         } catch (error) {}
       }
-      this.setData({ company :data ,company_name :data.name ,company_logo:data.logo})
+      this.setData({ companyData :data ,company_name :data.name ,company_logo:data.logo})
     }).finally(()=>{
       this.setData({loading :false})
     })
@@ -83,7 +83,7 @@ Page({
   toCompanySettingsPage(){
     let company_id = this.data.company_id
     wx.navigateTo({
-      url: `/pages/work/company/settings/index?id=${company_id}`,
+      url: `/pages/work/company/settings/update_info/index?id=${company_id}`,
     })
   },
   // 去往公司设置页面

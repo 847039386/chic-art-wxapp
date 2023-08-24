@@ -4,18 +4,17 @@
 </cu-custom>
 
 <form class="">
-  <view class="padding-lg">
+  <view>
     <!-- 标签选择 -->
-    <view class="cu-form-group margin-top-xl" style="border-top: 1rpx solid #EEE">
+    <view class="cu-form-group" style="border-top: 1rpx solid #EEE">
       <view class="title text-bold text-black">项目地址</view>
       <input value="{{address}}" bindinput="handleAddressInput" placeholder="请输入项目地址"></input>
       <text bindtap="openMap" class="cuIcon-locationfill text-orange"></text>
     </view>
-    <view class="text-grey margin-top-sm">设置项目地址方便更好的管理</view>
-
+    <view class="text-grey padding">设置项目地址方便更好的管理</view>
     <!-- 创建按钮 -->
-    <view class="flex justify-center margin-top-xl" bindtap="updateAddress">
-      <button loading="{{loading}}" disabled="{{loading}}" class="cu-btn xxl" style="background-color:#1AAD19;color:#FFF;width: 50vw;">确定</button>
+    <view class="padding">
+      <button loading="{{loading}}" disabled="{{loading}}" bindtap="updateAddress" class="cu-btn block bg-green xxl">确定</button>
     </view>
   </view>
 </form>
