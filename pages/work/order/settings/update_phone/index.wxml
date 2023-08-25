@@ -1,0 +1,20 @@
+<!--pages/work/order/settings/update_phone/index.wxml-->
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+  <!-- <view slot="content"></view> -->
+</cu-custom>
+
+<form class="">
+  <view>
+    <!-- 标签选择 -->
+    <view class="cu-form-group" style="border-top: 1rpx solid #EEE">
+      <view class="title text-bold text-black">客户电话</view>
+      <input value="{{phone}}" bindinput="handlePhoneInput" placeholder="请输入对接客户"></input>
+    </view>
+    <view class="text-grey padding">设置客户电话方便更好的管理</view>
+
+    <!-- 创建按钮 -->
+    <view class="padding">
+      <button loading="{{loading}}" disabled="{{loading}}" bindtap="updatePhone" class="cu-btn block bg-green xxl">确定</button>
+    </view>
+  </view>
+</form>

@@ -69,7 +69,6 @@ Page({
       const companyData = this.data.companyData
       prevPage.setData({ companyData })
     }
-
   }
 
   

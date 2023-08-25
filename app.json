@@ -31,7 +31,12 @@
     "pages/work/company/settings/update_name/index",
     "pages/work/company/settings/update_description/index",
     "pages/work/company/settings/update_tag/index",
-    "pages/work/company/settings/update_address/index"
+    "pages/work/company/settings/update_address/index",
+    "pages/work/order/note/list/index",
+    "pages/work/order/note/create/index",
+    "pages/work/order/note/info/index",
+    "pages/work/order/settings/update_customer/index",
+    "pages/work/order/settings/update_phone/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

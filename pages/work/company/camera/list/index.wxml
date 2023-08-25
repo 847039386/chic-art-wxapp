@@ -7,6 +7,9 @@
   <view class="action">
     <text class="cuIcon-titles text-blue"></text>
     <text>监控列表</text>
+    <text bindtap="openTip" class="margin-left-sm text-sm text-gray margin-top-xs">
+      <text class="cuIcon-infofill"></text>
+    </text>
   </view>
 </view>
 <!--无数据显示-->
@@ -31,7 +34,7 @@ bindscrolltolower='_onLoadmore'>
     <view class="cu-list menu">
       <view data-id="{{item._id}}" bindtap="toCompanyCameraSettingsPage" class="cu-item arrow" wx:for="{{cameraList}}" wx:key="_id">
         <view class="content">
-          <text class="cuIcon-recordfill text-blue"></text>
+          <text class="cuIcon-recordfill {{ item.state == 0 ? 'text-gray' :'text-blue'}}"></text>
           <text class="text-grey">编号：{{item.camera_id.no}}</text>
         </view>
         <view class="action">

@@ -1,0 +1,26 @@
+<!--pages/work/order/note/create/index.wxml-->
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+  <!-- <view slot="content"></view> -->
+</cu-custom>
+<!-- 表单 -->
+<form>
+  <view class="cu-form-group">
+    <view class="title">标题</view>
+    <input value="{{title}}" bindinput="handleTitleInput" placeholder="请输入笔记标题"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">可看人</view>
+    <picker bindchange="lookablePickerChange" range-key="lable" value="{{index}}" range="{{lookablePicker}}">
+      <view class="picker">{{lookablePicker[currentLookableIndex].lable}}</view>
+    </picker>
+  </view>
+  <view class="cu-form-group align-start">
+    <view class="title">内容</view>
+    <textarea value="{{content}}" bindinput="handleContentInput" style="height: 200rpx;" maxlength="-1"  placeholder="请输入笔记内容"></textarea>
+  </view>
+</form>
+
+<!-- 创建按钮 -->
+<view class="padding margin-top">
+  <button loading="{{loading}}" disabled="{{loading || isCreate }}" bindtap="createNote" class="cu-btn block bg-blue xxl">创建笔记</button>
+</view>

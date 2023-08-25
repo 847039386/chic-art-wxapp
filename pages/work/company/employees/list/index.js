@@ -151,7 +151,11 @@ Page({
     // 去重分组
     localEmployeeGroup = getLocalEmployeeGroup()  //本地组
     remoteEmployeeGroup = uniqueArray(remoteEmployeeGroup); // 远程组
-    allEmployeeGroup = uniqueArray(remoteEmployeeGroup.concat(localEmployeeGroup)) // 合并两组
+    if(this.data.isAllowOperation){
+      allEmployeeGroup = uniqueArray(remoteEmployeeGroup.concat(localEmployeeGroup)) // 合并两组
+    }else{
+      allEmployeeGroup = remoteEmployeeGroup
+    }
     // 重新排序默认分组，把他分到第一位
     allEmployeeGroup.forEach((element,index) =>{
       if(element == '默认分组'){

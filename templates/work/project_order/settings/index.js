@@ -47,6 +47,20 @@ Component({
         url: `/pages/work/order/settings/update_name/index?id=${id}&name=${name}`,
       })
     },
+    toUpdateCustomerPage(){
+      let customer = this.data.projectOrder.customer;
+      let id = this.data.id;
+      wx.navigateTo({
+        url: `/pages/work/order/settings/update_customer/index?id=${id}&customer=${customer}`,
+      })
+    },
+    toUpdatePhonePage(){
+      let phone = this.data.projectOrder.phone;
+      let id = this.data.id;
+      wx.navigateTo({
+        url: `/pages/work/order/settings/update_phone/index?id=${id}&phone=${phone}`,
+      })
+    },
     toUpdateAddressPage(){
       let address = this.data.projectOrder.address;
       let id = this.data.id;

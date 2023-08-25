@@ -85,5 +85,12 @@ Page({
       return item;
     })
     return datas;
+  },
+  openTip(){
+    wx.showModal({
+      title: '提示',
+      showCancel:false,
+      content: '小图标为灰色时表明监控空闲中，小图标为蓝色表明监控已分配给订单',
+    })
   }
 })

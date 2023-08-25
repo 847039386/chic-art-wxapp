@@ -3,6 +3,10 @@
   <view class="action">
     <text class="cuIcon-titles text-blue"></text>
     <text>订单员工</text>
+    <text wx:if="{{isAdm}}" class="margin-left-sm text-sm text-gray margin-top-xs">
+      <text class="cuIcon-infofill"></text>
+      <text>左滑可删除员工</text>
+    </text>
   </view>
   <view class="action" wx:if="{{isAdm}}">
     <button bindtap="openEmployeeModal" class="cu-btn sm bg-blue">
@@ -35,10 +39,20 @@
     </view>
   </view>
 </block>
-
+ 
 <!-- 员工列表侧边抽屉 -->
 <view class="cu-modal drawer-modal justify-start {{ employeeModal ? 'show' :'' }}" bindtap="closeEmployeeModal">
   <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;height:calc(100vh - {{CustomBar}}px)">
+    <view class="cu-bar bg-white solid-bottom">
+      <view class="action">
+        <text class="cuIcon-titles text-blue"></text>
+        <text>员工</text>
+        <text class="margin-left-sm text-sm text-gray margin-top-xs">
+          <text class="cuIcon-infofill"></text>
+          <text>点击后即可添加</text>
+        </text>
+      </view>
+    </view>
     <block wx:for="{{ companyEmployees.rows }}" wx:for-item="group" wx:key="index" wx:for-index="group_index">
       <view class="padding cf bg-white" catchtap="openGroup" data-index="{{group_index}}">
           <view class="fl">{{ group.group_name}}</view>

@@ -1,0 +1,30 @@
+<!--pages/work/order/note/info/index.wxml-->
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+  <!-- <view slot="content"></view> -->
+</cu-custom>
+
+<block>
+  <view class="padding-sm ">
+    <text class="text-xxl text-bold text-black">{{title}}</text>
+  </view>
+
+  <view class="flex justify-between margin-top-xs">
+    <view class="flex padding-left-sm">
+      <view>
+        <text>{{create_time}}</text>
+        <text wx:if="{{isAdm}}" class="margin-left text-blue">
+          <text wx:if="{{state == 0}}">所有人</text>
+          <text wx:if="{{state == 1}}">仅负责人</text>
+          <text wx:if="{{state == 2}}">仅员工</text>
+          <text wx:if="{{state == 3}}">仅客户</text>
+        </text>
+      </view>
+    </view>
+    <view wx:if="{{isAdm && !isRemove}}" class="padding-right flex align-center text-red" bindtap="removeNote">
+      <view class="cuIcon-delete"></view>删除
+    </view>
+  </view>
+
+  <view class="padding-sm text-lg margin-top-sm">{{content}}</view>
+
+</block>

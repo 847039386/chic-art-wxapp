@@ -22,6 +22,25 @@
         <text class="text-grey text-sm">{{ projectOrder.name }}</text>
       </view>
     </view>
+    <!--客户名称-->
+    <view class="cu-item arrow" bindtap="toUpdateCustomerPage">
+      <view class="content">
+        <text class="">对接客户</text>
+      </view>
+      <view class="action">
+        <text class="text-grey text-sm">{{ projectOrder.customer }}</text>
+      </view>
+    </view>
+    <!--客户电话-->
+    <view class="cu-item arrow" bindtap="toUpdatePhonePage">
+      <view class="content">
+        <text class="">客户电话</text>
+      </view>
+      <view class="action">
+        <text class="text-grey text-sm">{{ projectOrder.phone }}</text>
+      </view>
+    </view>
+    <!--地址-->
     <view class="cu-item arrow" bindtap="toUpdateAddressPage">
       <view class="content padding-tb">
         <view>

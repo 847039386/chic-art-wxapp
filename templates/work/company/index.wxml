@@ -33,7 +33,7 @@ bindscrolltolower='_onLoadmore'>
           </view>
           <view>
             <view wx:if="{{item.audit_state == 1}}" class="text-df text-yellow">审核中</view>
-            <view wx:if="{{item.audit_state == 2}}" class="text-df text-gray">待审核</view>
+            <view wx:if="{{item.audit_state == 2}}" class="text-df text-red">审核未通过</view>
             <view wx:if="{{item.company_identity_type && item.company_identity_type == 2}}" class="text-df text-blue">管理员</view>
           </view>
         </view>

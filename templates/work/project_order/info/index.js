@@ -12,8 +12,7 @@ Component({
   lifetimes : {
     ready:function(){
       const id = this.properties.aid;
-      const isAdm = this.properties.isAdm;
-      this.setData({ id ,isAdm })
+      this.setData({ id })
       this.getInfo(id);
     }
   },
@@ -21,7 +20,6 @@ Component({
     finishCurrentProgressLoading:false,
     loading:true,
     id : null,
-    isAdm :false,
     projectOrder : { },
     step:0,
   },
@@ -52,6 +50,13 @@ Component({
       const id = this.data.id;
       wx.navigateTo({
         url: `/pages/shared/qrcode/user_add_project_order/index?id=${id}`,
+      })
+    },
+    toProjectOrderNotePage(){
+      const id = this.data.id;
+      const isAdm = this.properties.isAdm;
+      wx.navigateTo({
+        url: `/pages/work/order/note/list/index?id=${id}&isAdm=${isAdm}`,
       })
     },
     finishCurrentProgress(event){

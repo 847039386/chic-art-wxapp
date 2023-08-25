@@ -16,6 +16,7 @@
         <view wx:else>无联系方式</view>
       </view>
     </view>
+    <view bindtap="toProjectOrderNotePage"  class="fr cuIcon-card margin-top-xs margin-left-sm" style="font-size: 64rpx;"></view>
     <view bindtap="toUserAddOrderQrCode" class="fr cuIcon-qr_code margin-top-xs" style="font-size: 64rpx;"></view>
   </view>
 

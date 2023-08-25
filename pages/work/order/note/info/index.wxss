@@ -1,0 +1,4 @@
+/* pages/work/order/note/info/index.wxss */
+page{
+  background-color: #ffffff;
+}

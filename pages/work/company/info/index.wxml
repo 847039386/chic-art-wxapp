@@ -15,7 +15,7 @@
             </view>
             <view>
               <view wx:if="{{companyData.audit_state == 1}}" class="text-df text-yellow">审核中</view>
-              <view wx:if="{{companyData.audit_state == 2}}" class="text-df text-gray">待审核</view>
+              <view wx:if="{{companyData.audit_state == 2}}" class="text-df text-red">审核未通过</view>
               <view wx:if="{{isADM}}" class="text-df text-blue">管理员</view>
             </view>
           </view>
@@ -51,7 +51,10 @@
       <!-- 员工管理 -->
       <view class="cu-item-my"  bindtap="toCompanyEmployeesPage">
         <view class="cuIcon-group text-blue text-shadow" style="font-size: 56rpx;"></view>
-        <text class="margin-top-xs">员工管理</text>
+        <text class="margin-top-xs">
+          <text wx:if="{{isCSR}}">员工管理</text>
+          <text wx:else>同事</text>
+        </text>
       </view>
       <!-- 二维码 -->
       <view class="cu-item-my"  bindtap="toCompanyEmployeesQrcodePage">

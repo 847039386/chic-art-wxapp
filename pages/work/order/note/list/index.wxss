@@ -1,0 +1,7 @@
+/* pages/work/order/note/index.wxss */
+.my-piano-text{
+  overflow: hidden;
+  text-align: justify;
+  line-height: 40rpx;
+  height: 80rpx;
+}

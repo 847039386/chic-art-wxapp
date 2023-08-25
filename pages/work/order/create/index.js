@@ -196,7 +196,7 @@ Page({
     let namePattern = /^[0-9A-Za-z\u4e00-\u9fa5\s]{1,16}$/;
     let customerPattern = /^[0-9A-Za-z\u4e00-\u9fa5\s]{1,16}$/;
     let phonePattern = /^\d{7,8}$|^1\d{10}$|^(0\d{2,3}-?|0\d2,3 )?[1-9]\d{4,7}(-\d{1,8})?$/;
-    let addressPattern = /^.{2,120}$/;
+    let addressPattern = /^.{1,120}$/;
     if(!name || !namePattern.test(name)){
       err_msg = '项目名称只允许数字英文或汉文还有空格1-16位'
     }
@@ -207,7 +207,7 @@ Page({
       err_msg = '请输入正确的手机号码，可以是固定电话'
     }
     if(!address || !addressPattern.test(address)){
-      err_msg = '地址的字符长度应在2-120个字符之间'
+      err_msg = '地址的字符长度应在1-120个字符之间'
     } 
     if(err_msg){
       wx.showModal({

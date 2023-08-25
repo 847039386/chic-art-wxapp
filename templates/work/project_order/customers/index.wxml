@@ -40,7 +40,7 @@
   <view class="cu-bar bg-white solid-bottom">
     <view class="action">
       <text class="cuIcon-titles text-blue"></text>
-      <text>客户列表</text>
+      <text>订单客户</text>
     </view>
   </view>
   <view class="cu-list menu-avatar no-padding bg-gray">

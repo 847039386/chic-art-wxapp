@@ -12,15 +12,13 @@ Component({
   lifetimes : {
     ready:function(){
       const id = this.properties.aid;
-      const isAdm = this.properties.isAdm
       this.getCustomers(id)
-      this.setData({ id ,isAdm})
+      this.setData({ id })
       console.log(this.properties)
     }
   },
   data: {
     id:null,
-    isAdm :false,
     loading:false,
     customerList:[],   // 通过审核的客户
     auditCustomerList :[] // 未通过审核的客户

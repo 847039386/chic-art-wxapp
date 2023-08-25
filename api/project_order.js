@@ -90,6 +90,17 @@ const updateCameraName = (id,name) => {
 const updateName = (id,name) => {
   return request({ url: `/project-order/up_name?id=${id}&name=${name}` ,method: 'PATCH' });
 }
+
+// 修改对接客户
+const updateCustomer = (id,customer) => {
+  return request({ url: `/project-order/up_customer?id=${id}&customer=${customer}` ,method: 'PATCH' });
+}
+
+// 修改客户电话
+const updatePhone= (id,phone) => {
+  return request({ url: `/project-order/up_phone?id=${id}&phone=${phone}` ,method: 'PATCH' });
+}
+
 // 修改项目地址
 const updateAddress = (id,address) => {
   return request({ url: `/project-order/up_address?id=${id}&address=${address}` ,method: 'PATCH' });
@@ -104,6 +115,24 @@ const updateCameraState = (id,state) => {
 const removeCamera = (id) => {
   return request({ url: `/project-order-camera/del?id=${id}` ,method: 'DELETE' });
 }
+
+// 给订单添加笔记
+const addNote = (data) => {
+  return request({ url: `/project-order-note/add` ,method: 'POST' ,data });
+}
+
+// 获取员工笔记
+const getEmployeeNote = (project_order_id,page,limit) => {
+  page = page || 1;
+  limit = limit || 10;
+  return request({ url: `/project-order-note/list_by_employee?page=${page}&limit=${limit}&project_order_id=${project_order_id}` ,method: 'GET' })
+}
+
+const removeNote = (id) => {
+  return request({ url: `/project-order-note/del?id=${id}` ,method: 'DELETE' });
+}
+
+
 
 
 module.exports = {
@@ -124,7 +153,12 @@ module.exports = {
   addCustomer,
   addEmployee,
   updateName,
+  updateCustomer,
+  updatePhone,
   updateAddress,
   removeEmployee,
-  removeCustomer
+  removeCustomer,
+  addNote,
+  getEmployeeNote,
+  removeNote
 }

@@ -1,6 +1,6 @@
 <!--pages/company/employees/index.wxml-->
 <cu-custom bgColor="bg-white" isBack="{{true}}">
-  <view slot="content">员工管理</view>
+  <!-- <view slot="content"></view> -->
 </cu-custom>
 <!-- 申请列表 -->
 <view wx:if="{{ loading }}" class="cu-load loading bg-gray"></view>

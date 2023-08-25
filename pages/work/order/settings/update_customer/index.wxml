@@ -1,0 +1,20 @@
+<!--pages/work/order/settings/update_customer/index.wxml-->
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+  <!-- <view slot="content"></view> -->
+</cu-custom>
+
+<form class="">
+  <view>
+    <!-- 标签选择 -->
+    <view class="cu-form-group" style="border-top: 1rpx solid #EEE">
+      <view class="title text-bold text-black">对接客户</view>
+      <input value="{{customer}}" bindinput="handleCustomerInput" placeholder="请输入对接客户"></input>
+    </view>
+    <view class="text-grey padding">设置对接客户方便更好的管理</view>
+
+    <!-- 创建按钮 -->
+    <view class="padding">
+      <button loading="{{loading}}" disabled="{{loading}}" bindtap="updateCustomer" class="cu-btn block bg-green xxl">确定</button>
+    </view>
+  </view>
+</form>

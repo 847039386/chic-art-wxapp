@@ -29,7 +29,7 @@
   <view class="cu-item">
     <view class="content">
       <text class="cuIcon-repeal text-green" style="font-size: 38rpx;"></text>
-      <text class="text-black text-xl">切换公司端</text>
+      <text class="text-black text-xl">切换工作端</text>
     </view>
   </view>
   <view class="cu-item" bindtap="toMyProgressTemplatesSettings">

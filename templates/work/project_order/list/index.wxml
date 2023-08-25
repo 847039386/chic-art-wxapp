@@ -29,11 +29,11 @@ bindscrolltolower='_onLoadmore'>
         </view>
       </view>
       <view class="padding">
-        <view>
+        <view style="overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
           <text>项目名称：</text>
           <text class="text-grey">{{item.project_order_id.name}}</text>
         </view>
-        <view class="margin-top-xs">
+        <view class="margin-top-xs" style="overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
           <text>项目地址：</text>
           <text class="text-grey">{{item.project_order_id.address}}</text>
         </view>
