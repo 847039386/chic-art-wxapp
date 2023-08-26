@@ -62,7 +62,6 @@ Page({
     }
   },
   formatCompanyTagList(allTagList,companyTagList){
-    console.log(allTagList)
     for (let index = 0; index < allTagList.length; index++) {
       const a_tag = allTagList[index];  // 所有tags
       for (let jndex = 0; jndex < companyTagList.length; jndex++) {

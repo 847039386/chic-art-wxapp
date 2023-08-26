@@ -10,7 +10,8 @@ Component({
   },
   properties:{
     aid :String,
-    cid :String
+    cid :String,
+    isAdm :Boolean
   },
   lifetimes : {
     ready:function(){
@@ -20,12 +21,17 @@ Component({
       this._init();
     }
   },
+  pageLifetimes:{
+    show(){
+      this._init();
+    }
+  },
   data: {
     CustomBar: app.globalData.CustomBar,
     id:null,
-    isAdm : false,
     company_id :null,
     loading:false,
+    employeeModal :false,
     // 新的
     projectOrderEmployees:[],  //订单员工
     companyEmployees :[]  // 可分配的公司员工
@@ -40,14 +46,13 @@ Component({
           avatar = getImageUrl(element.user_id.avatar);
         }
         if(element.company_employee_id){
-          e_Datas.push(Object.assign(element.user_id,{ avatar ,ce_remark :element.company_employee_id.remark ,project_order_employee_id :element._id }))
+          element.user_id = Object.assign(element.user_id,{ avatar })
+          element.ce_remark = element.company_employee_id.remark;
+          e_Datas.push(element)
         }else{
-          const userinfo = getUserInfo();
-          const user_id = userinfo.user_id;
-          if(user_id == element.user_id._id){
-            this.setData({isAdm:true})
-          }
-          a_Datas.push(Object.assign(element.user_id,{ avatar ,ce_remark :'项目负责人' ,project_order_employee_id :element._id }))
+          element.user_id = Object.assign(element.user_id,{ avatar })
+          element.ce_remark = '项目负责人';
+          a_Datas.push(element)
         }
       });
       let newDatas = a_Datas.concat(e_Datas)  // 创始人始终在前
@@ -68,10 +73,9 @@ Component({
         content: '是否添加员工到该订单',
         complete: (res) => {
           if (res.confirm) {
-            wx.showLoading()
+            wx.showLoading({mask:true})
             ProjectOrder.addEmployee(user_id ,project_order_id,company_employee_id).then(() => {
               this._init();
-              wx.showToast()
             }).finally(() => {
               wx.hideLoading()
             })
@@ -103,6 +107,11 @@ Component({
     getOptionalEmployeeList(projectOrderEmployees ,companyEmployees){
       let newList = []
       if(companyEmployees.length > 0){
+        // 去除掉所有审核未通过的员工
+        companyEmployees = companyEmployees.filter((item) => {
+          return item.audit_state == 1;
+        })
+        // 去重已经在订单内的员工
         for (let index = 0; index < companyEmployees.length; index++) {
           let isExist = false;
           const item = companyEmployees[index]
@@ -185,35 +194,18 @@ Component({
         }
       })
     },
-    // ListTouch触摸开始
-    ListTouchStart(e) {
-      this.setData({
-        ListTouchStart: e.touches[0].pageX
-      })
-    },
-
-    // ListTouch计算方向
-    ListTouchMove(e) {
-      this.setData({
-        ListTouchDirection: e.touches[0].pageX - this.data.ListTouchStart > 0 ? 'right' : 'left'
-      })
-    },
-
-    // ListTouch计算滚动
-    ListTouchEnd(e) {
-      console.log(e.currentTarget.dataset.target)
-      if (this.data.ListTouchDirection == 'left') {
-        this.setData({
-          modalName: e.currentTarget.dataset.target
-        })
-      } else {
-        this.setData({
-          modalName: null
+    toEmployeeManage(event){
+      const isAdm = this.properties.isAdm;
+      if(isAdm){
+        const info = event.currentTarget.dataset.info;
+        const visible_state = info.visible_state;
+        const user_id = info.user_id._id
+        const id = info._id;
+        wx.navigateTo({
+          url: `/pages/work/order/employee/update_info/index?id=${id}&user_id=${user_id}&visible_state=${visible_state}`,
         })
       }
-      this.setData({
-        ListTouchDirection: null
-      })
     },
+    
   }
 })

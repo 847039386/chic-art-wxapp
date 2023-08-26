@@ -17,14 +17,14 @@ Component({
     totalPage :0,
     // 是否有更多，默认有
     isMore :true,
+    myCompany:null,
   },
   lifetimes : {
     ready:function(){
       // 获取内容高度根据wx小程序屏幕高度
       let windowHeight = wx.getSystemInfoSync().windowHeight
       let rate = 750 / wx.getSystemInfoSync().windowWidth
-      let contentH = windowHeight * rate;
-      contentH = contentH - 355;
+      let contentH = windowHeight * rate - 375;
       this.setData({ contentH })
       this._onRefresh();
     }
@@ -56,7 +56,8 @@ Component({
         }).then((data) => {
           if(data){
             this.setData({userIsHaveCompany : true})
-            companyList.unshift(data)
+            this.setData({ myCompany : data })
+            // companyList.unshift(data)
           }else{
             // 用户已注册公司，就不显示按钮了
             this.setData({userIsHaveCompany : false})

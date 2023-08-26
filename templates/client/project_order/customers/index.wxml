@@ -1,0 +1,36 @@
+<!--templates/client/project_order/customers/index.wxml-->
+<view class="cu-bar bg-white solid-bottom">
+  <view class="action">
+    <text class="cuIcon-titles text-blue"></text>
+    <text>订单客户</text>
+  </view>
+</view>
+<!--加载显示-->
+<view class="cu-load loading" wx:if="{{loading}}" ></view>
+<!--无数据显示-->
+<block wx:if="{{ !loading && customerList.length == 0  }}">
+  <view class="margin-tb-sm padding-top-lg padding-bottom-xl">
+    <view class="flex justify-center text-xsl">
+      <view class="cuIcon-searchlist text-gray icon"></view>
+    </view>
+    <view class="flex justify-center padding-top-sm">
+      <view class="text-gray text">暂无客户</view>
+    </view>
+  </view>
+</block>
+<!--通过审核的用户-->
+<block wx:if="{{!loading && customerList.length > 0 }}">
+  <view class="cu-list menu-avatar no-padding bg-gray">
+    <view class="cu-item" wx:for="{{ customerList }}" wx:key="_id" >
+      <view class="cu-avatar radius lg" style="background-image:url({{item.user_id.avatar}});"></view>
+      <view class="content">
+        <view class="text-black">
+          <text class="text-Abc text-xl">{{ item.user_id.name || item.user_id.nickname }}</text>
+        </view>
+        <view class="text-gray text-sm margin-top-xs">
+          <text>{{ item.user_id.phone || '无联系方式'}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</block>

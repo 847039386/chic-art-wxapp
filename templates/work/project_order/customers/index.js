@@ -12,9 +12,13 @@ Component({
   lifetimes : {
     ready:function(){
       const id = this.properties.aid;
-      this.getCustomers(id)
       this.setData({ id })
-      console.log(this.properties)
+      this.getCustomers();
+    }
+  },
+  pageLifetimes:{
+    show(){
+      this.getCustomers();
     }
   },
   data: {
@@ -24,25 +28,37 @@ Component({
     auditCustomerList :[] // 未通过审核的客户
   },
   methods: {
-    getCustomers(id){
+    getCustomers(){
+      const id = this.properties.aid;
+      const isAdm = this.properties.isAdm;
       this.setData({loading :true})
       let customerList = [];
       let auditCustomerList = [];
       ProjectOrder.getCustomers(id).then((result) => {
+        if(!isAdm){
+          // 当不是项目管理员的时候过滤掉所有不允许客户员工查看的客户
+          result.data = result.data.filter((item) => {
+            return item.visible_state == 0;
+          })
+        }
+        // 遍历循环
         result.data.forEach(element => {
           let avatar = '';
           let user_id = {};
           let newData = {};
+          // 转换图片真实地址
           if(element.user_id && element.user_id.avatar){
             avatar = getImageUrl(element.user_id.avatar);
           }
+          // 赋值
           if(element && element.user_id){
             user_id = Object.assign(element.user_id,{ avatar })
             newData = Object.assign(element,{ user_id })
           }
+          // 过滤审核和未审核的员工
           if(element.state == 0){
             auditCustomerList.push(newData)
-          }else{
+          }else{   
             customerList.push(newData)
           }
         });
@@ -97,34 +113,15 @@ Component({
         }
       })
     },
-    // ListTouch触摸开始
-    ListTouchStart(e) {
-      this.setData({
-        ListTouchStart: e.touches[0].pageX
-      })
-    },
-
-    // ListTouch计算方向
-    ListTouchMove(e) {
-      this.setData({
-        ListTouchDirection: e.touches[0].pageX - this.data.ListTouchStart > 0 ? 'right' : 'left'
-      })
-    },
-
-    // ListTouch计算滚动
-    ListTouchEnd(e) {
-      if (this.data.ListTouchDirection == 'left') {
-        this.setData({
-          modalName: e.currentTarget.dataset.target
-        })
-      } else {
-        this.setData({
-          modalName: null
+    toCustomerManage(event){
+      const isAdm = this.properties.isAdm;
+      if(isAdm){
+        const id = event.currentTarget.dataset.id;
+        const visible_state = event.currentTarget.dataset.visible_state;
+        wx.navigateTo({
+          url: `/pages/work/order/customer/update_info/index?id=${id}&visible_state=${visible_state}`,
         })
       }
-      this.setData({
-        ListTouchDirection: null
-      })
-    },
+    }
   }
 })

@@ -15,15 +15,6 @@
      </button>
   </view>
 </view>
-<!-- 无数据显示 -->
-<view class="margin-tb-sm padding-top-lg padding-bottom-xl" wx:if="{{ myProgressTemplates.length == 0}}">
-  <view class="flex justify-center text-xsl">
-    <view class="cuIcon-searchlist text-gray icon"></view>
-  </view>
-  <view class="flex justify-center padding-top-sm">
-    <view class="text-gray text">暂无进度模板</view>
-  </view>
-</view>
 <!-- 列表模板 -->
 <scroll-view scroll-y
 style="height: {{contentH}}rpx;" 

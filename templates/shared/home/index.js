@@ -1,6 +1,7 @@
 // pages/template/home/index.js
 const { getUserInfo } = require('@/utils/auth')
 const { userScanCode } = require('@/utils/scan_code')
+const { getAppMode, switchWorkAppMode, switchClientAppMode } = require('@/utils/storage/app_mode')
 Component({
   options: {
     addGlobalClass: true
@@ -10,7 +11,8 @@ Component({
    */
   data: {
     username:'',
-    avatar:''
+    avatar:'',
+    APP_MODE :null,
   },
   onShow(){
     console.log('我时设置页面')
@@ -19,8 +21,9 @@ Component({
     attached:function(){
       let userinfo = getUserInfo()
       let nickname = userinfo.nickname;
-      let avatar = userinfo.avatar
-      this.setData({nickname,avatar})
+      let avatar = userinfo.avatar;
+      let APP_MODE = getAppMode()
+      this.setData({nickname ,avatar ,APP_MODE})
     }
   },
   pageLifetimes:{
@@ -40,7 +43,9 @@ Component({
           const datajson = res.result;
           wx.showLoading()
           userScanCode(datajson).then(() => {
-            wx.showToast({ title: '成功' })
+            setTimeout(() => {
+              wx.showToast({ title: '成功' })
+            },100)
           }).finally(() => {
             wx.hideLoading()
           })
@@ -55,6 +60,23 @@ Component({
     toMyProgressTemplatesSettings(){
       wx.navigateTo({
         url: '/pages/work/progress_template/list/index',
+      })
+    },
+    updateAppMode(){
+      wx.showModal({
+        title: '提示',
+        content: '是否切换模式？',
+        complete: (res) => {
+          if (res.confirm) {
+            const APP_MODE = this.data.APP_MODE;
+            if(APP_MODE == 'CLIENT'){
+              switchWorkAppMode();
+            }else{
+              switchClientAppMode();
+            }
+            wx.reLaunch({url: '/pages/shared/index/index'})
+          }
+        }
       })
     }
   }

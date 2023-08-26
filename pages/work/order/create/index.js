@@ -82,7 +82,7 @@ Page({
             element.user_id.avatar = getImageUrl(element.user_id.avatar)
           }
           // identity_type > 0 是通过申请的员工
-          if(element.identity_type > 0){
+          if(element.audit_state == 1){
             // Uid是登陆者的ID，当前功能为创建订单那么订单绑定的人就是登陆者id，所以不应添加自己，因为本身自己就是存在的
             // 所以该代码过滤自己的ID
             if(uid != element.user_id._id){

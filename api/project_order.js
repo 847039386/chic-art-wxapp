@@ -25,6 +25,15 @@ const removeEmployee = (id) => {
   return request({ url: `/project-order-employee/del?id=${id}` ,method: 'DELETE' })
 }
 
+const updateEmployeeVisibleState = (id ,visible_state) => {
+  return request({ url: `/project-order-employee/up_visible_state?id=${id}&visible_state=${visible_state}` ,method: 'PATCH' })
+}
+
+// 修改客户可见状态
+const updateCustomerVisibleState = (id ,visible_state) => {
+  return request({ url: `/project-order-customer/up_visible_state?id=${id}&visible_state=${visible_state}` ,method: 'PATCH' })
+}
+
 // 删除订单中的客户，拒绝审核也走此方法
 const removeCustomer = (id) => {
   return request({ url: `/project-order-customer/del?id=${id}` ,method: 'DELETE' })
@@ -47,6 +56,19 @@ const getList = (data) => {
     return request({ url: `/project-order-employee/project_order_list?page=${page}&limit=${limit}` ,method: 'GET' })
   }
 }
+
+// 根据token获取所有与用户有关系的订单，这里是客户
+const getCList = (data) => {
+  let page = data.page || 1;
+  let limit = data.limit || 10;
+  let state = data.state;
+  if(state != -1){
+    return request({ url: `/project-order-customer/list_by_userid?page=${page}&limit=${limit}&state=${state}` ,method: 'GET' })
+  }else{
+    return request({ url: `/project-order-customer/list_by_userid?page=${page}&limit=${limit}` ,method: 'GET' })
+  }
+}
+
 
 // 修改项目订单进度
 const updateProjectOrderStep = (id) => {
@@ -121,15 +143,27 @@ const addNote = (data) => {
   return request({ url: `/project-order-note/add` ,method: 'POST' ,data });
 }
 
-// 获取员工笔记
+// 员工获取订单笔记
 const getEmployeeNote = (project_order_id,page,limit) => {
   page = page || 1;
   limit = limit || 10;
   return request({ url: `/project-order-note/list_by_employee?page=${page}&limit=${limit}&project_order_id=${project_order_id}` ,method: 'GET' })
 }
+// 客户获取订单笔记
+const getCustomerNote = (project_order_id,page,limit) => {
+  page = page || 1;
+  limit = limit || 10;
+  return request({ url: `/project-order-note/list_by_customer?page=${page}&limit=${limit}&project_order_id=${project_order_id}` ,method: 'GET' })
+}
 
+// 删除订单笔记
 const removeNote = (id) => {
   return request({ url: `/project-order-note/del?id=${id}` ,method: 'DELETE' });
+}
+
+// 转移项目
+const handOver = (id,recv_user_id) => {
+  return request({ url: '/project-order/hand_over' ,method: 'PATCH' ,data :{ id,recv_user_id } });
 }
 
 
@@ -140,6 +174,8 @@ module.exports = {
   remove,
   getInfoById,
   getList,
+  getCList,
+  handOver,
   updateProjectOrderStep,
   getEmployees,
   getCustomers,
@@ -160,5 +196,8 @@ module.exports = {
   removeCustomer,
   addNote,
   getEmployeeNote,
-  removeNote
+  getCustomerNote,
+  removeNote,
+  updateEmployeeVisibleState,
+  updateCustomerVisibleState
 }

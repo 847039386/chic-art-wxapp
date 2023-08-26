@@ -1,0 +1,35 @@
+<!--templates/client/project_order/employees/index.wxml-->
+<view class="cu-bar bg-white solid-bottom">
+  <view class="action">
+    <text class="cuIcon-titles text-blue"></text>
+    <text>订单员工</text>
+  </view>
+</view>
+<view wx:if="{{ !loading && projectOrderEmployees.length == 0 }}" class="margin-tb-sm padding-top-lg padding-bottom-xl">
+  <view class="flex justify-center text-xsl">
+    <view class="cuIcon-searchlist text-gray icon"></view>
+  </view>
+  <view class="flex justify-center padding-top-sm">
+    <view class="text-gray text">暂无员工</view>
+  </view>
+</view>
+<!-- 加载中 -->
+<view class="cu-load loading" wx:if="{{loading}}" ></view>
+<!-- 内容 -->
+<block wx:if="{{!loading}}">
+  <view class="cu-list menu-avatar no-padding bg-gray">
+    <view class="cu-item" wx:for="{{ projectOrderEmployees }}" wx:key="_id" data-info="{{item}}" >
+      <view class="cu-avatar radius lg" style="background-image:url({{item.user_id.avatar}});"></view>
+      <view class="content">
+        <view class="text-black">
+          <text class="text-Abc text-xl">{{ item.user_id.name || item.user_id.nickname }}</text>
+        </view>
+        <view class="text-gray text-sm margin-top-xs">
+          <text>{{ item.phone || '无联系方式'}}</text>
+          <text class="text-Abc text-xs text-blue margin-left">{{ item.ce_remark || '普通员工' }}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</block>
+ 

@@ -1,7 +1,9 @@
 {
   "usingComponents": {
-    "UserTabBar": "/components/user-tab-bar/index",
-    "ProjectOrder": "/templates/work/project_order/list/index",
+    "WorkTabBar": "/components/work-tab-bar/index",
+    "ClientTabBar": "/components/client-tab-bar/index",
+    "WorkProjectOrder": "/templates/work/project_order/list/index",
+    "ClientProjectOrder": "/templates/client/project_order/list/index",
     "Home": "/templates/shared/home/index",
     "Company": "/templates/work/company/index"
   }

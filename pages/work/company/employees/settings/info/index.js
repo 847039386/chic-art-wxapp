@@ -12,26 +12,26 @@ Page({
     upAdmLoading:false,
     switchAdminChecked:false,
     localEmployeeGroup:[],
-    remark:null
+    remark:null,
+    identity_type :null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    console.log(options)
     let switchAdminChecked = false;
     let localEmployeeGroup = getLocalEmployeeGroup()
     let id = options.id
     let group_name = options.group_name;
     let identity_type = Number(options.identity_type)
     let remark = options.remark
-    switchAdminChecked = identity_type == 2 ? true : false;
+    switchAdminChecked = identity_type == 1 ? true : false;
     // 获取该用户所在分组，去除掉用户本身分组
     localEmployeeGroup = localEmployeeGroup.filter(function(item) {
       return item !== group_name
     });
-    this.setData({id ,localEmployeeGroup ,switchAdminChecked ,remark})
+    this.setData({id ,localEmployeeGroup ,switchAdminChecked ,remark ,identity_type })
   },
   // 转移到组
   onMoveGroupOk(event){
@@ -67,9 +67,7 @@ Page({
     let identity_type = 0
     this.setData({upAdmLoading :true})
     if(value){
-      identity_type = 2;
-    }else{
-      identity_type = 1
+      identity_type = 1;
     }
     Company.updateEmployeeIdentityType(id,identity_type).catch(() => {
       this.setData({switchAdminChecked : !value })

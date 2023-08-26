@@ -1,5 +1,8 @@
 // templates/project_order/settings/index.js
-const { ProjectOrder } = require('@/api/index');
+const { ProjectOrder ,Company } = require('@/api/index');
+const { getImageUrl } = require('@/utils/util');
+const { getUserInfo } = require('@/utils/auth')
+const app = getApp();
 Component({
   options: {
     addGlobalClass: true
@@ -15,19 +18,23 @@ Component({
     }
   },
   pageLifetimes:{
-    // 当用户设置了订单摄像头某个东西后重返这个页面走这个方法
     show(){
       const id = this.data.id;
       this.getInfo(id);
     }
   },
   data: {
+    CustomBar: app.globalData.CustomBar,
     loading:true,
     id : null,
     errMsg :null,
     delButtonLoading :false,
     isDel:false,
     projectOrder : { },
+    // 转移项目所需要的
+    employeeAdmsModal :false,
+    companyEmployeeAdmsLoading:false,
+    companyEmployeeAdms :[]   // 这里包含了所有公司员工并且是管理的
   },
   methods: {
     getInfo(id){
@@ -86,6 +93,53 @@ Component({
             })
           }
         }
+      })
+    },
+    updateUid(event){
+      // 转移项目，
+      const id = this.data.id;
+      const user_id = event.currentTarget.dataset.user_id;
+      let content = '转移项目无需对方同意，转移后您将退出该订单，是否继续？';
+      wx.showModal({
+        title: '提示',
+        content,
+        complete: (res) => {
+          if (res.confirm) {
+            wx.showLoading({mask:true})
+            ProjectOrder.handOver(id,user_id).then(() => {
+              wx.setStorageSync("needRefresh", true);
+              wx.navigateBack({ delta: 1 })
+            }).finally(() => {
+              wx.hideLoading()
+            })
+          }
+        }
+      })
+    },
+    openEmployeeAdmsModal(){
+      if(this.data.companyEmployeeAdms.length < 1){
+        this.getEmployeeAdms();
+      }
+      this.setData({employeeAdmsModal : true})
+    },
+    closeEmployeeAdmsModal(){
+      this.setData({employeeAdmsModal : false})
+    },
+    getEmployeeAdms(){
+      const userinfo = getUserInfo()
+      const projectOrder = this.data.projectOrder;
+      const company_id = projectOrder.company_id._id;
+      this.setData({companyEmployeeAdmsLoading:true ,companyEmployeeAdms:[]})
+      Company.getEmployees(company_id).then((result) => {
+        const data = result.data;
+        let list = data.list;
+        list = list.filter((item) => {
+          item.user_id.avatar = getImageUrl(item.user_id.avatar)
+          return item.identity_type > 0 && item.user_id._id != userinfo.user_id;
+        })
+        this.setData({companyEmployeeAdms :list})
+      }).finally(() => {
+        this.setData({ companyEmployeeAdmsLoading :false })
       })
     }
   }

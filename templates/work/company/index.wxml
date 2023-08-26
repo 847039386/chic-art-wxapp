@@ -2,7 +2,7 @@
 <cu-custom bgColor="bg-white">
   <view slot="content"></view>
 </cu-custom>
-
+<!--别人的公司-->
 <view class="cu-bar bg-white solid-bottom">
     <view class="action">
       <text class="cuIcon-titles text-blue "></text>
@@ -21,7 +21,28 @@ refresher-default-style="black"
 refresher-triggered="{{refreshLoading}}"  
 bindrefresherrefresh="_onRefresh"
 bindscrolltolower='_onLoadmore'>
-  <!-- 列表内容 -->
+  <!--我的公司-->  
+  <view class="bg-white" wx:if="{{myCompany}}">
+    <view class="padding-sm flex flex-wrap" wx:key="_id" bindtap="toCompanyInfoPage" data-id="{{myCompany._id}}" >
+      <view class="cu-avatar xl radius basis-xs" style="background-image:url({{myCompany.logo}});"></view>
+      <view class="padding-xs text-xl text-black basis-xl">
+        <view class="flex justify-between margin-left-xs">
+          <view>
+            <text class="text-xl text-bold ">{{ myCompany.name }}</text>
+            <text class="text-df margin-left-sm text-gray">创始人</text>
+          </view>
+          <view>
+            <view wx:if="{{myCompany.audit_state == 1}}" class="text-df text-yellow">审核中</view>
+            <view wx:if="{{myCompany.audit_state == 2}}" class="text-df text-red">审核未通过</view>
+          </view>
+        </view>
+        <view class="padding-top-sm margin-left-xs">
+          <view class="cu-tag bg-blue light radius" wx:for="{{myCompany.tag_ids}}" wx:key="_id">{{ item.name }}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!--我的加入-->  
   <view class="bg-white">
     <view class="padding-sm flex flex-wrap" wx:key="_id" wx:for="{{companyList}}" bindtap="toCompanyInfoPage" data-id="{{item._id}}" >
       <view class="cu-avatar xl radius basis-xs" style="background-image:url({{item.logo}});"></view>
@@ -34,7 +55,8 @@ bindscrolltolower='_onLoadmore'>
           <view>
             <view wx:if="{{item.audit_state == 1}}" class="text-df text-yellow">审核中</view>
             <view wx:if="{{item.audit_state == 2}}" class="text-df text-red">审核未通过</view>
-            <view wx:if="{{item.company_identity_type && item.company_identity_type == 2}}" class="text-df text-blue">管理员</view>
+            <view wx:if="{{item.company_identity_type == 1}}" class="text-df text-blue">管理员</view>
+            <view wx:if="{{item.company_identity_type == 2}}" class="text-df text-blue">创始人</view>
           </view>
         </view>
         <view class="padding-top-sm margin-left-xs">

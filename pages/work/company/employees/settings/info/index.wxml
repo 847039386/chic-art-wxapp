@@ -1,7 +1,6 @@
 <!--pages/company/employees/settings/index.wxml-->
-<!--pages/user/update_info/index.wxml-->
 <cu-custom bgColor="bg-white" isBack="{{true}}">
-  <view slot="content">个人信息</view>
+  <!-- <view slot="content"></view> -->
 </cu-custom>
 
 <view class="cu-list menu">
@@ -14,7 +13,7 @@
     </view>
   </view>
   <!-- 设置管理 -->
-  <view class="cu-item">
+  <view class="cu-item" wx:if="{{identity_type != 2 }}" >
     <view class="content padding-tb-sm">
       <view>设置管理</view>
       <view class="text-gray text-sm">管理员可以创建订单</view>
@@ -23,7 +22,6 @@
       <switch disabled="{{ upAdmLoading }}" checked="{{ switchAdminChecked }}" class="blue" bindchange="switchAdmin"></switch>
     </view>
   </view>
-
 <!-- 移动分组 -->
   <picker disabled="{{ localEmployeeGroup.length < 1}}" class="mov_group_pick bg-white" bindchange="onMoveGroupOk" range="{{localEmployeeGroup}}">
     <view class="margin-top-sm bg-white">
@@ -31,7 +29,7 @@
     </view>
   </picker>
   <!-- 删除员工 -->
-  <view class="cu-item margin-top-sm" bindtap="removeEmployee">
+  <view wx:if="{{identity_type != 2 }}" class="cu-item margin-top-sm" bindtap="removeEmployee">
     <view class="content text-center">
       <text class="text-red ">删除员工</text>
     </view>

@@ -3,10 +3,6 @@
   <view class="action">
     <text class="cuIcon-titles text-blue"></text>
     <text>订单员工</text>
-    <text wx:if="{{isAdm}}" class="margin-left-sm text-sm text-gray margin-top-xs">
-      <text class="cuIcon-infofill"></text>
-      <text>左滑可删除员工</text>
-    </text>
   </view>
   <view class="action" wx:if="{{isAdm}}">
     <button bindtap="openEmployeeModal" class="cu-btn sm bg-blue">
@@ -22,19 +18,16 @@
 <block wx:if="{{!loading}}">
   <view class="cu-list menu-avatar no-padding bg-gray">
     <!--index:0是项目负责人也就是自己不允许删除 -->
-    <view bindtouchstart="ListTouchStart" bindtouchmove="ListTouchMove" bindtouchend="ListTouchEnd" class="cu-item {{ (modalName == 'move-box-' + index) && index!= 0 && isAdm ? 'move-cur': '' }}" wx:for="{{ projectOrderEmployees }}" wx:key="_id"  wx:for-item="item" data-target="move-box-{{index}}">
-      <view class="cu-avatar radius lg" style="background-image:url({{item.avatar}});"></view>
+    <view class="cu-item" wx:for="{{ projectOrderEmployees }}" bindtap="toEmployeeManage" wx:key="_id" data-info="{{item}}" >
+      <view class="cu-avatar radius lg" style="background-image:url({{item.user_id.avatar}});"></view>
       <view class="content">
         <view class="text-black">
-          <text class="text-Abc text-xl">{{ item.name || item.nickname }}</text>
+          <text class="text-Abc text-xl">{{ item.user_id.name || item.user_id.nickname }}</text>
         </view>
         <view class="text-gray text-sm margin-top-xs">
           <text>{{ item.phone || '无联系方式'}}</text>
           <text class="text-Abc text-xs text-blue margin-left">{{ item.ce_remark || '普通员工' }}</text>
         </view>
-      </view>
-      <view class="move">
-        <view class="bg-red" bindtap="removeProjectOrderEmployee" data-id="{{item.project_order_employee_id}}">删除</view>
       </view>
     </view>
   </view>
@@ -63,7 +56,7 @@
       </view>
       <view class="cu-list menu-avatar no-padding bg-gray" wx:if="{{group.checked}}">
         <view wx:for="{{ group.list }}" wx:key="_id"  wx:for-item="item" wx:for-index="list_index" >
-          <view class="padding-xs cf cu-item {{ item.checked ? 'bg-blue light':'' }}" data-group_index="{{group_index}}" data-list_index="{{list_index}}" data-user_id="{{item.user_id._id}}" data-id="{{item._id}}" bindtap="addEmployee">
+          <view class="padding-xs cf cu-item {{ item.checked ? 'bg-blue light':'' }}" data-group_index="{{group_index}}" data-list_index="{{list_index}}" data-user_id="{{item.user_id._id}}" data-id="{{item._id}}" catchtap="addEmployee">
             <view class="cu-avatar radius fl" style="background-image:url({{item.user_id.avatar}});"></view>
             <view style="height: 64rpx;line-height: 64rpx;" class="content margin-left-sm fl">{{ item.user_id.name || item.user_id.nickname }}</view>
             <view style="height: 64rpx;line-height: 64rpx;" class="content margin-left-sm text-xs fr {{ item.checked ? 'text-grey' :'text-gray'}}">{{ item.remark || '普通员工' }}</view>

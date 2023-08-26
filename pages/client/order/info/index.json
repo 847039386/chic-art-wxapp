@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "InfoTemplate": "/templates/client/project_order/info/index",
+    "EmployeesTemplate": "/templates/client/project_order/employees/index",
+    "CustomersTemplate": "/templates/client/project_order/customers/index",
+    "CamerasTemplate": "/templates/client/project_order/cameras/list/index"
+  }
+}

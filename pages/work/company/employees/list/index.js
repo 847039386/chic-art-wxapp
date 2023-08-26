@@ -8,7 +8,6 @@ Page({
   data: {
     isAllowOperation:false,
     loading:false,
-    company:null,
     company_id:null,
     employeeDatas :[],    // 已经通过审核的员工
     formatEmployeeDatas : [], // 格式化通过审核员工数据
@@ -42,15 +41,12 @@ Page({
       if(company.user_id._id == uid){
         this.setData({isAllowOperation :true})
       }
-      if(company.user_id){
-        company.user_id.avatar = getImageUrl(company.user_id.avatar)
-      }
       if(employeeList.length > 0){
         employeeList.map((element) => {
           if(element.user_id && element.user_id.avatar){
             element.user_id.avatar = getImageUrl(element.user_id.avatar)
           }
-          if(element.identity_type == 0){
+          if(element.audit_state == 0){
             // 0 是正在申请的人
             auditEmployeeDatas.push(element)
           } else {
@@ -63,7 +59,7 @@ Page({
       }
       // 格式化数据
       this.getFormatemployeeDatas(remoteEmployeeGroup,employeeDatas)
-      this.setData({auditEmployeeDatas ,remoteEmployeeGroup ,employeeDatas ,company})
+      this.setData({auditEmployeeDatas ,remoteEmployeeGroup ,employeeDatas })
     }).finally(() => {
       this.setData({ loading :false})
       if(callback){
@@ -233,10 +229,11 @@ Page({
   },
   toEmployeeSettingsPage(event){
     let isAllowOperation = this.data.isAllowOperation
+    const identity_type = event.currentTarget.dataset.identity_type;
     if(isAllowOperation){
       const id = event.currentTarget.dataset.id;
       const group_name = event.currentTarget.dataset.group_name;
-      const identity_type = event.currentTarget.dataset.identity_type
+      
       const remark = event.currentTarget.dataset.remark
       wx.navigateTo({
         url: `/pages/work/company/employees/settings/info/index?id=${id}&group_name=${group_name}&identity_type=${identity_type}&remark=${remark}`,

@@ -3,21 +3,17 @@
   <!-- <view slot="content"></view> -->
 </cu-custom>
 
-<form class="">
-  <view class="padding-lg">
-    <view class="flex justify-center">
-        <view class="text-xxl text-bold text-black">修改备注</view>
-    </view>
+<form>
+  <view>
     <!-- 标签选择 -->
-    <view class="cu-form-group margin-top-xl" style="border-top: 1rpx solid #EEE">
+    <view class="cu-form-group" style="border-top: 1rpx solid #EEE">
       <view class="title text-bold text-black">备注</view>
       <input value="{{remark}}" bindinput="handleRemarkInput" placeholder="请输入备注"></input>
     </view>
-    <view class="text-grey margin-top-sm">备注长度应是1-16位，不宜过长，备注将在员工列表和项目订单员工列表中展现，方便客户联系负责人，请起一些与职务相关的备注例如：工人、木工、电工</view>
-
+    <view class="text-grey padding">备注长度应是1-16位，不宜过长，备注将在员工列表和项目订单员工列表中展现，方便客户联系负责人，请起一些与职务相关的备注例如：工人、木工、电工</view>
     <!-- 修改按钮 -->
-    <view class="flex justify-center margin-top-xl" bindtap="updateRemark">
-      <button loading="{{loading}}" disabled="{{loading}}" class="cu-btn xxl" style="background-color:#1AAD19;color:#FFF;width: 50vw;">确定</button>
+    <view class="padding">
+      <button oading="{{loading}}" disabled="{{loading}}" bindtap="updateRemark" class="cu-btn block bg-green xxl">确定</button>
     </view>
   </view>
 </form>

@@ -1,0 +1,16 @@
+<!--components/user-tab-bar/index.wxml-->
+<view class="cu-tabbar-height"></view>
+<view class="cu-bar tabbar bg-white shadow foot">
+  <view class="action {{ PageCur == 'WorkProjectOrder' ? 'text-blue' : 'text-black' }}" bindtap="NavChange" data-cur="WorkProjectOrder">
+    <view class="{{ PageCur == 'WorkProjectOrder' ? 'cuIcon-formfill' : 'cuIcon-form' }}"></view> 订单
+  </view>
+  <view class="action {{ PageCur == 'Company' ? 'text-blue' : 'text-black' }}" bindtap="NavChange" data-cur="Company">
+    <view class="{{ PageCur == 'Company' ? 'cuIcon-group_fill' : 'cuIcon-group' }}"></view> 公司
+  </view>
+  <view class="action {{ PageCur == 'Message' ? 'text-blue' : 'text-black' }}" bindtap="NavChange" data-cur="Message">
+    <view class="{{ PageCur == 'Message' ? 'cuIcon-commentfill' : 'cuIcon-comment' }}"></view> 消息
+  </view>
+  <view class="action {{ PageCur == 'Home' ? 'text-blue' : 'text-black' }}" bindtap="NavChange" data-cur="Home">
+    <view class="{{ PageCur == 'Home' ? 'cuIcon-myfill' : 'cuIcon-my' }}"></view> 我
+  </view>
+</view>

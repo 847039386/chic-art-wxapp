@@ -2,14 +2,22 @@
 <!--加载显示-->
 <view class="cu-load loading" wx:if="{{loading}}" ></view>
 <!--无数据显示-->
-<view class="margin-tb-sm padding-top-lg padding-bottom-xl" wx:if="{{ (!loading && customerList.length == 0 && auditCustomerList.length == 0) || !loading && !isAdm && customerList.length == 0 }}">
-  <view class="flex justify-center text-xsl">
-    <view class="cuIcon-searchlist text-gray icon"></view>
+<block wx:if="{{ (!loading && customerList.length == 0 && auditCustomerList.length == 0) || !loading && !isAdm && customerList.length == 0 }}">
+  <view class="cu-bar bg-white solid-bottom">
+    <view class="action">
+      <text class="cuIcon-titles text-blue"></text>
+      <text>订单客户</text>
+    </view>
   </view>
-  <view class="flex justify-center padding-top-sm">
-    <view class="text-gray text">暂无客户</view>
+  <view class="margin-tb-sm padding-top-lg padding-bottom-xl">
+    <view class="flex justify-center text-xsl">
+      <view class="cuIcon-searchlist text-gray icon"></view>
+    </view>
+    <view class="flex justify-center padding-top-sm">
+      <view class="text-gray text">暂无客户</view>
+    </view>
   </view>
-</view>
+</block>
 <!--未通过审核的用户-->
 <block wx:if="{{auditCustomerList.length > 0 && isAdm}}">
   <view class="cu-bar bg-white solid-bottom">
@@ -44,7 +52,7 @@
     </view>
   </view>
   <view class="cu-list menu-avatar no-padding bg-gray">
-    <view bindtouchstart="ListTouchStart" bindtouchmove="ListTouchMove" bindtouchend="ListTouchEnd" class="cu-item {{ (modalName == 'move-box-' + index) && isAdm ? 'move-cur': '' }}" bindtap="toEmployeeSettingsPage" wx:for="{{ customerList }}" wx:key="_id"  wx:for-item="item" data-target="move-box-{{index}}">
+    <view class="cu-item" bindtap="toCustomerManage" wx:for="{{ customerList }}" wx:key="_id" data-id="{{item._id}}" data-visible_state="{{item.visible_state}}">
       <view class="cu-avatar radius lg" style="background-image:url({{item.user_id.avatar}});"></view>
       <view class="content">
         <view class="text-black">
@@ -53,9 +61,6 @@
         <view class="text-gray text-sm margin-top-xs">
           <text>{{ item.user_id.phone || '无联系方式'}}</text>
         </view>
-      </view>
-      <view class="move">
-        <view class="bg-red" bindtap="removeProjectOrderCustomer" data-id="{{item._id}}">删除</view>
       </view>
     </view>
   </view>

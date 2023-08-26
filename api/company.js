@@ -104,6 +104,12 @@ const getCamerasAssignList = (id,page,limit) => {
   limit = limit || 999
   return request({ url: `/company-camera/list_by_companyid_assign?company_id=${id}&page=${page}&limit=${limit}` ,method: 'GET' })
 }
+
+// 获取和公司所有有关系的订单
+const getProjectOrderList = (data) => {
+  return request({ url: `/project-order/list_by_companyid` ,method: 'POST' , data })
+}
+
 module.exports = {
   create,
   getList,
@@ -125,5 +131,6 @@ module.exports = {
   updateName,
   updateDescription,
   updateTag,
-  updateAddress
+  updateAddress,
+  getProjectOrderList
 }

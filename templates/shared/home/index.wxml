@@ -11,7 +11,10 @@
     </view>
     <view class="padding-xs text-xxl text-black margin-left-sm">
       <view>{{nickname || '无昵称'}}<text class="text-gray text-df"></text></view>
-      <view class="text-gray text-df padding-top-sm">用户模式</view>
+      <view class="text-gray text-df padding-top-sm">
+        <text wx:if="{{APP_MODE == 'WORK'}}">工作模式</text>
+        <text wx:if="{{APP_MODE == 'CLIENT'}}">客户模式</text>
+      </view>
     </view>
   </view>
 </view>
@@ -26,13 +29,14 @@
 </view>
 
 <view class="cu-list menu">
-  <view class="cu-item">
+  <view class="cu-item" bindtap="updateAppMode">
     <view class="content">
       <text class="cuIcon-repeal text-green" style="font-size: 38rpx;"></text>
-      <text class="text-black text-xl">切换工作端</text>
+      <text wx:if="{{APP_MODE == 'WORK'}}" class="text-black text-xl">切换客户端</text>
+      <text wx:if="{{APP_MODE == 'CLIENT'}}" class="text-black text-xl">切换工作端</text>
     </view>
   </view>
-  <view class="cu-item" bindtap="toMyProgressTemplatesSettings">
+  <view wx:if="{{APP_MODE == 'WORK'}}" class="cu-item" bindtap="toMyProgressTemplatesSettings">
     <view class="content">
       <text class="cuIcon-tag text-red" style="font-size: 38rpx;"></text>
       <text class="text-black text-xl">我的进度模板</text>
@@ -40,7 +44,7 @@
   </view>
 </view>
 
-<view class="cu-list menu margin-top">
+<view wx:if="{{APP_MODE == 'WORK'}}" class="cu-list menu margin-top">
   <view class="cu-item">
     <view class="content">
       <text class="cuIcon-service text-orange text-xl" style="font-size: 38rpx;"></text>

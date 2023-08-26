@@ -40,13 +40,18 @@
     <view class="cu-list grid col-5 no-border text-black margin-lr-sm radius margin-top">
       <!-- 创建订单 -->
       <view class="cu-item-my" wx:if="{{isCSR || isADM}}" bindtap="toCompanyOrderPage">
-        <view class="cuIcon-form text-blue text-shadow" style="font-size: 56rpx;"></view>
+        <view class="cuIcon-edit text-blue text-shadow" style="font-size: 56rpx;"></view>
         <text class="margin-top-xs">创建订单</text>
       </view>
       <!-- 申请监控 -->
-      <view class="cu-item-my"  bindtap="toCompanyCamerasPage">
+      <view class="cu-item-my" wx:if="{{isCSR || isADM}}" bindtap="toCompanyCamerasPage">
         <view class="cuIcon-record text-blue text-shadow" style="font-size: 56rpx;"></view>
         <text class="margin-top-xs">监控管理</text>
+      </view>
+      <!-- 申请监控 -->
+      <view class="cu-item-my" wx:if="{{isCSR}}" bindtap="toCompanyOrderListPage">
+        <view class="cuIcon-form text-blue text-shadow" style="font-size: 56rpx;"></view>
+        <text class="margin-top-xs">公司订单</text>
       </view>
       <!-- 员工管理 -->
       <view class="cu-item-my"  bindtap="toCompanyEmployeesPage">

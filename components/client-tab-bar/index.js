@@ -1,19 +1,11 @@
-// components/user-tab-bar/index.js
+// components/client-tab-bar/index.js
 Component({
   options: {
     addGlobalClass: true
   },
-
-  /**
-   * 组件的初始数据
-   */
   data: {
-    PageCur: 'ProjectOrder'
+    PageCur: 'ClientProjectOrder'
   },
-
-  /**
-   * 组件的方法列表
-   */
   methods: {
     NavChange(e) {
       let PageCur = e.currentTarget.dataset.cur
@@ -22,3 +14,4 @@ Component({
     },
   }
 })
+

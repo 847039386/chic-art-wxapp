@@ -36,7 +36,13 @@
     "pages/work/order/note/create/index",
     "pages/work/order/note/info/index",
     "pages/work/order/settings/update_customer/index",
-    "pages/work/order/settings/update_phone/index"
+    "pages/work/order/settings/update_phone/index",
+    "pages/work/order/employee/update_info/index",
+    "pages/work/order/customer/update_info/index",
+    "pages/work/company/order_list/index",
+    "pages/client/order/info/index",
+    "pages/client/order/note/list/index",
+    "pages/client/order/note/info/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

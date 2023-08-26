@@ -55,7 +55,7 @@ Page({
             this.setData({remark :utc.remark })
           }
           // 2就是管理员
-          if(identity_type == 2){
+          if(identity_type == 1){
             this.setData({isADM : true })
           }
         } catch (error) {}
@@ -67,7 +67,7 @@ Page({
   },
   // 去往员工管理页面
   toCompanyEmployeesPage(){
-    let company_id = this.data.company_id
+    let company_id = this.data.company_id;
     wx.navigateTo({
       url: `/pages/work/company/employees/list/index?id=${company_id}`,
     })
@@ -77,6 +77,13 @@ Page({
     let company_id = this.data.company_id
     wx.navigateTo({
       url: `/pages/work/company/camera/list/index?id=${company_id}`,
+    })
+  },
+  // 公司订单列表
+  toCompanyOrderListPage(){
+    let company_id = this.data.company_id
+    wx.navigateTo({
+      url: `/pages/work/company/order_list/index?id=${company_id}`,
     })
   },
   // 去往公司设置页面

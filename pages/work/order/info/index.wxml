@@ -4,7 +4,7 @@
 </cu-custom>
 
 <InfoTemplate isAdm ="{{isAdm}}" aid="{{id}}"  wx:if="{{PageCur=='InfoTemplate' && id }}"></InfoTemplate>
-<EmployeesTemplate cid="{{company_id}}" aid="{{id}}" wx:if="{{PageCur=='EmployeesTemplate' && id}}"></EmployeesTemplate>
+<EmployeesTemplate isAdm ="{{isAdm}}" cid="{{company_id}}" aid="{{id}}" wx:if="{{PageCur=='EmployeesTemplate' && id}}"></EmployeesTemplate>
 <CustomersTemplate isAdm ="{{isAdm}}" aid="{{id}}" wx:if="{{PageCur=='CustomersTemplate' && id}}"></CustomersTemplate>
 <!-- 只有项目负责人才可以管理项目监控 -->
 <AdmCamerasTemplate cid="{{company_id}}" aid="{{id}}" wx:if="{{PageCur=='CamerasTemplate' && id && isAdm}}"></AdmCamerasTemplate>

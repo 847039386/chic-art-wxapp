@@ -26,23 +26,6 @@
         </view>
       </view>
     </block>
-    <!-- 创始人-->
-    <block wx:if="{{company}}">
-      <view class="padding bg-white">创始人</view>
-      <view class="cu-list menu-avatar no-padding bg-gray">
-        <view class="cu-item">
-          <view class="cu-avatar radius lg" style="background-image:url({{company.user_id.avatar}});"></view>
-          <view class="content">
-            <view class="text-black">
-              <text class="text-Abc text-xl">{{ company.user_id.name || company.user_id.nickname }}</text>
-            </view>
-            <view class="text-gray text-sm margin-top-xs">
-              {{ company.user_id.phone || '无联系方式'}}
-            </view>
-          </view>
-        </view>
-      </view>
-    </block>
     <!-- 员工列表 -->
     <block wx:for="{{ formatEmployeeDatas }}" wx:for-item="group" wx:key="index">
       <view class="padding cf bg-white"  bindtap="toggleCell" data-index="{{ index }}">

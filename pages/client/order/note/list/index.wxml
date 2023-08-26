@@ -1,0 +1,35 @@
+<!--pages/client/order/note/list/index.wxml-->
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+  <!-- <view slot="content"></view> -->
+</cu-custom>
+<!-- 添加和标题 -->
+<view class="cu-bar bg-white solid-bottom">
+  <view class="action">
+    <text class="cuIcon-titles text-blue"></text>
+    <text>项目笔记</text>
+  </view>
+</view>
+<!-- 列表模板 -->
+<scroll-view scroll-y
+style="height: {{contentH}}rpx;" 
+refresher-enabled="{{true}}"  
+refresher-default-style="black" 
+refresher-triggered="{{refreshLoading}}"  
+bindrefresherrefresh="_onRefresh"
+bindscrolltolower='_onLoadmore'>
+  <view wx:for="{{noteList}}" wx:key="index" class="cu-card article margin-top margin-lr">
+    <view class="cu-item shadow padding" bindtap="toInfoPage" data-create_time="{{item.create_time}}"  data-title="{{item.title}}" data-content="{{item.content}}">
+      <view style="overflow: hidden;white-space: nowrap;text-overflow: ellipsis;" class="margin-bottom-xs text-lg text-bold">{{ item.title }}</view>
+      <view>
+        <view class="text-sm margin-bottom-xs cf">
+          <view class="text-gray fl">{{ item.create_time }}</view>
+        </view>
+        <view class="text-grey my-piano-text">{{item.content}}</view>
+      </view>
+    </view>
+  </view>
+  <!--加载--> 
+  <view class="cu-load loading" wx:if="{{moreLoading}}"></view>
+  <view class="cu-load text-gray" wx:if="{{!isMore}}">暂无更多</view>
+</scroll-view>
+

@@ -14,6 +14,14 @@
 <block wx:if="{{!errMsg && !loading && projectOrder }}">
   <!-- 信息列表 -->
   <view class="cu-list menu" >
+    <view class="cu-item" bindtap="openEmployeeAdmsModal">
+      <view class="content">
+        <text class="">负责人</text>
+      </view>
+      <view class="action">
+        <text class="text-grey text-sm">{{ projectOrder.user_id.name }}</text>
+      </view>
+    </view>
     <view class="cu-item arrow" bindtap="toUpdateNamePage">
       <view class="content">
         <text class="">项目名称</text>
@@ -61,3 +69,32 @@
     <button loading="{{delButtonLoading}}" disabled="{{isDel || delButtonLoading}}" bindtap="removeOrder" class="cu-btn block bg-red xxl">删除订单</button>
   </view>
 </block>
+
+
+<!-- 员工列表侧边抽屉 -->
+<view class="cu-modal drawer-modal justify-start {{ employeeAdmsModal ? 'show' : ''}}" bindtap="closeEmployeeAdmsModal">
+  <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;height:calc(100vh - {{CustomBar}}px)">
+    <view class="cu-bar bg-white solid-bottom">
+      <view class="action">
+        <text class="cuIcon-titles text-blue"></text>
+        <text>管理</text>
+        <text class="margin-left-sm text-sm text-gray margin-top-xs">
+          <text class="cuIcon-infofill"></text>
+          <text>点击后即可转移项目</text>
+        </text>
+      </view>
+    </view>
+    <block wx:for="{{ companyEmployeeAdms }}" wx:key="index" >
+      <view class="padding-xs cf cu-item" catchtap="updateUid" data-user_id="{{item.user_id._id}}">
+        <view class="cu-avatar radius fl" style="background-image:url({{item.user_id.avatar}});"></view>
+        <view style="height: 64rpx;line-height: 64rpx;" class="content margin-left-sm fl">{{ item.user_id.name || item.user_id.nickname }}</view>
+        <view style="height: 64rpx;line-height: 64rpx;" class="content margin-left-sm text-xs fr text-blue">
+          <text wx:if="{{item.identity_type == 2}}">创始人</text>
+          <text wx:if="{{item.identity_type == 1}}">管理</text>
+        </view>
+      </view>
+    </block>
+    <!-- 加载 -->
+    <view class="cu-load loading" wx:if="{{companyEmployeeAdmsLoading}}"></view>
+  </view>
+</view>
