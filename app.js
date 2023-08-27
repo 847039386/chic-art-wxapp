@@ -1,4 +1,5 @@
 const { verifyToken } = require('@/utils/auth')
+const { Message } = require('@/api/index')
 App({
   onLaunch() {
     wx.getSystemInfo({
@@ -14,6 +15,10 @@ App({
       wx.redirectTo({
         url: '/pages/shared/login/index',
       })
+    }else{
+      // Message.getNotReadCount().then((result) => {
+      //   this.globalData.unread_count = result.data;
+      // })
     }
     
   },

@@ -58,7 +58,7 @@ Page({
     const content = event.currentTarget.dataset.content;
     const create_time = event.currentTarget.dataset.create_time;
     wx.navigateTo({
-      url: `/pages/client/order/note/info/index?&title=${title}&content=${content}&create_time=${create_time}`,
+      url: `/pages/client/order/note/info/index?title=${title}&content=${content}&create_time=${create_time}`,
     })
   },
   getList(page){

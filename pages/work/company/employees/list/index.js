@@ -90,7 +90,7 @@ Page({
   auditNotEmployee(e){
     let id = e.currentTarget.dataset.id
     wx.showLoading({mask:true})
-    Company.removeEmployee(id).then(() =>{
+    Company.auditEmployeeNot(id).then(() =>{
       let index = e.currentTarget.dataset.index
       // 审核通过后在审核数组删除这条数据
       let auditEmployeeDatas = this.data.auditEmployeeDatas

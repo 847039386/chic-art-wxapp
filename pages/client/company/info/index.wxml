@@ -1,0 +1,31 @@
+<!--pages/client/company/info/index.wxml-->
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+  <!-- <view slot="content"></view> -->
+</cu-custom>
+<!--加载-->
+<view class="cu-load loading" wx:if="{{loading}}"></view>
+<view wx:if="{{!loading}}">
+  <view>
+    <view class="padding-sm flex flex-wrap"  >
+      <view class="cu-avatar xl radius basis-xs" style="background-image:url({{companyData.logo}});"></view>
+      <view class="padding-xs text-xl text-black basis-xl">
+        <view class="flex justify-between margin-left-xs">
+          <view>
+            <text class="text-xl text-bold ">{{ companyData.name }}</text>
+          </view>
+        </view>
+        <view class="padding-top-sm margin-left-xs">
+          <view class="cu-tag bg-blue light radius" wx:for="{{companyData.tag_ids}}" wx:key="_id">{{ item.name }}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="text-df text-grey padding-sm">
+      <text class="cuIcon-locationfill text-orange margin-right-xs"></text>
+      <text>{{ companyData.address }}</text>
+    </view>
+  <view class="padding-sm">
+    <view class="text-df text-grey" >{{ companyData.description }}</view>
+  </view>
+</view>
+

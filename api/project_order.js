@@ -89,6 +89,11 @@ const auditCustomer = (id) => {
   return request({ url: `/project-order-customer/audit_ok?id=${id}` ,method: 'PATCH' })
 }
 
+// 审核通过项目订单的客户
+const auditNotCustomer = (id) => {
+  return request({ url: `/project-order-customer/audit_not?id=${id}` ,method: 'DELETE' })
+}
+
 // 根据项目订单ID获取它所有的监控
 const getCameras = (project_order_id) => {
   return request({ url: `/project-order-camera/list_by_projectorderid?project_order_id=${project_order_id}` ,method: 'GET' })
@@ -180,6 +185,7 @@ module.exports = {
   getEmployees,
   getCustomers,
   auditCustomer,
+  auditNotCustomer,
   getCameras,
   addCamera,
   getCameraById,

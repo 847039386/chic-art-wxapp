@@ -1,0 +1,38 @@
+<!--templates/client/company/index.wxml-->
+<cu-custom bgColor="bg-white">
+  <view slot="content"></view>
+</cu-custom>
+<view class="cu-bar bg-white solid-bottom">
+    <view class="action">
+      <text class="cuIcon-titles text-blue "></text>
+      <text>公司列表</text>
+    </view>
+</view>
+<!-- 公司列表 -->
+<scroll-view scroll-y 
+style="height: {{contentH}}rpx;" 
+refresher-enabled="{{true}}"  
+refresher-default-style="black" 
+refresher-triggered="{{refreshLoading}}"  
+bindrefresherrefresh="_onRefresh"
+bindscrolltolower='_onLoadmore'>
+  <!--客户端公司列表-->  
+  <view class="bg-white">
+    <view class="padding-sm flex flex-wrap" wx:key="_id" wx:for="{{companyList}}" bindtap="toCompanyInfoPage" data-id="{{item._id}}" >
+      <view class="cu-avatar xl radius basis-xs" style="background-image:url({{item.logo}});"></view>
+      <view class="padding-xs text-xl text-black basis-xl">
+        <view class="flex justify-between margin-left-xs">
+          <view>
+            <text class="text-xl text-bold ">{{ item.name }}</text>
+          </view>
+        </view>
+        <view class="padding-top-sm margin-left-xs">
+          <view class="cu-tag bg-blue light radius" wx:for="{{item.tag_ids}}" wx:key="_id">{{ item.name }}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 下拉翻页loading -->
+  <view class="cu-load loading" wx:if="{{moreLoading}}"></view>
+  <view class="cu-load text-gray" wx:if="{{!isMore}}">暂无更多</view>
+</scroll-view>

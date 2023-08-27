@@ -4,7 +4,7 @@ Component({
     addGlobalClass: true
   },
   data: {
-    PageCur: 'ClientProjectOrder'
+    PageCur: 'ClientProjectOrder',
   },
   methods: {
     NavChange(e) {

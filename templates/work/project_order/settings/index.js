@@ -99,7 +99,7 @@ Component({
       // 转移项目，
       const id = this.data.id;
       const user_id = event.currentTarget.dataset.user_id;
-      let content = '转移项目无需对方同意，转移后您将退出该订单，是否继续？';
+      let content = '转移项目无需对方同意，是否继续？';
       wx.showModal({
         title: '提示',
         content,

@@ -42,7 +42,9 @@
     "pages/work/company/order_list/index",
     "pages/client/order/info/index",
     "pages/client/order/note/list/index",
-    "pages/client/order/note/info/index"
+    "pages/client/order/note/info/index",
+    "pages/client/company/info/index",
+    "pages/shared/message/info/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

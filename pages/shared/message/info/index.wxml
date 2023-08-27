@@ -1,0 +1,19 @@
+<!--pages/shared/message/info/index.wxml-->
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+  <!-- <view slot="content"></view> -->
+</cu-custom>
+
+<block>
+  <view class="padding-sm ">
+    <text class="text-xxl text-bold text-black">{{title}}</text>
+  </view>
+
+  <view class="flex justify-between margin-top-xs">
+    <view class="flex padding-left-sm">
+      <view>
+        <text>{{create_time}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="padding-sm text-lg margin-top-sm">{{content}}</view>
+</block>

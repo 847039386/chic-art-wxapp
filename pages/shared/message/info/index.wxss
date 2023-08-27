@@ -1,0 +1,4 @@
+/* pages/shared/message/info/index.wxss */
+page{
+  background-color: #FFF;
+}

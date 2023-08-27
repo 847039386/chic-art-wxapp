@@ -55,6 +55,11 @@ const auditEmployeeOk = (id) => {
   return request({ url: `/company-employee/audit_ok?id=${id}` ,method: 'PATCH' })
 }
 
+// 公司员工申请拒绝
+const auditEmployeeNot = (id) => {
+  return request({ url: `/company-employee/audit_not?id=${id}` ,method: 'DELETE' })
+}
+
 // 修改公司员工组名称
 const updateEmployeeGroupName = (id ,group_name) => {
   return request({ url: `/company-employee/up_group_name` ,method: 'PATCH' ,data :{ id ,group_name } })
@@ -89,6 +94,12 @@ const getList = (page) => {
   return request({ url: `/company-employee/list_by_userid?page=${page}&limit=${limit}` ,method: 'GET' })
 }
 
+// 客户端获取所有，包括审核通过和未被封禁的
+const getCList = (page) => {
+  let data = { state :0 ,audit_state:0 ,page , limit :10 }
+  return request({ url: `/company/list` ,method: 'POST' ,data })
+}
+
 // 获取公司的摄像头
 const getCameras = (id,page,limit) => {
   limit = limit || 10
@@ -113,11 +124,13 @@ const getProjectOrderList = (data) => {
 module.exports = {
   create,
   getList,
+  getCList,
   getUser,
   getInfo,
   addEmployee,
   getEmployees,
   auditEmployeeOk,
+  auditEmployeeNot,
   removeEmployee,
   updateEmployeeGroupName,
   updateAllEmployeeGroupName,

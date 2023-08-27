@@ -6,9 +6,10 @@
 <!--客户端-->
 <block wx:if="{{APP_MODE == 'CLIENT'}}">
   <!--模板-->
-  <ClientProjectOrder wx:if="{{PageCur=='ClientProjectOrder' }}"></ClientProjectOrder>
   <Home wx:if="{{PageCur=='Home'}}"></Home>
-  <Company wx:if="{{PageCur=='Company'}}"></Company>
+  <Message wx:if="{{PageCur=='Message'}}"></Message>
+  <ClientProjectOrder wx:if="{{PageCur=='ClientProjectOrder' }}"></ClientProjectOrder>
+  <ClientCompany wx:if="{{PageCur=='ClientCompany'}}"></ClientCompany>
   <!--底部导航-->
   <ClientTabBar bind:NavChange="onSwitchTab"></ClientTabBar>
 </block>
@@ -16,9 +17,10 @@
 <!--工作端-->
 <block wx:if="{{APP_MODE == 'WORK'}}">
   <!--模板-->
-  <WorkProjectOrder wx:if="{{PageCur=='WorkProjectOrder' }}"></WorkProjectOrder>
   <Home wx:if="{{PageCur=='Home'}}"></Home>
-  <Company wx:if="{{PageCur=='Company'}}"></Company>
+  <Message wx:if="{{PageCur=='Message'}}"></Message>
+  <WorkProjectOrder wx:if="{{PageCur=='WorkProjectOrder' }}"></WorkProjectOrder>
+  <WorkCompany wx:if="{{PageCur=='WorkCompany'}}"></WorkCompany>
   <!--底部导航-->
   <WorkTabBar bind:NavChange="onSwitchTab"></WorkTabBar>
 </block>

@@ -88,7 +88,7 @@ Component({
       let id = event.currentTarget.dataset.id;
       let index = event.currentTarget.dataset.index;
       wx.showLoading({mask :true});
-      ProjectOrder.removeCustomer(id).then(() => {
+      ProjectOrder.auditNotCustomer(id).then(() => {
         let auditCustomerList = this.data.auditCustomerList;
         auditCustomerList.splice(index, 1);
         this.setData({ auditCustomerList})

@@ -4,11 +4,13 @@ const File = require('./file')
 const Company = require('./company')
 const ProgressTemplate = require('./progress_template')
 const ProjectOrder = require('./project_order')
+const Message = require('./message')
 
 
 module.exports = {
-  ProjectOrder,
   ProgressTemplate,
+  ProjectOrder,
+  Message,
   Company,
   User,
   Tag,

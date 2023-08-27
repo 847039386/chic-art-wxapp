@@ -7,7 +7,7 @@
   <!-- 设置管理 -->
   <view class="cu-item">
     <view class="content padding-tb-sm">
-      <view>客户可见</view>
+      <view>员工可见</view>
     </view>
     <view class="action">
       <switch disabled="{{ upVisibleLoading }}" checked="{{ switchVisibleChecked }}" class="blue" bindchange="switchVisibleState"></switch>
