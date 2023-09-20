@@ -1,4 +1,5 @@
 const app = getApp()
+const { verifyToken } = require('@/utils/auth')
 const { getAppMode } = require('@/utils/storage/app_mode')
 Page({
   data: {
@@ -6,15 +7,21 @@ Page({
     PageCur: null
   },
   onLoad(){
-    const APP_MODE = getAppMode();
-    if(APP_MODE == 'WORK'){
-      this.setData({ PageCur :'WorkProjectOrder' });
+
+    if(!verifyToken()){
+      wx.redirectTo({
+        url: '/pages/shared/login/index',
+      })
     }else{
-      this.setData({ PageCur : 'ClientProjectOrder'});
+      const APP_MODE = getAppMode();
+      if(APP_MODE == 'WORK'){
+        this.setData({ PageCur :'WorkProjectOrder' });
+      }else{
+        this.setData({ PageCur : 'ClientProjectOrder'});
+      }
+      this.setData({APP_MODE})
     }
-
-
-    this.setData({APP_MODE})
+    
   },
   onShow(){
 

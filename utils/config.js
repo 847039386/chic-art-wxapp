@@ -1,5 +1,5 @@
 
-const  host = 'http://192.168.3.9:3000'
+const  host = 'https://chic.leihuoshenzhen.com'
 
 module.exports = {
   host,

@@ -9,8 +9,8 @@ Page({
    */
   data: {
     wxLoginLoading:false,
-    wxExistLoading: false,
-    loginLoading :false
+    loginLoading :false,
+    mess:'aaaa'
   },
 
   /**
@@ -22,10 +22,12 @@ Page({
 
   onLogin () {
     let that = this;
-    this.setData({loginLoading :true ,wxExistLoading:true ,wxLoginLoading:true})
+    this.setData({loginLoading :true ,wxLoginLoading:true})
     wx.login({
       success: (wx_LoginRes) => {
         let code = wx_LoginRes.code
+        // 如果域名是非法的则这端代码报错errno:600002，小程序必须调取域名是https，而测试的时候是用IP测试，一旦放到体验版后
+        // 该代码会返回错误信息。此时体验版需开启vConsole模式可跳过。
         User.wxExist(code).then((result)=>{
           let data = result.data;
           if(data){
@@ -34,9 +36,6 @@ Page({
               wx.navigateTo({
                 url: '/pages/shared/index/index',
               })
-            }).catch((error) =>{
-              console.log(error)
-              wx.showToast({title: '失败',icon: 'error',duration: 2000})
             }).finally(() =>{
               this.setData({loginLoading :false})
             })
@@ -47,11 +46,11 @@ Page({
             })
           }
         }).finally(() => {
-          that.setData({ wxExistLoading :false })
+          that.setData({ loginLoading :false })
         })
       },
       fail :(wx_LoginRes_err)=>{
-        wx.showToast({title: '失败',icon: 'error',duration: 2000})
+        that.setData({ loginLoading:false })
       },
       complete(){
         that.setData({ wxLoginLoading :false })

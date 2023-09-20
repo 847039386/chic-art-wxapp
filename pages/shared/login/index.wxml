@@ -1,9 +1,9 @@
 <!--pages/login/index.wxml-->
 <cu-custom bgColor="bg-white">
-  <view slot="content">登陆</view>
+  <!-- <view slot="content">登陆</view> -->
 </cu-custom>
 
-<view class="margin-xs">
+<view >
   <view class="bg-white radius-lg" style="min-height: 90vh;">
     <view class="padding-tb padding-lr">
       <text class="text-xxl text-black">欢迎使用</text>
@@ -17,8 +17,8 @@
     <view class="padding-bottom-xxl padding-top padding-lr">
       <view class="flex flex-column margin-sm">
         <button 
-        loading="{{loginLoading || wxExistLoading || wxLoginLoading}}" 
-        disabled="{{loginLoading || wxExistLoading || wxLoginLoading}}" 
+        loading="{{loginLoading || wxLoginLoading}}" 
+        disabled="{{loginLoading || wxLoginLoading}}" 
         bindtap="onLogin" 
         class="cu-btn xxl bg-gradual-blue round">
         <text class="icon-wechat" decode="{{true}}">&nbsp;</text>微信用户一键登录</button>
